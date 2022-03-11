@@ -17,7 +17,7 @@ class TestGame(unittest.TestCase):
     @patch("builtins.print")
     def test_print_board(self, mock_print):
         board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        Game().display_board()
+        Game().display_board(board)
         mock_print.assert_called_with(
             f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}",
         )
