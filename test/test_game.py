@@ -1,19 +1,16 @@
 import unittest
-from unittest.mock import patch
 
 from src.game import Game
 
 
 class TestGame(unittest.TestCase):
-    @patch("builtins.print")
-    def test_welcome_message(self, mock_print):
-        Game().display_welcome_message()
-        mock_print.assert_called_with("Welcome to Tic Tac Toe")
+    def test_welcome_message(self):
+        game = Game()
+        self.assertEqual("Welcome to Tic Tac Toe", game.get_welcome_message())
 
-    @patch("builtins.print")
-    def test_print_board(self, mock_print):
-        board = Game().board
-        Game().display_board()
-        mock_print.assert_called_with(
-            f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}",
+    def test_initialize_board_with_real_values(self):
+        game = Game()
+        self.assertEqual(
+            "1 | 2 | 3\n--+--+--\n4 | 5 | 6\n--+--+--\n7 | 8 | 9",
+            game.initialize_board(),
         )
