@@ -7,7 +7,11 @@ class Game:
     def display_welcome_message(self):
         print("Welcome to Tic Tac Toe")
 
-    def display_board(self, board):
+    def display_board(self):
         print(
-            f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}"
+            f"{self.board[0]} | {self.board[1]} | {self.board[2]}\n--+--+--\n{self.board[3]} | {self.board[4]} | {self.board[5]}\n--+--+--\n{self.board[6]} | {self.board[7]} | {self.board[8]}"
         )
+
+    def run(self):
+        self.display_welcome_message()
+        self.display_board()
