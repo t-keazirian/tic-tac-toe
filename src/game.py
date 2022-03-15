@@ -28,12 +28,16 @@ class Game:
             prompt = f"Player {next_player} - enter the number of an empty spot"
         return prompt
 
-    def handle_first_player(self):
-        position_choice = input()
-        position_choice = int(position_choice) - 1
-        self.board[position_choice] = "X"
+    def place_mark_on_board(self, user_input):
+        user_input = user_input - 1
+        self.board[user_input] = self.get_next_player(self.count_plays())
+        return self.board
 
-    #        print(self.initialize_board())
+    # def place_mark_on_board(self, get_next_player):
+    # position_choice = input()
+    # position_choice = int(position_choice) - 1
+    #        position_choice = 0
+    #        self.board[position_choice] = self.get_next_player(0)
 
     def run(self):
         print(self.get_welcome_message())
