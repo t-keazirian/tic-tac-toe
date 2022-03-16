@@ -31,7 +31,7 @@ class Game:
         if play_count == len(self.board):
             prompt = "Game Over!"
         else:
-            prompt = f"Player {next_player} - enter the number of an empty spot"
+            prompt = f"Player {next_player} - enter a number to place your mark"
         return prompt
 
     def place_mark_on_board(self, user_input, board, play_count):

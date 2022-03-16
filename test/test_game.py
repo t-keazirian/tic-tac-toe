@@ -20,19 +20,19 @@ class TestGame(unittest.TestCase):
         game = Game()
         play_count = 0
         prompt = game.get_prompt(play_count)
-        self.assertEqual("Player X - enter the number of an empty spot", prompt)
+        self.assertEqual("Player X - enter a number to place your mark", prompt)
 
     def test_prompt_o_for_second_turn(self):
         game = Game()
         play_count = 1
         prompt = game.get_prompt(play_count)
-        self.assertEqual("Player O - enter the number of an empty spot", prompt)
+        self.assertEqual("Player O - enter a number to place your mark", prompt)
 
     def test_prompt_x_for_third_turn(self):
         game = Game()
         play_count = 2
         prompt = game.get_prompt(play_count)
-        self.assertEqual("Player X - enter the number of an empty spot", prompt)
+        self.assertEqual("Player X - enter a number to place your mark", prompt)
 
     def test_full_board_game_over(self):
         game = Game()
