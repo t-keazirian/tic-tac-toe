@@ -34,9 +34,9 @@ class Game:
             prompt = f"Player {next_player} - enter the number of an empty spot"
         return prompt
 
-    def place_mark_on_board(self, user_input, board):
+    def place_mark_on_board(self, user_input, board, play_count):
         user_input = user_input - 1
-        board[user_input] = "X"
+        board[user_input] = self.get_next_player(play_count)
         return board
 
     # def place_mark_on_board(self, get_next_player):

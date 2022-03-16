@@ -67,8 +67,28 @@ class TestGame(unittest.TestCase):
         game = Game()
         board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         user_input = 1
-        game.place_mark_on_board(user_input, board)
-        self.assertEqual(board[0], "X")
+        play_count = 0
+        next_player = game.get_next_player(play_count)
+        game.place_mark_on_board(user_input, board, play_count)
+        self.assertEqual(board[0], next_player)
+
+    def test_O_is_placed_in_index_1_with_input_2(self):
+        game = Game()
+        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 2
+        play_count = 1
+        next_player = game.get_next_player(play_count)
+        game.place_mark_on_board(user_input, board, play_count)
+        self.assertEqual(board[1], next_player)
+
+    def test_X_is_placed_in_index_2_with_input_3(self):
+        game = Game()
+        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 3
+        play_count = 2
+        next_player = game.get_next_player(play_count)
+        game.place_mark_on_board(user_input, board, play_count)
+        self.assertEqual(board[2], next_player)
 
 
 # test - when user has inputted 1, X will replace 1
