@@ -1,6 +1,6 @@
 class Game:
-
-    board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    def __init__(self):
+        self.board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
     def get_welcome_message(self):
         return "Welcome to Tic Tac Toe"
@@ -28,10 +28,10 @@ class Game:
             prompt = f"Player {next_player} - enter the number of an empty spot"
         return prompt
 
-    def place_mark_on_board(self, user_input):
+    def place_mark_on_board(self, user_input, board):
         user_input = user_input - 1
-        self.board[user_input] = self.get_next_player(self.count_plays())
-        return self.board
+        board[user_input] = "X"
+        return board
 
     # def place_mark_on_board(self, get_next_player):
     # position_choice = input()

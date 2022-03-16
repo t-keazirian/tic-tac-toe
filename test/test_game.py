@@ -63,19 +63,14 @@ class TestGame(unittest.TestCase):
         next_player = game.get_next_player(play_count)
         self.assertEqual("X", next_player)
 
-    #    def test_if_board_empty_and_player_x_turn_choice_is_replaced_with_x(self):
-    #        game = Game()
-    #        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    #        play_count = 0
-    #        next_player = game.get_next_player(play_count)
-    #        game.place_mark_on_board(next_player)
-    #        self.assertEqual(board[0], "X")
-
-    def test_X_is_placed_in_index_0(self):
+    def test_X_is_placed_in_index_0_with_input_1(self):
         game = Game()
         board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        play_count = 0
-        next_player = game.get_next_player(play_count)
         user_input = 1
-        game.place_mark_on_board(user_input)
+        game.place_mark_on_board(user_input, board)
         self.assertEqual(board[0], "X")
+
+
+# test - when user has inputted 1, X will replace 1
+# test - when X replaces 1, board is reprinted with X in spot 1
+# test - when X replaces 1, it is O's turn and repeat
