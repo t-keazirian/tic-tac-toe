@@ -39,13 +39,13 @@ class Game:
         board[user_input] = self.get_next_player(play_count)
         return board
 
-    # def place_mark_on_board(self, get_next_player):
-    # position_choice = input()
-    # position_choice = int(position_choice) - 1
-    #        position_choice = 0
-    #        self.board[position_choice] = self.get_next_player(0)
+    def process_user_input(self):
+        position_choice = int(input())
+        self.place_mark_on_board(position_choice, self.board, self.play_count)
+        print(self.initialize_board())
 
     def run(self):
         print(self.get_welcome_message())
         print(self.initialize_board())
         print(self.get_prompt(self.count_plays()))
+        self.process_user_input()

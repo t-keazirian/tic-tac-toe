@@ -91,6 +91,5 @@ class TestGame(unittest.TestCase):
         self.assertEqual(board[2], next_player)
 
 
-# test - when user has inputted 1, X will replace 1
 # test - when X replaces 1, board is reprinted with X in spot 1
 # test - when X replaces 1, it is O's turn and repeat
