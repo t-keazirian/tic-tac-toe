@@ -22,7 +22,7 @@ class Game:
 
     def get_prompt(self, play_count):
         next_player = self.get_next_player(play_count)
-        if play_count == 9:
+        if play_count == len(self.board):
             prompt = "Game Over!"
         else:
             prompt = f"Player {next_player} - enter the number of an empty spot"
