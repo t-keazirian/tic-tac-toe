@@ -1,9 +1,9 @@
 class Game:
-    def __init__(self):
-        self.board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        self.player_one = "X"
-        self.player_two = "O"
-        self.play_count = 0
+    #    def __init__(self):
+    board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    player_one = "X"
+    player_two = "O"
+    play_count = 0
 
     def get_welcome_message(self):
         return "Welcome to Tic Tac Toe"
@@ -18,10 +18,10 @@ class Game:
             )
         return play_count
 
-    def get_next_player(self, number):
-        if number == 0:
+    def get_next_player(self, play_count):
+        if play_count == 0:
             return self.player_one
-        elif number % 2 == 0:
+        elif play_count % 2 == 0:
             return self.player_one
         else:
             return self.player_two
