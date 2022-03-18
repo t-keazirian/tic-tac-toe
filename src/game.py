@@ -35,8 +35,8 @@ class Game:
         return prompt
 
     def place_mark_on_board(self, user_input, board, play_count):
-        user_input = user_input - 1
-        board[user_input] = self.get_next_player(play_count)
+        input_index = user_input - 1
+        board[input_index] = self.get_next_player(play_count)
         return board
 
     def process_user_input(self):
