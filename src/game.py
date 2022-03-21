@@ -44,6 +44,16 @@ class Game:
         self.place_mark_on_board(position_choice, self.board, self.play_count)
         print(self.initialize_board())
 
+    def progress_game(self):
+        self.get_prompt(self.play_count)
+        current_play_count = self.count_plays()
+        while current_play_count < len(self.board):
+            print(self.get_prompt(current_play_count))
+            print(f"{current_play_count} current play count")
+            print(self.get_next_player(current_play_count))
+            self.process_user_input()
+            current_play_count += 1
+
     def is_spot_taken(self, user_input, board):
         input_index = user_input - 1
         if (self.player_one or self.player_two) not in board[input_index]:
@@ -54,5 +64,5 @@ class Game:
     def run(self):
         print(self.get_welcome_message())
         print(self.initialize_board())
-        print(self.get_prompt(self.count_plays()))
-        self.process_user_input()
+        # print(self.get_prompt(self.count_plays()))
+        self.progress_game()
