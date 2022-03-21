@@ -42,6 +42,7 @@ class Game:
     def process_user_input(self):
         position_choice = int(input())
         self.place_mark_on_board(position_choice, self.board, self.play_count)
+        self.play_count += 1
         print(self.initialize_board())
 
     def progress_game(self):
@@ -49,8 +50,6 @@ class Game:
         current_play_count = self.count_plays()
         while current_play_count < len(self.board):
             print(self.get_prompt(current_play_count))
-            print(f"{current_play_count} current play count")
-            print(self.get_next_player(current_play_count))
             self.process_user_input()
             current_play_count += 1
 
@@ -64,5 +63,4 @@ class Game:
     def run(self):
         print(self.get_welcome_message())
         print(self.initialize_board())
-        # print(self.get_prompt(self.count_plays()))
         self.progress_game()
