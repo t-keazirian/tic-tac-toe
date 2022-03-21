@@ -90,6 +90,26 @@ class TestGame(unittest.TestCase):
         game.place_mark_on_board(user_input, board, play_count)
         self.assertEqual(board[2], next_player)
 
+    def test_player_cant_mark_board_when_spot_is_taken(self):
+        game = Game()
+        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
+        user_input = 3
+        play_count = 1
+        error_prompt = game.is_spot_taken(user_input, board, play_count)
+        self.assertEqual("Spot is taken - choose another spot", error_prompt)
 
-# test - when X replaces 1, board is reprinted with X in spot 1
-# test - when X replaces 1, it is O's turn and repeat
+    def test_player_cant_mark_board_when_spot_is_taken_2(self):
+        game = Game()
+        board = ["1", "2", "X", "4", "5", "6", "7", "O", "9"]
+        user_input = 8
+        play_count = 2
+        error_prompt = game.is_spot_taken(user_input, board, play_count)
+        self.assertEqual("Spot is taken - choose another spot", error_prompt)
+
+    def test_player_cant_mark_board_when_spot_is_taken_3(self):
+        game = Game()
+        board = ["1", "2", "X", "4", "5", "6", "7", "O", "X"]
+        user_input = 9
+        play_count = 3
+        error_prompt = game.is_spot_taken(user_input, board, play_count)
+        self.assertEqual("Spot is taken - choose another spot", error_prompt)

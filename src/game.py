@@ -44,6 +44,13 @@ class Game:
         self.place_mark_on_board(position_choice, self.board, self.play_count)
         print(self.initialize_board())
 
+    def is_spot_taken(self, user_input, board, play_count):
+        input_index = user_input - 1
+        if board[input_index] not in board:
+            self.place_mark_on_board(user_input, board, play_count)
+        else:
+            return "Spot is taken - choose another spot"
+
     def run(self):
         print(self.get_welcome_message())
         print(self.initialize_board())
