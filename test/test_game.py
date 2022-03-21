@@ -89,3 +89,27 @@ class TestGame(unittest.TestCase):
         next_player = game.get_next_player(play_count)
         game.place_mark_on_board(user_input, board, play_count)
         self.assertEqual(board[2], next_player)
+
+    def test_return_true_if_spot_is_taken(self):
+        game = Game()
+        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
+        user_input = 3
+        self.assertEqual(True, game.is_spot_taken(board, user_input))
+
+    def test_return_false_if_spot_is_not_taken(self):
+        game = Game()
+        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
+        user_input = 4
+        self.assertEqual(False, game.is_spot_taken(board, user_input))
+
+    def test_return_true_if_spot_is_taken_in_two_places(self):
+        game = Game()
+        board = ["1", "2", "X", "4", "5", "6", "7", "8", "O"]
+        user_input = 9
+        self.assertEqual(True, game.is_spot_taken(board, user_input))
+
+    def test_return_true_if_spot_is_taken_in_three_places(self):
+        game = Game()
+        board = ["1", "2", "X", "4", "5", "6", "X", "8", "O"]
+        user_input = 7
+        self.assertEqual(True, game.is_spot_taken(board, user_input))

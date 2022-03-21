@@ -37,6 +37,16 @@ class Game:
             prompt = f"Player {next_player} - enter a number to place your mark"
         return prompt
 
+    def is_spot_taken(self, board, user_input):
+        input_index = user_input - 1
+        if (
+            board[input_index] == self.player_one
+            or board[input_index] == self.player_two
+        ):
+            return True
+        else:
+            return False
+
     def place_mark_on_board(self, user_input, board, play_count):
         input_index = user_input - 1
         board[input_index] = self.get_next_player(play_count)
@@ -46,7 +56,6 @@ class Game:
         position_choice = int(input())
         self.place_mark_on_board(position_choice, self.board, self.play_count)
         self.play_count += 1
-        print(self.initialize_board())
 
     def progress_game(self):
         current_play_count = self.count_plays()
@@ -54,6 +63,7 @@ class Game:
             print(self.get_prompt(current_play_count))
             self.process_user_input()
             current_play_count += 1
+            print(self.initialize_board())
         else:
             print(self.get_prompt(current_play_count))
 
