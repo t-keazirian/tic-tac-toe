@@ -94,22 +94,12 @@ class TestGame(unittest.TestCase):
         game = Game()
         board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
         user_input = 3
-        play_count = 1
-        error_prompt = game.is_spot_taken(user_input, board, play_count)
-        self.assertEqual("Spot is taken - choose another spot", error_prompt)
+        error_prompt = game.is_spot_taken(user_input, board)
+        self.assertEqual(True, error_prompt)
 
-    def test_player_cant_mark_board_when_spot_is_taken_2(self):
+    def test_player_can_mark_board_when_spot_isnt_taken(self):
         game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "7", "O", "9"]
-        user_input = 8
-        play_count = 2
-        error_prompt = game.is_spot_taken(user_input, board, play_count)
-        self.assertEqual("Spot is taken - choose another spot", error_prompt)
-
-    def test_player_cant_mark_board_when_spot_is_taken_3(self):
-        game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "7", "O", "X"]
-        user_input = 9
-        play_count = 3
-        error_prompt = game.is_spot_taken(user_input, board, play_count)
-        self.assertEqual("Spot is taken - choose another spot", error_prompt)
+        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
+        user_input = 7
+        error_prompt = game.is_spot_taken(user_input, board)
+        self.assertEqual(False, error_prompt)
