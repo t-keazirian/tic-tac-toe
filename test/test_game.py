@@ -103,3 +103,11 @@ class TestGame(unittest.TestCase):
         user_input = 7
         error_prompt = game.is_spot_taken(user_input, board)
         self.assertEqual(False, error_prompt)
+
+    def test_error_prompt_if_spot_is_taken(self):
+        game = Game()
+        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
+        user_input = 3
+        play_count = 2
+        error_prompt = game.get_prompt(play_count)
+        self.assertEqual("Spot already taken - try again", error_prompt)

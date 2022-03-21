@@ -48,7 +48,7 @@ class Game:
     def progress_game(self):
         self.get_prompt(self.play_count)
         current_play_count = self.count_plays()
-        while current_play_count < len(self.board):
+        while self.is_spot_taken is not False:
             print(self.get_prompt(current_play_count))
             self.process_user_input()
             current_play_count += 1
