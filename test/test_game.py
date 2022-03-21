@@ -90,14 +90,14 @@ class TestGame(unittest.TestCase):
         game.place_mark_on_board(user_input, board, play_count)
         self.assertEqual(board[2], next_player)
 
-    def test_player_cant_mark_board_when_spot_is_taken(self):
+    def test_return_true_if_spot_is_taken(self):
         game = Game()
         board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
         user_input = 3
         error_prompt = game.is_spot_taken(user_input, board)
         self.assertEqual(True, error_prompt)
 
-    def test_player_can_mark_board_when_spot_isnt_taken(self):
+    def test_return_false_if_spot_not_taken(self):
         game = Game()
         board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
         user_input = 7
