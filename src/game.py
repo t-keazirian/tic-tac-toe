@@ -1,3 +1,6 @@
+import sys
+
+
 class Game:
     #    def __init__(self):
     board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -46,19 +49,13 @@ class Game:
         print(self.initialize_board())
 
     def progress_game(self):
-        self.get_prompt(self.play_count)
         current_play_count = self.count_plays()
-        while self.is_spot_taken is not False:
+        while current_play_count != len(self.board):
             print(self.get_prompt(current_play_count))
             self.process_user_input()
             current_play_count += 1
-
-    def is_spot_taken(self, user_input, board):
-        input_index = user_input - 1
-        if (self.player_one or self.player_two) not in board[input_index]:
-            return False
         else:
-            return True
+            print(self.get_prompt(current_play_count))
 
     def run(self):
         print(self.get_welcome_message())

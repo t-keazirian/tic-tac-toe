@@ -89,25 +89,3 @@ class TestGame(unittest.TestCase):
         next_player = game.get_next_player(play_count)
         game.place_mark_on_board(user_input, board, play_count)
         self.assertEqual(board[2], next_player)
-
-    def test_return_true_if_spot_is_taken(self):
-        game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
-        user_input = 3
-        error_prompt = game.is_spot_taken(user_input, board)
-        self.assertEqual(True, error_prompt)
-
-    def test_return_false_if_spot_not_taken(self):
-        game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
-        user_input = 7
-        error_prompt = game.is_spot_taken(user_input, board)
-        self.assertEqual(False, error_prompt)
-
-    def test_error_prompt_if_spot_is_taken(self):
-        game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
-        user_input = 3
-        play_count = 2
-        error_prompt = game.get_prompt(play_count)
-        self.assertEqual("Spot already taken - try again", error_prompt)
