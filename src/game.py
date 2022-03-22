@@ -33,7 +33,7 @@ class Game:
 
     def progress_game(self):
         current_total_marks_on_board = self.new_board.count_marks_in_board(
-            self.player_one, self.player_two
+            self.board, self.player_one, self.player_two
         )
         while current_total_marks_on_board != len(self.board):
             print(self.get_prompt(current_total_marks_on_board))

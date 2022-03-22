@@ -40,33 +40,6 @@ class TestGame(unittest.TestCase):
         prompt = game.get_prompt(total_marks_on_board)
         self.assertEqual("Game Over!", prompt)
 
-    def test_no_turns_taken_yet(self):
-        game = Game()
-        board = Board()
-        total_marks_on_board = board.count_marks_in_board("X", "O")
-        self.assertEqual(0, total_marks_on_board)
-
-    def test_zero_turns_player_x_goes_first(self):
-        game = Game()
-        board = Board()
-        total_marks_on_board = 0
-        current_player = board.get_current_player(total_marks_on_board)
-        self.assertEqual("X", current_player)
-
-    def test_one_turn_player_o_goes_next(self):
-        game = Game()
-        board = Board()
-        total_marks_on_board = 1
-        current_player = board.get_current_player(total_marks_on_board)
-        self.assertEqual("O", current_player)
-
-    def test_two_turn_player_x_goes_next(self):
-        game = Game()
-        board = Board()
-        total_marks_on_board = 2
-        current_player = board.get_current_player(total_marks_on_board)
-        self.assertEqual("X", current_player)
-
     def test_X_is_placed_in_index_0_with_input_1(self):
         game = Game()
         board = Board()
