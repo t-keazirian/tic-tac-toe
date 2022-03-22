@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch
 
 from src.game import Game
 
@@ -9,11 +8,11 @@ class TestGame(unittest.TestCase):
         game = Game()
         self.assertEqual("Welcome to Tic Tac Toe", game.get_welcome_message())
 
-    def test_initialize_board_with_real_values(self):
+    def test_get_formatted_board_with_real_values(self):
         game = Game()
         self.assertEqual(
             "1 | 2 | 3\n--+--+--\n4 | 5 | 6\n--+--+--\n7 | 8 | 9",
-            game.initialize_board(),
+            game.get_formatted_board(),
         )
 
     def test_prompt_x_for_first_turn(self):
@@ -119,11 +118,3 @@ class TestGame(unittest.TestCase):
         board = ["X", "O", "X", "O", "X", "6", "7", "8", "9"]
         user_input = 9
         self.assertEqual(False, game.is_spot_taken(board, user_input))
-
-    def test_take_turns_alternates_play(self):
-        game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
-        user_input = 2
-        play_count = 1
-        new_board = game.place_mark_on_board(user_input, board, play_count)
-        self.assertEqual(new_board, game.take_turns())

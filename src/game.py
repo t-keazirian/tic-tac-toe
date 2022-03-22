@@ -1,6 +1,3 @@
-import sys
-
-
 class Game:
     def __init__(self):
         self.board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -11,7 +8,7 @@ class Game:
     def get_welcome_message(self):
         return "Welcome to Tic Tac Toe"
 
-    def initialize_board(self):
+    def get_formatted_board(self):
         return f"{self.board[0]} | {self.board[1]} | {self.board[2]}\n--+--+--\n{self.board[3]} | {self.board[4]} | {self.board[5]}\n--+--+--\n{self.board[6]} | {self.board[7]} | {self.board[8]}"
 
     def count_marks_in_board(self):
@@ -57,23 +54,17 @@ class Game:
         self.place_mark_on_board(position_choice, self.board, self.play_count)
         self.play_count += 1
 
-    def take_turns(self):
-        current_play_count = self.count_marks_in_board()
-        if current_play_count != len(self.board):
-            self.get_prompt(current_play_count)
-            return self.board
-
     def progress_game(self):
         current_play_count = self.count_marks_in_board()
         while current_play_count != len(self.board):
             print(self.get_prompt(current_play_count))
             self.process_user_input()
             current_play_count += 1
-            print(self.initialize_board())
+            print(self.get_formatted_board())
         else:
             print(self.get_prompt(current_play_count))
 
     def run(self):
         print(self.get_welcome_message())
-        print(self.initialize_board())
+        print(self.get_formatted_board())
         self.progress_game()
