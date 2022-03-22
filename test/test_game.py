@@ -1,5 +1,6 @@
 import unittest
 
+from src.board import Board
 from src.game import Game
 
 
@@ -41,53 +42,60 @@ class TestGame(unittest.TestCase):
 
     def test_no_turns_taken_yet(self):
         game = Game()
-        play_count = game.count_marks_in_board()
+        board = Board()
+        play_count = board.count_marks_in_board("X", "O")
         self.assertEqual(0, play_count)
 
     def test_zero_turns_player_x_goes_first(self):
         game = Game()
+        board = Board()
         play_count = 0
-        current_player = game.get_current_player(play_count)
+        current_player = board.get_current_player(play_count)
         self.assertEqual("X", current_player)
 
     def test_one_turn_player_o_goes_next(self):
         game = Game()
+        board = Board()
         play_count = 1
-        current_player = game.get_current_player(play_count)
+        current_player = board.get_current_player(play_count)
         self.assertEqual("O", current_player)
 
     def test_two_turn_player_x_goes_next(self):
         game = Game()
+        board = Board()
         play_count = 2
-        current_player = game.get_current_player(play_count)
+        current_player = board.get_current_player(play_count)
         self.assertEqual("X", current_player)
 
     def test_X_is_placed_in_index_0_with_input_1(self):
         game = Game()
-        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         user_input = 1
         play_count = 0
-        current_player = game.get_current_player(play_count)
-        game.place_mark_on_board(user_input, board, play_count)
-        self.assertEqual(board[0], current_player)
+        current_player = board.get_current_player(play_count)
+        game.place_mark_on_board(user_input, current_board, play_count)
+        self.assertEqual(current_board[0], current_player)
 
     def test_O_is_placed_in_index_1_with_input_2(self):
         game = Game()
-        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         user_input = 2
         play_count = 1
-        current_player = game.get_current_player(play_count)
-        game.place_mark_on_board(user_input, board, play_count)
-        self.assertEqual(board[1], current_player)
+        current_player = board.get_current_player(play_count)
+        game.place_mark_on_board(user_input, current_board, play_count)
+        self.assertEqual(current_board[1], current_player)
 
     def test_X_is_placed_in_index_2_with_input_3(self):
         game = Game()
-        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         user_input = 3
         play_count = 2
-        current_player = game.get_current_player(play_count)
-        game.place_mark_on_board(user_input, board, play_count)
-        self.assertEqual(board[2], current_player)
+        current_player = board.get_current_player(play_count)
+        game.place_mark_on_board(user_input, current_board, play_count)
+        self.assertEqual(current_board[2], current_player)
 
     def test_return_true_if_spot_is_taken(self):
         game = Game()

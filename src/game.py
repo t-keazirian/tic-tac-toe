@@ -1,6 +1,10 @@
+from src.board import Board
+
+
 class Game:
     def __init__(self):
-        self.board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        self.new_board = Board()
+        self.board = self.new_board.status
         self.player_one = "X"
         self.player_two = "O"
         self.play_count = 0
@@ -11,23 +15,8 @@ class Game:
     def get_formatted_board(self):
         return f"{self.board[0]} | {self.board[1]} | {self.board[2]}\n--+--+--\n{self.board[3]} | {self.board[4]} | {self.board[5]}\n--+--+--\n{self.board[6]} | {self.board[7]} | {self.board[8]}"
 
-    def count_marks_in_board(self):
-        for mark in self.board:
-            play_count = self.board.count(self.player_one) + self.board.count(
-                self.player_two
-            )
-        return play_count
-
-    def get_current_player(self, play_count):
-        if play_count == 0:
-            return self.player_one
-        elif play_count % 2 == 0:
-            return self.player_one
-        else:
-            return self.player_two
-
     def get_prompt(self, play_count):
-        current_player = self.get_current_player(play_count)
+        current_player = self.new_board.get_current_player(play_count)
         if play_count == len(self.board):
             prompt = "Game Over!"
         else:
@@ -46,7 +35,7 @@ class Game:
 
     def place_mark_on_board(self, user_input, board, play_count):
         input_index = user_input - 1
-        board[input_index] = self.get_current_player(play_count)
+        board[input_index] = self.new_board.get_current_player(play_count)
         return board
 
     def process_user_input(self):
@@ -55,7 +44,9 @@ class Game:
         self.play_count += 1
 
     def progress_game(self):
-        current_play_count = self.count_marks_in_board()
+        current_play_count = self.new_board.count_marks_in_board(
+            self.player_one, self.player_two
+        )
         while current_play_count != len(self.board):
             print(self.get_prompt(current_play_count))
             self.process_user_input()
