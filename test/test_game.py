@@ -74,7 +74,7 @@ class TestGame(unittest.TestCase):
         user_input = 1
         total_marks_on_board = 0
         current_player = board.get_current_player(total_marks_on_board)
-        game.place_mark_on_board(user_input, current_board, total_marks_on_board)
+        board.place_mark_on_board(user_input, current_board, total_marks_on_board)
         self.assertEqual(current_board[0], current_player)
 
     def test_O_is_placed_in_index_1_with_input_2(self):
@@ -84,7 +84,7 @@ class TestGame(unittest.TestCase):
         user_input = 2
         total_marks_on_board = 1
         current_player = board.get_current_player(total_marks_on_board)
-        game.place_mark_on_board(user_input, current_board, total_marks_on_board)
+        board.place_mark_on_board(user_input, current_board, total_marks_on_board)
         self.assertEqual(current_board[1], current_player)
 
     def test_X_is_placed_in_index_2_with_input_3(self):
@@ -94,35 +94,5 @@ class TestGame(unittest.TestCase):
         user_input = 3
         total_marks_on_board = 2
         current_player = board.get_current_player(total_marks_on_board)
-        game.place_mark_on_board(user_input, current_board, total_marks_on_board)
+        board.place_mark_on_board(user_input, current_board, total_marks_on_board)
         self.assertEqual(current_board[2], current_player)
-
-    def test_return_true_if_spot_is_taken(self):
-        game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
-        user_input = 3
-        self.assertEqual(True, game.is_spot_taken(board, user_input))
-
-    def test_return_false_if_spot_is_not_taken(self):
-        game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
-        user_input = 4
-        self.assertEqual(False, game.is_spot_taken(board, user_input))
-
-    def test_return_true_if_spot_is_taken_in_two_places(self):
-        game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "7", "8", "O"]
-        user_input = 9
-        self.assertEqual(True, game.is_spot_taken(board, user_input))
-
-    def test_return_true_if_spot_is_taken_in_three_places(self):
-        game = Game()
-        board = ["1", "2", "X", "4", "5", "6", "X", "8", "O"]
-        user_input = 7
-        self.assertEqual(True, game.is_spot_taken(board, user_input))
-
-    def test_return_false_if_spot_is_not_taken_two(self):
-        game = Game()
-        board = ["X", "O", "X", "O", "X", "6", "7", "8", "9"]
-        user_input = 9
-        self.assertEqual(False, game.is_spot_taken(board, user_input))

@@ -16,3 +16,8 @@ class Board:
             return "X"
         else:
             return "O"
+
+    def place_mark_on_board(self, user_input, board, total_marks_on_board):
+        input_index = user_input - 1
+        board[input_index] = self.get_current_player(total_marks_on_board)
+        return board
