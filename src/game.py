@@ -27,7 +27,10 @@ class Game:
         self.new_board.place_mark_on_board(
             position_choice, self.board, self.total_marks_on_board
         )
-        self.total_marks_on_board += 1
+        self.total_marks_on_board = self.new_board.count_marks_in_board(
+            self.board, self.player_one, self.player_two
+        )
+        print(self.total_marks_on_board)
 
     def convert_input_to_integer(self, user_input):
         return int(user_input)
@@ -43,12 +46,15 @@ class Game:
         while current_total_marks_on_board != len(self.board):
             self.get_prompt(current_total_marks_on_board)
             self.process_user_input()
-            current_total_marks_on_board += 1
+            current_total_marks_on_board = self.new_board.count_marks_in_board(
+                self.board, self.player_one, self.player_two
+            )
+
             print(self.get_formatted_board())
         else:
             self.get_prompt(current_total_marks_on_board)
 
-    def play_new_game(self):
+    def run(self):
         message.display_welcome_message(self)
         print(self.get_formatted_board())
         self.progress_game()
