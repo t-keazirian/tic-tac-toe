@@ -40,11 +40,41 @@ class TestBoard(unittest.TestCase):
         current_player = board.get_current_player(total_marks_on_board)
         self.assertEqual("X", current_player)
 
+    def test_take_turns_marking_board_when_no_marks_and_X_is_going_first(self):
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        new_board_with_marks = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 1
+        total_marks_on_board = 0
+        self.assertEqual(
+            new_board_with_marks,
+            board.take_turns_marking_board(
+                current_board, user_input, total_marks_on_board
+            ),
+        )
 
-#    def test_take_turns_marking_board(self):
-#        board = Board()
-#        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-#        new_board_with_marks = ["X", "0", "3", "4", "5", "6", "7", "8", "9"]
-#        self.assertEqual(
-#            new_board_with_marks, board.take_turns_marking_board(current_board)
-#        )
+    def test_take_turns_marking_board_when_one_mark_and_O_is_next_player(self):
+        board = Board()
+        current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
+        new_board_with_marks = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 2
+        total_marks_on_board = 1
+        self.assertEqual(
+            new_board_with_marks,
+            board.take_turns_marking_board(
+                current_board, user_input, total_marks_on_board
+            ),
+        )
+
+    def test_take_turns_marking_board_when_two_marks_and_X_is_next_player(self):
+        board = Board()
+        current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
+        new_board_with_marks = ["X", "O", "X", "4", "5", "6", "7", "8", "9"]
+        user_input = 3
+        total_marks_on_board = 2
+        self.assertEqual(
+            new_board_with_marks,
+            board.take_turns_marking_board(
+                current_board, user_input, total_marks_on_board
+            ),
+        )

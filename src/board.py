@@ -26,6 +26,6 @@ class Board:
         else:
             return False
 
-    def take_turns_marking_board(self, board):
-        while self.is_board_full is False:
-            return self.place_mark_on_board()
+    def take_turns_marking_board(self, board, user_input, total_marks_on_board):
+        self.place_mark_on_board(user_input, board, total_marks_on_board)
+        return board
