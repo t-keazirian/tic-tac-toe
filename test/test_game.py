@@ -5,12 +5,6 @@ from src.game import Game
 
 
 class TestGame(unittest.TestCase):
-    def test_get_formatted_board_with_real_values(self):
-        game = Game()
-        self.assertEqual(
-            "1 | 2 | 3\n--+--+--\n4 | 5 | 6\n--+--+--\n7 | 8 | 9",
-            game.get_formatted_board(),
-        )
 
     # mocks print
     @patch("builtins.print")
