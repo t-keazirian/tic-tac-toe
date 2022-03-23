@@ -81,7 +81,7 @@ class TestBoard(unittest.TestCase):
         total_marks_on_board = 0
         self.assertEqual(
             new_board_with_marks,
-            board.take_turns_marking_board(
+            board.mark_board_with_user_selection(
                 user_input, current_board, total_marks_on_board
             ),
         )
@@ -94,7 +94,7 @@ class TestBoard(unittest.TestCase):
         total_marks_on_board = 1
         self.assertEqual(
             new_board_with_marks,
-            board.take_turns_marking_board(
+            board.mark_board_with_user_selection(
                 user_input, current_board, total_marks_on_board
             ),
         )
@@ -107,7 +107,7 @@ class TestBoard(unittest.TestCase):
         total_marks_on_board = 2
         self.assertEqual(
             new_board_with_marks,
-            board.take_turns_marking_board(
+            board.mark_board_with_user_selection(
                 user_input, current_board, total_marks_on_board
             ),
         )

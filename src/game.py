@@ -24,7 +24,7 @@ class Game:
     def process_user_input(self):
         user_input_as_string = self.get_user_input()
         position_choice = self.convert_input_to_integer(user_input_as_string)
-        self.new_board.take_turns_marking_board(
+        self.new_board.mark_board_with_user_selection(
             position_choice, self.board, self.total_marks_on_board
         )
         self.total_marks_on_board = self.new_board.count_marks_in_board(
@@ -39,7 +39,7 @@ class Game:
         user_input = input()
         return user_input
 
-    def progress_game(self):
+    def play_game(self):
         current_total_marks_on_board = self.new_board.count_marks_in_board(
             self.board, self.player_one, self.player_two
         )
@@ -57,4 +57,4 @@ class Game:
     def run(self):
         message.display_welcome_message(self)
         self.get_formatted_board()
-        self.progress_game()
+        self.play_game()
