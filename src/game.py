@@ -7,8 +7,8 @@ class Game:
         # initialize a new Board
         self.new_board = Board()
         self.board = self.new_board.starter_board
-        self.player_one = "X"
-        self.player_two = "O"
+        self.player_one = self.new_board.player_one
+        self.player_two = self.new_board.player_two
         self.total_marks_on_board = 0
 
     def get_formatted_board(self):

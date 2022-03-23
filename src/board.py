@@ -1,6 +1,8 @@
 class Board:
     def __init__(self):
         self.starter_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        self.player_one = "X"
+        self.player_two = "O"
 
     def count_marks_in_board(self, board, player_one, player_two):
         for mark in board:
@@ -8,12 +10,10 @@ class Board:
         return total_marks_on_board
 
     def get_current_player(self, total_marks_on_board):
-        if total_marks_on_board == 0:
-            return "X"
-        elif total_marks_on_board % 2 == 0:
-            return "X"
+        if total_marks_on_board % 2 == 0:
+            return self.player_one
         else:
-            return "O"
+            return self.player_two
 
     def assign_board_index_to_current_player_mark(
         self, user_input, board, total_marks_on_board
