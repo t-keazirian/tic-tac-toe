@@ -10,3 +10,6 @@ class Message:
 
     def display_prompt_message_for_move(self, current_player):
         print(f"Player {current_player} - enter a number to place your mark")
+
+    def display_error_prompt_for_occupied_spot(self):
+        print("Spot is taken - choose another spot")

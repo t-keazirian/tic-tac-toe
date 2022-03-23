@@ -25,3 +25,9 @@ class TestMessage(unittest.TestCase):
         mock_print.assert_called_with(
             f"Player {current_player} - enter a number to place your mark"
         )
+
+    @patch("builtins.print")
+    def test_display_error_prompt_if_spot_is_taken(self, mock_print):
+        message = Message()
+        message.display_error_prompt_for_occupied_spot()
+        mock_print.assert_called_with("Spot is taken - choose another spot")

@@ -3,6 +3,7 @@ from unittest.mock import patch
 
 from src.board import Board
 from src.game import Game
+from src.message import Message
 
 
 class TestGame(unittest.TestCase):
@@ -13,29 +14,33 @@ class TestGame(unittest.TestCase):
             game.get_formatted_board(),
         )
 
-    def test_prompt_x_for_first_turn(self):
+    @patch("builtins.print")
+    def test_prompt_x_for_first_turn(self, mock_print):
         game = Game()
         total_marks_on_board = 0
-        prompt = game.get_prompt(total_marks_on_board)
-        self.assertEqual("Player X - enter a number to place your mark", prompt)
+        game.get_prompt(total_marks_on_board)
+        mock_print.assert_called_with("Player X - enter a number to place your mark")
 
-    def test_prompt_o_for_second_turn(self):
+    @patch("builtins.print")
+    def test_prompt_o_for_second_turn(self, mock_print):
         game = Game()
         total_marks_on_board = 1
-        prompt = game.get_prompt(total_marks_on_board)
-        self.assertEqual("Player O - enter a number to place your mark", prompt)
+        game.get_prompt(total_marks_on_board)
+        mock_print.assert_called_with("Player O - enter a number to place your mark")
 
-    def test_prompt_x_for_third_turn(self):
+    @patch("builtins.print")
+    def test_prompt_x_for_third_turn(self, mock_print):
         game = Game()
         total_marks_on_board = 2
-        prompt = game.get_prompt(total_marks_on_board)
-        self.assertEqual("Player X - enter a number to place your mark", prompt)
+        game.get_prompt(total_marks_on_board)
+        mock_print.assert_called_with("Player X - enter a number to place your mark")
 
-    def test_full_board_game_over(self):
+    @patch("builtins.print")
+    def test_full_board_game_over(self, mock_print):
         game = Game()
         total_marks_on_board = 9
-        prompt = game.get_prompt(total_marks_on_board)
-        self.assertEqual("Game Over!", prompt)
+        game.get_prompt(total_marks_on_board)
+        mock_print.assert_called_with("Game Over!")
 
     def test_X_is_placed_in_index_0_with_input_1(self):
         game = Game()
