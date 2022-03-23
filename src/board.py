@@ -15,9 +15,17 @@ class Board:
         else:
             return "O"
 
-    def place_mark_on_board(self, user_input, board, total_marks_on_board):
+    def assign_board_index_to_current_player_mark(
+        self, user_input, board, total_marks_on_board
+    ):
         input_index = user_input - 1
         board[input_index] = self.get_current_player(total_marks_on_board)
+        return board[input_index]
+
+    def take_turns_marking_board(self, user_input, board, total_marks_on_board):
+        self.assign_board_index_to_current_player_mark(
+            user_input, board, total_marks_on_board
+        )
         return board
 
     def is_board_full(self, total_marks_on_board, board):
@@ -25,7 +33,3 @@ class Board:
             return True
         else:
             return False
-
-    def take_turns_marking_board(self, board, user_input, total_marks_on_board):
-        self.place_mark_on_board(user_input, board, total_marks_on_board)
-        return board

@@ -1,9 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from src.board import Board
 from src.game import Game
-from src.message import Message
 
 
 class TestGame(unittest.TestCase):
@@ -14,6 +12,7 @@ class TestGame(unittest.TestCase):
             game.get_formatted_board(),
         )
 
+    # mocks print
     @patch("builtins.print")
     def test_prompt_x_for_first_turn(self, mock_print):
         game = Game()
@@ -42,42 +41,13 @@ class TestGame(unittest.TestCase):
         game.get_prompt(total_marks_on_board)
         mock_print.assert_called_with("Game Over!")
 
-    def test_X_is_placed_in_index_0_with_input_1(self):
-        game = Game()
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 1
-        total_marks_on_board = 0
-        current_player = board.get_current_player(total_marks_on_board)
-        board.place_mark_on_board(user_input, current_board, total_marks_on_board)
-        self.assertEqual(current_board[0], current_player)
-
-    def test_O_is_placed_in_index_1_with_input_2(self):
-        game = Game()
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 2
-        total_marks_on_board = 1
-        current_player = board.get_current_player(total_marks_on_board)
-        board.place_mark_on_board(user_input, current_board, total_marks_on_board)
-        self.assertEqual(current_board[1], current_player)
-
-    def test_X_is_placed_in_index_2_with_input_3(self):
-        game = Game()
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 3
-        total_marks_on_board = 2
-        current_player = board.get_current_player(total_marks_on_board)
-        board.place_mark_on_board(user_input, current_board, total_marks_on_board)
-        self.assertEqual(current_board[2], current_player)
-
     def test_takes_in_user_input_returns_integer(self):
         game = Game()
         user_input = game.convert_input_to_integer("5")
         output = 5
         self.assertEqual(user_input, output)
 
+    # mocks user input
     @patch("builtins.input", side_effect=["3"])
     def test_gets_user_input(self, mock_input):
         game = Game()

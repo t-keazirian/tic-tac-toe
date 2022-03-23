@@ -24,13 +24,12 @@ class Game:
     def process_user_input(self):
         user_input_as_string = self.get_user_input()
         position_choice = self.convert_input_to_integer(user_input_as_string)
-        self.new_board.place_mark_on_board(
+        self.new_board.take_turns_marking_board(
             position_choice, self.board, self.total_marks_on_board
         )
         self.total_marks_on_board = self.new_board.count_marks_in_board(
             self.board, self.player_one, self.player_two
         )
-        print(self.total_marks_on_board)
 
     def convert_input_to_integer(self, user_input):
         return int(user_input)
