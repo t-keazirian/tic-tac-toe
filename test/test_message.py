@@ -18,7 +18,10 @@ class TestMessage(unittest.TestCase):
         mock_print.assert_called_with("Game Over!")
 
     @patch("builtins.print")
-    def test_player_is_prompted_for_move(self, mock_print):
+    def test_X_player_is_prompted_for_move_when_is_current_player(self, mock_print):
         message = Message()
-        message.display_prompt_message_for_move()
-        mock_print.assert_called_with("Player X - enter a number to place your mark")
+        current_player = "X"
+        message.display_prompt_message_for_move(current_player)
+        mock_print.assert_called_with(
+            f"Player {current_player} - enter a number to place your mark"
+        )

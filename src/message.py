@@ -8,5 +8,5 @@ class Message:
     def display_game_over_message(self):
         print("Game Over!")
 
-    def display_prompt_message_for_move(self):
-        print("Player X - enter a number to place your mark")
+    def display_prompt_message_for_move(self, current_player):
+        print(f"Player {current_player} - enter a number to place your mark")

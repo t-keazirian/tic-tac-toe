@@ -17,10 +17,9 @@ class Game:
     def get_prompt(self, total_marks_on_board):
         current_player = self.new_board.get_current_player(total_marks_on_board)
         if self.new_board.is_board_full(total_marks_on_board, self.board):
-            prompt = "Game Over!"
+            message.display_game_over_message(self)
         else:
-            prompt = f"Player {current_player} - enter a number to place your mark"
-        return prompt
+            message.display_prompt_message_for_move(self, current_player)
 
     def process_user_input(self):
         position_choice = int(input())
@@ -41,12 +40,12 @@ class Game:
             self.board, self.player_one, self.player_two
         )
         while current_total_marks_on_board != len(self.board):
-            print(self.get_prompt(current_total_marks_on_board))
+            self.get_prompt(current_total_marks_on_board)
             self.process_user_input()
             current_total_marks_on_board += 1
             print(self.get_formatted_board())
         else:
-            print(self.get_prompt(current_total_marks_on_board))
+            self.get_prompt(current_total_marks_on_board)
 
     def play_new_game(self):
         message.display_welcome_message(self)
