@@ -82,7 +82,9 @@ class TestBoard(unittest.TestCase):
         )
         self.assertEqual("X", board_index)
 
-    def test_take_turns_marking_board_when_no_marks_and_X_is_going_first(self):
+    def test_board_is_marked_with_user_selection_when_no_marks_and_X_is_going_first(
+        self,
+    ):
         board = Board()
         current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         new_board_with_marks = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -95,7 +97,9 @@ class TestBoard(unittest.TestCase):
             ),
         )
 
-    def test_take_turns_marking_board_when_one_mark_and_O_is_next_player(self):
+    def test_board_is_marked_with_user_selection_when_one_mark_and_O_is_next_player(
+        self,
+    ):
         board = Board()
         current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
         new_board_with_marks = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
@@ -108,7 +112,9 @@ class TestBoard(unittest.TestCase):
             ),
         )
 
-    def test_take_turns_marking_board_when_two_marks_and_X_is_next_player(self):
+    def test_board_is_marked_with_user_selection_when_two_marks_and_X_is_next_player(
+        self,
+    ):
         board = Board()
         current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
         new_board_with_marks = ["X", "O", "X", "4", "5", "6", "7", "8", "9"]
