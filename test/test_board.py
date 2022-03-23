@@ -45,33 +45,30 @@ class TestBoard(unittest.TestCase):
         current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         user_input = 1
         total_marks_on_board = 0
-        current_player = board.get_current_player(total_marks_on_board)
-        board.assign_board_index_to_current_player_mark(
+        board_index = board.assign_board_index_to_current_player_mark(
             user_input, current_board, total_marks_on_board
         )
-        self.assertEqual("X", current_player)
+        self.assertEqual("X", board_index)
 
     def test_O_is_placed_in_index_1_with_input_2(self):
         board = Board()
         current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
         user_input = 2
         total_marks_on_board = 1
-        current_player = board.get_current_player(total_marks_on_board)
-        board.assign_board_index_to_current_player_mark(
+        board_index = board.assign_board_index_to_current_player_mark(
             user_input, current_board, total_marks_on_board
         )
-        self.assertEqual("O", current_player)
+        self.assertEqual("O", board_index)
 
     def test_X_is_placed_in_index_2_with_input_3(self):
         board = Board()
         current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
         user_input = 3
         total_marks_on_board = 2
-        current_player = board.get_current_player(total_marks_on_board)
-        board.assign_board_index_to_current_player_mark(
+        board_index = board.assign_board_index_to_current_player_mark(
             user_input, current_board, total_marks_on_board
         )
-        self.assertEqual("X", current_player)
+        self.assertEqual("X", board_index)
 
     def test_take_turns_marking_board_when_no_marks_and_X_is_going_first(self):
         board = Board()
