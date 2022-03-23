@@ -31,3 +31,11 @@ class TestMessage(unittest.TestCase):
         message = Message()
         message.display_error_prompt_for_occupied_spot()
         mock_print.assert_called_with("Spot is taken - choose another spot")
+
+    @patch("builtins.print")
+    def test_display_formatted_board(self, mock_print):
+        message = Message()
+        message.display_formatted_board()
+        mock_print.assert_called_with(
+            "1 | 2 | 3\n--+--+--\n4 | 5 | 6\n--+--+--\n7 | 8 | 9",
+        )

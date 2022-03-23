@@ -12,7 +12,7 @@ class Game:
         self.total_marks_on_board = 0
 
     def get_formatted_board(self):
-        return f"{self.board[0]} | {self.board[1]} | {self.board[2]}\n--+--+--\n{self.board[3]} | {self.board[4]} | {self.board[5]}\n--+--+--\n{self.board[6]} | {self.board[7]} | {self.board[8]}"
+        message.display_formatted_board(self)
 
     def get_prompt(self, total_marks_on_board):
         current_player = self.new_board.get_current_player(total_marks_on_board)
@@ -49,11 +49,11 @@ class Game:
                 self.board, self.player_one, self.player_two
             )
 
-            print(self.get_formatted_board())
+            self.get_formatted_board()
         else:
             self.get_prompt(current_total_marks_on_board)
 
     def run(self):
         message.display_welcome_message(self)
-        print(self.get_formatted_board())
+        self.get_formatted_board()
         self.progress_game()
