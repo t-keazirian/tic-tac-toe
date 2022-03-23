@@ -22,7 +22,8 @@ class Game:
             message.display_prompt_message_for_move(self, current_player)
 
     def process_user_input(self):
-        position_choice = int(input())
+        user_input_as_string = self.get_user_input()
+        position_choice = self.convert_input_to_integer(user_input_as_string)
         self.new_board.place_mark_on_board(
             position_choice, self.board, self.total_marks_on_board
         )
@@ -32,8 +33,8 @@ class Game:
         return int(user_input)
 
     def get_user_input(self):
-        position_choice = input()
-        return position_choice
+        user_input = input()
+        return user_input
 
     def progress_game(self):
         current_total_marks_on_board = self.new_board.count_marks_in_board(
