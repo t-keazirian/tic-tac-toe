@@ -25,3 +25,7 @@ class Board:
             return True
         else:
             return False
+
+    def take_turns_marking_board(self, board):
+        while self.is_board_full is False:
+            return self.place_mark_on_board()

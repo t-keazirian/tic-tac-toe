@@ -1,14 +1,11 @@
 import unittest
+from unittest.mock import patch
 
 from src.board import Board
 from src.game import Game
 
 
 class TestGame(unittest.TestCase):
-    def test_welcome_message(self):
-        game = Game()
-        self.assertEqual("Welcome to Tic Tac Toe", game.get_welcome_message())
-
     def test_get_formatted_board_with_real_values(self):
         game = Game()
         self.assertEqual(
@@ -69,3 +66,27 @@ class TestGame(unittest.TestCase):
         current_player = board.get_current_player(total_marks_on_board)
         board.place_mark_on_board(user_input, current_board, total_marks_on_board)
         self.assertEqual(current_board[2], current_player)
+
+    def test_takes_in_user_input_returns_integer(self):
+        game = Game()
+        user_input = game.convert_input_to_integer("5")
+        output = 5
+        self.assertEqual(user_input, output)
+
+    @patch("builtins.input", side_effect=["3"])
+    def test_gets_user_input(self, mock_input):
+        game = Game()
+        output = game.get_user_input()
+        self.assertEqual(output, "3")
+
+    @patch("builtins.input", side_effect=["3"])
+    def test_gets_user_input_returns_string(self, mock_input):
+        game = Game()
+        output = type(game.get_user_input())
+        self.assertEqual(output, str)
+
+    @patch("builtins.input", side_effect=["5"])
+    def test_gets_user_input_function_not_returning_false_positive(self, mock_input):
+        game = Game()
+        output = game.get_user_input()
+        self.assertNotEqual(output, "3")

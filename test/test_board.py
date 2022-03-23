@@ -39,3 +39,12 @@ class TestBoard(unittest.TestCase):
         total_marks_on_board = 2
         current_player = board.get_current_player(total_marks_on_board)
         self.assertEqual("X", current_player)
+
+
+#    def test_take_turns_marking_board(self):
+#        board = Board()
+#        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+#        new_board_with_marks = ["X", "0", "3", "4", "5", "6", "7", "8", "9"]
+#        self.assertEqual(
+#            new_board_with_marks, board.take_turns_marking_board(current_board)
+#        )

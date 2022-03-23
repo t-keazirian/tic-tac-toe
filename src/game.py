@@ -1,4 +1,5 @@
 from src.board import Board
+from src.message import Message as message
 
 
 class Game:
@@ -10,15 +11,12 @@ class Game:
         self.player_two = "O"
         self.total_marks_on_board = 0
 
-    def get_welcome_message(self):
-        return "Welcome to Tic Tac Toe"
-
     def get_formatted_board(self):
         return f"{self.board[0]} | {self.board[1]} | {self.board[2]}\n--+--+--\n{self.board[3]} | {self.board[4]} | {self.board[5]}\n--+--+--\n{self.board[6]} | {self.board[7]} | {self.board[8]}"
 
     def get_prompt(self, total_marks_on_board):
         current_player = self.new_board.get_current_player(total_marks_on_board)
-        if total_marks_on_board == len(self.board):
+        if self.new_board.is_board_full(total_marks_on_board, self.board):
             prompt = "Game Over!"
         else:
             prompt = f"Player {current_player} - enter a number to place your mark"
@@ -30,6 +28,13 @@ class Game:
             position_choice, self.board, self.total_marks_on_board
         )
         self.total_marks_on_board += 1
+
+    def convert_input_to_integer(self, user_input):
+        return int(user_input)
+
+    def get_user_input(self):
+        position_choice = input()
+        return position_choice
 
     def progress_game(self):
         current_total_marks_on_board = self.new_board.count_marks_in_board(
@@ -44,6 +49,6 @@ class Game:
             print(self.get_prompt(current_total_marks_on_board))
 
     def play_new_game(self):
-        print(self.get_welcome_message())
+        message.display_welcome_message(self)
         print(self.get_formatted_board())
         self.progress_game()
