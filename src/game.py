@@ -30,6 +30,7 @@ class Game:
         self.total_marks_on_board = self.new_board.count_marks_in_board(
             self.board, self.player_one, self.player_two
         )
+        return self.board
 
     def convert_input_to_integer(self, user_input):
         return int(user_input)

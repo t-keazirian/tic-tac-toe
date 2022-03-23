@@ -59,3 +59,19 @@ class TestGame(unittest.TestCase):
         game = Game()
         output = game.get_user_input()
         self.assertNotEqual(output, "3")
+
+    @patch("builtins.input", side_effect=["1"])
+    def test_process_user_input_returns_updated_board_when_1_is_inputted(
+        self, mock_input
+    ):
+        game = Game()
+        output = game.process_user_input()
+        self.assertEqual(output, ["X", "2", "3", "4", "5", "6", "7", "8", "9"])
+
+    @patch("builtins.input", side_effect=["2"])
+    def test_process_user_input_returns_updated_board_when_2_is_inputted(
+        self, mock_input
+    ):
+        game = Game()
+        output = game.process_user_input()
+        self.assertEqual(output, ["1", "X", "3", "4", "5", "6", "7", "8", "9"])
