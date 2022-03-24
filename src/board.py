@@ -28,7 +28,7 @@ class Board:
         )
         return board
 
-    def is_board_full(self, total_marks_on_board, board):
+    def is_full(self, total_marks_on_board, board):
         if total_marks_on_board == len(board):
             return True
         else:
