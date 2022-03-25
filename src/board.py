@@ -9,6 +9,7 @@ class Board:
             total_marks_on_board = board.count(player_one) + board.count(player_two)
         return total_marks_on_board
 
+    # need to refactor to remove and import Player
     def get_current_player(self, total_marks_on_board):
         if total_marks_on_board % 2 == 0:
             return self.player_one
