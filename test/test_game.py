@@ -5,91 +5,73 @@ from src.game import Game
 
 
 class TestGame(unittest.TestCase):
-    def test_welcome_message(self):
+
+    # mocks print
+    @patch("builtins.print")
+    def test_prompt_x_for_first_turn(self, mock_print):
         game = Game()
-        self.assertEqual("Welcome to Tic Tac Toe", game.get_welcome_message())
+        total_marks_on_board = 0
+        game.get_prompt(total_marks_on_board)
+        mock_print.assert_called_with("Player X - enter a number to place your mark")
 
-    def test_initialize_board_with_real_values(self):
+    @patch("builtins.print")
+    def test_prompt_o_for_second_turn(self, mock_print):
         game = Game()
-        self.assertEqual(
-            "1 | 2 | 3\n--+--+--\n4 | 5 | 6\n--+--+--\n7 | 8 | 9",
-            game.initialize_board(),
-        )
+        total_marks_on_board = 1
+        game.get_prompt(total_marks_on_board)
+        mock_print.assert_called_with("Player O - enter a number to place your mark")
 
-    def test_prompt_x_for_first_turn(self):
+    @patch("builtins.print")
+    def test_prompt_x_for_third_turn(self, mock_print):
         game = Game()
-        play_count = 0
-        prompt = game.get_prompt(play_count)
-        self.assertEqual("Player X - enter a number to place your mark", prompt)
+        total_marks_on_board = 2
+        game.get_prompt(total_marks_on_board)
+        mock_print.assert_called_with("Player X - enter a number to place your mark")
 
-    def test_prompt_o_for_second_turn(self):
+    @patch("builtins.print")
+    def test_full_board_game_over(self, mock_print):
         game = Game()
-        play_count = 1
-        prompt = game.get_prompt(play_count)
-        self.assertEqual("Player O - enter a number to place your mark", prompt)
+        total_marks_on_board = 9
+        game.get_prompt(total_marks_on_board)
+        mock_print.assert_called_with("Game Over!")
 
-    def test_prompt_x_for_third_turn(self):
+    def test_takes_in_user_input_returns_integer(self):
         game = Game()
-        play_count = 2
-        prompt = game.get_prompt(play_count)
-        self.assertEqual("Player X - enter a number to place your mark", prompt)
+        user_input = game.convert_input_to_integer("5")
+        output = 5
+        self.assertEqual(user_input, output)
 
-    def test_full_board_game_over(self):
+    # mocks user input
+    @patch("builtins.input", side_effect=["3"])
+    def test_gets_user_input(self, mock_input):
         game = Game()
-        play_count = 9
-        prompt = game.get_prompt(play_count)
-        self.assertEqual("Game Over!", prompt)
+        output = game.get_user_input()
+        self.assertEqual(output, "3")
 
-    def test_no_turns_taken_yet(self):
+    @patch("builtins.input", side_effect=["3"])
+    def test_gets_user_input_returns_string(self, mock_input):
         game = Game()
-        play_count = game.count_plays()
-        self.assertEqual(0, play_count)
+        output = type(game.get_user_input())
+        self.assertEqual(output, str)
 
-    def test_zero_turns_player_x_goes_first(self):
+    @patch("builtins.input", side_effect=["5"])
+    def test_gets_user_input_function_not_returning_false_positive(self, mock_input):
         game = Game()
-        play_count = 0
-        next_player = game.get_next_player(play_count)
-        self.assertEqual("X", next_player)
+        output = game.get_user_input()
+        self.assertNotEqual(output, "3")
 
-    def test_one_turn_player_o_goes_next(self):
+    @patch("builtins.input", side_effect=["1"])
+    def test_process_user_input_returns_updated_board_when_1_is_inputted(
+        self, mock_input
+    ):
         game = Game()
-        play_count = 1
-        next_player = game.get_next_player(play_count)
-        self.assertEqual("O", next_player)
+        output = game.process_user_input()
+        self.assertEqual(output, ["X", "2", "3", "4", "5", "6", "7", "8", "9"])
 
-    def test_two_turn_player_x_goes_next(self):
+    @patch("builtins.input", side_effect=["2"])
+    def test_process_user_input_returns_updated_board_when_2_is_inputted(
+        self, mock_input
+    ):
         game = Game()
-        play_count = 2
-        next_player = game.get_next_player(play_count)
-        self.assertEqual("X", next_player)
-
-    def test_X_is_placed_in_index_0_with_input_1(self):
-        game = Game()
-        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 1
-        play_count = 0
-        next_player = game.get_next_player(play_count)
-        game.place_mark_on_board(user_input, board, play_count)
-        self.assertEqual(board[0], next_player)
-
-    def test_O_is_placed_in_index_1_with_input_2(self):
-        game = Game()
-        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 2
-        play_count = 1
-        next_player = game.get_next_player(play_count)
-        game.place_mark_on_board(user_input, board, play_count)
-        self.assertEqual(board[1], next_player)
-
-    def test_X_is_placed_in_index_2_with_input_3(self):
-        game = Game()
-        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 3
-        play_count = 2
-        next_player = game.get_next_player(play_count)
-        game.place_mark_on_board(user_input, board, play_count)
-        self.assertEqual(board[2], next_player)
-
-
-# test - when X replaces 1, board is reprinted with X in spot 1
-# test - when X replaces 1, it is O's turn and repeat
+        output = game.process_user_input()
+        self.assertEqual(output, ["1", "X", "3", "4", "5", "6", "7", "8", "9"])

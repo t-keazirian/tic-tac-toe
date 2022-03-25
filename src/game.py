@@ -1,51 +1,60 @@
+from src.board import Board
+from src.message import Message as message
+
+
 class Game:
-    #    def __init__(self):
-    board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    player_one = "X"
-    player_two = "O"
-    play_count = 0
+    def __init__(self):
+        # initialize a new Board
+        self.new_board = Board()
+        self.board = self.new_board.starter_board
+        self.player_one = self.new_board.player_one
+        self.player_two = self.new_board.player_two
+        self.total_marks_on_board = 0
 
-    def get_welcome_message(self):
-        return "Welcome to Tic Tac Toe"
+    def get_formatted_board(self):
+        message.display_formatted_board(self)
 
-    def initialize_board(self):
-        return f"{self.board[0]} | {self.board[1]} | {self.board[2]}\n--+--+--\n{self.board[3]} | {self.board[4]} | {self.board[5]}\n--+--+--\n{self.board[6]} | {self.board[7]} | {self.board[8]}"
-
-    def count_plays(self):
-        for mark in self.board:
-            play_count = self.board.count(self.player_one) + self.board.count(
-                self.player_two
-            )
-        return play_count
-
-    def get_next_player(self, play_count):
-        if play_count == 0:
-            return self.player_one
-        elif play_count % 2 == 0:
-            return self.player_one
+    def get_prompt(self, total_marks_on_board):
+        current_player = self.new_board.get_current_player(total_marks_on_board)
+        if self.new_board.is_full(total_marks_on_board, self.board):
+            message.display_game_over_message(self)
         else:
-            return self.player_two
-
-    def get_prompt(self, play_count):
-        next_player = self.get_next_player(play_count)
-        if play_count == len(self.board):
-            prompt = "Game Over!"
-        else:
-            prompt = f"Player {next_player} - enter a number to place your mark"
-        return prompt
-
-    def place_mark_on_board(self, user_input, board, play_count):
-        input_index = user_input - 1
-        board[input_index] = self.get_next_player(play_count)
-        return board
+            message.display_prompt_message_for_move(self, current_player)
 
     def process_user_input(self):
-        position_choice = int(input())
-        self.place_mark_on_board(position_choice, self.board, self.play_count)
-        print(self.initialize_board())
+        user_input_as_string = self.get_user_input()
+        position_choice = self.convert_input_to_integer(user_input_as_string)
+        self.new_board.mark_board_with_user_selection(
+            position_choice, self.board, self.total_marks_on_board
+        )
+        self.total_marks_on_board = self.new_board.count_marks(
+            self.board, self.player_one, self.player_two
+        )
+        return self.board
+
+    def convert_input_to_integer(self, user_input):
+        return int(user_input)
+
+    def get_user_input(self):
+        user_input = input()
+        return user_input
+
+    def play_game(self):
+        current_total_marks_on_board = self.new_board.count_marks(
+            self.board, self.player_one, self.player_two
+        )
+        while current_total_marks_on_board != len(self.board):
+            self.get_prompt(current_total_marks_on_board)
+            self.process_user_input()
+            current_total_marks_on_board = self.new_board.count_marks(
+                self.board, self.player_one, self.player_two
+            )
+
+            self.get_formatted_board()
+        else:
+            self.get_prompt(current_total_marks_on_board)
 
     def run(self):
-        print(self.get_welcome_message())
-        print(self.initialize_board())
-        print(self.get_prompt(self.count_plays()))
-        self.process_user_input()
+        message.display_welcome_message(self)
+        self.get_formatted_board()
+        self.play_game()
