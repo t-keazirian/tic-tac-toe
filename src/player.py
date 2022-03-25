@@ -1,14 +1,15 @@
-from src.board import Board as board_class
+from src.board import Board
 
 
 class Player:
     def __init__(self):
-        self.player_one = "X"
-        self.player_two = "O"
+        self.board_class = Board()
+        self.player_one = self.board_class.player_one
+        self.player_two = self.board_class.player_two
 
     def mark_board_with_user_selection(self, user_input, board, total_marks_on_board):
-        board_class.assign_board_index_to_current_player_mark(
-            self, user_input, board, total_marks_on_board
+        self.board_class.assign_board_index_to_current_player_mark(
+            user_input, board, total_marks_on_board
         )
         return board
 
