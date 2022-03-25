@@ -4,7 +4,7 @@ class Board:
         self.player_one = "X"
         self.player_two = "O"
 
-    def count_marks_in_board(self, board, player_one, player_two):
+    def count_marks(self, board, player_one, player_two):
         for mark in board:
             total_marks_on_board = board.count(player_one) + board.count(player_two)
         return total_marks_on_board
@@ -22,6 +22,7 @@ class Board:
         board[input_index] = self.get_current_player(total_marks_on_board)
         return board[input_index]
 
+    # go into a player class
     def mark_board_with_user_selection(self, user_input, board, total_marks_on_board):
         self.assign_board_index_to_current_player_mark(
             user_input, board, total_marks_on_board

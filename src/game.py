@@ -27,7 +27,7 @@ class Game:
         self.new_board.mark_board_with_user_selection(
             position_choice, self.board, self.total_marks_on_board
         )
-        self.total_marks_on_board = self.new_board.count_marks_in_board(
+        self.total_marks_on_board = self.new_board.count_marks(
             self.board, self.player_one, self.player_two
         )
         return self.board
@@ -40,13 +40,13 @@ class Game:
         return user_input
 
     def play_game(self):
-        current_total_marks_on_board = self.new_board.count_marks_in_board(
+        current_total_marks_on_board = self.new_board.count_marks(
             self.board, self.player_one, self.player_two
         )
         while current_total_marks_on_board != len(self.board):
             self.get_prompt(current_total_marks_on_board)
             self.process_user_input()
-            current_total_marks_on_board = self.new_board.count_marks_in_board(
+            current_total_marks_on_board = self.new_board.count_marks(
                 self.board, self.player_one, self.player_two
             )
 
