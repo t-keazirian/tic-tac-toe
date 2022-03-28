@@ -1,13 +1,11 @@
 from src.board import Board
 from src.message import Message as message
-from src.player import Player
 
 
 class Game:
     def __init__(self):
         # initialize a new Board
         self.new_board = Board()
-        self.new_player = Player()
         self.board = self.new_board.starter_board
         self.player_one = self.new_board.player_one
         self.player_two = self.new_board.player_two
@@ -16,8 +14,14 @@ class Game:
     def get_formatted_board(self):
         message.display_formatted_board(self, self.board)
 
+    def get_current_player(self, total_marks_on_board):
+        if total_marks_on_board % 2 == 0:
+            return self.player_one
+        else:
+            return self.player_two
+
     def get_prompt(self, total_marks_on_board):
-        current_player = self.new_player.get_current_player(total_marks_on_board)
+        current_player = self.get_current_player(total_marks_on_board)
         if self.new_board.is_full(total_marks_on_board, self.board):
             message.display_game_over_message(self)
         else:

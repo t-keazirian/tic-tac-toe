@@ -115,3 +115,21 @@ class TestGame(unittest.TestCase):
             new_board_with_marks,
             board.mark_board(user_input, current_board, total_marks_on_board),
         )
+
+    def test_zero_turns_player_x_goes_first(self):
+        game = Game()
+        total_marks_on_board = 0
+        current_player = game.get_current_player(total_marks_on_board)
+        self.assertEqual("X", current_player)
+
+    def test_one_turn_player_o_goes_next(self):
+        game = Game()
+        total_marks_on_board = 1
+        current_player = game.get_current_player(total_marks_on_board)
+        self.assertEqual("O", current_player)
+
+    def test_two_turn_player_x_goes_next(self):
+        game = Game()
+        total_marks_on_board = 2
+        current_player = game.get_current_player(total_marks_on_board)
+        self.assertEqual("X", current_player)

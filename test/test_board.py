@@ -1,7 +1,6 @@
 import unittest
 
 from src.board import Board
-from src.player import Player
 
 
 class TestBoard(unittest.TestCase):
@@ -34,25 +33,6 @@ class TestBoard(unittest.TestCase):
         current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
         total_marks_on_board = board.count_marks(current_board, "X", "O")
         self.assertEqual(2, total_marks_on_board)
-
-    #    def test_zero_turns_player_x_goes_first(self):
-    #        player = Player()
-    #        board = Board()
-    #        total_marks_on_board = 0
-    #        current_player = player.get_current_player(total_marks_on_board)
-    #        self.assertEqual("X", current_player)
-    #
-    #    def test_one_turn_player_o_goes_next(self):
-    #        board = Board()
-    #        total_marks_on_board = 1
-    #        current_player = board.get_current_player(total_marks_on_board)
-    #        self.assertEqual("O", current_player)
-    #
-    #    def test_two_turn_player_x_goes_next(self):
-    #        board = Board()
-    #        total_marks_on_board = 2
-    #        current_player = board.get_current_player(total_marks_on_board)
-    #        self.assertEqual("X", current_player)
 
     def test_X_is_placed_in_index_0_with_input_1(self):
         board = Board()
