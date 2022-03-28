@@ -15,3 +15,6 @@ class Message:
         print(
             f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}"
         )
+
+    def display_spot_taken_message(self):
+        print("Spot is taken - please choose another spot")

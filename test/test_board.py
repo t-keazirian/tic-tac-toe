@@ -63,3 +63,38 @@ class TestBoard(unittest.TestCase):
             user_input, current_board, total_marks_on_board
         )
         self.assertEqual("X", board_index)
+
+    def test_if_spot_is_taken_return_true(self):
+        board = Board()
+        current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 0
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(True, spot_is_taken)
+
+    def test_if_spot_is_taken_return_true_2(self):
+        board = Board()
+        current_board = ["1", "X", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 1
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(True, spot_is_taken)
+
+    def test_if_spot_is_not_taken_return_false(self):
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 0
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(False, spot_is_taken)
+
+    def test_if_different_spot_is_taken_return_false(self):
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "X", "7", "8", "9"]
+        user_input = 0
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(False, spot_is_taken)
+
+    def test_if_spot_is_taken_returns_true_with_multiple_spots_taken(self):
+        board = Board()
+        current_board = ["O", "X", "X", "O", "5", "6", "7", "8", "9"]
+        user_input = 4
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(False, spot_is_taken)

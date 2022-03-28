@@ -9,7 +9,6 @@ class Board:
             total_marks_on_board = board.count(player_one) + board.count(player_two)
         return total_marks_on_board
 
-    # need to refactor to remove and import Player
     def get_current_player(self, total_marks_on_board):
         if total_marks_on_board % 2 == 0:
             return self.player_one
@@ -23,7 +22,6 @@ class Board:
         board[input_index] = self.get_current_player(total_marks_on_board)
         return board[input_index]
 
-    # go into a player class
     def mark_board(self, user_input, board, total_marks_on_board):
         self.assign_board_index_to_current_player_mark(
             user_input, board, total_marks_on_board
@@ -32,6 +30,12 @@ class Board:
 
     def is_full(self, total_marks_on_board, board):
         if total_marks_on_board == len(board):
+            return True
+        else:
+            return False
+
+    def is_spot_taken(self, board, user_input):
+        if board[user_input] == self.player_one or board[user_input] == self.player_two:
             return True
         else:
             return False

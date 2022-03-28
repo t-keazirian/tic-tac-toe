@@ -40,3 +40,9 @@ class TestMessage(unittest.TestCase):
         mock_print.assert_called_with(
             "1 | 2 | 3\n--+--+--\n4 | 5 | 6\n--+--+--\n7 | 8 | 9",
         )
+
+    @patch("builtins.print")
+    def test_display_spot_taken_message(self, mock_print):
+        message = Message()
+        message.display_spot_taken_message()
+        mock_print.assert_called_with("Spot is taken - please choose another spot")
