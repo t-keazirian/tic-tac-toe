@@ -45,7 +45,7 @@ class Game:
         total_marks_on_board = self.new_board.count_marks(
             self.board, self.player_one, self.player_two
         )
-        while total_marks_on_board != len(self.board):
+        while not self.new_board.is_full(total_marks_on_board, self.board):
             self.get_prompt(total_marks_on_board)
             self.process_user_input()
             total_marks_on_board = self.new_board.count_marks(
