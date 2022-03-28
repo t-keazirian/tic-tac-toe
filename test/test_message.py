@@ -35,7 +35,8 @@ class TestMessage(unittest.TestCase):
     @patch("builtins.print")
     def test_display_formatted_board(self, mock_print):
         message = Message()
-        message.display_formatted_board()
+        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        message.display_formatted_board(board)
         mock_print.assert_called_with(
             "1 | 2 | 3\n--+--+--\n4 | 5 | 6\n--+--+--\n7 | 8 | 9",
         )

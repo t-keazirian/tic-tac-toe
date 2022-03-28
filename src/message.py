@@ -1,10 +1,4 @@
-from src.board import Board
-
-
 class Message:
-    def __init__(self):
-        self.new_board = Board()
-
     def display_welcome_message(self):
         print("Welcome to Tic Tac Toe")
 
@@ -17,7 +11,7 @@ class Message:
     def display_error_prompt_for_occupied_spot(self):
         print("Spot is taken - choose another spot")
 
-    def display_formatted_board(self):
+    def display_formatted_board(self, board):
         print(
-            f"{self.new_board.starter_board[0]} | {self.new_board.starter_board[1]} | {self.new_board.starter_board[2]}\n--+--+--\n{self.new_board.starter_board[3]} | {self.new_board.starter_board[4]} | {self.new_board.starter_board[5]}\n--+--+--\n{self.new_board.starter_board[6]} | {self.new_board.starter_board[7]} | {self.new_board.starter_board[8]}"
+            f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}"
         )

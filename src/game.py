@@ -14,7 +14,7 @@ class Game:
         self.total_marks_on_board = 0
 
     def get_formatted_board(self):
-        message.display_formatted_board(self)
+        message.display_formatted_board(self, self.board)
 
     def get_prompt(self, total_marks_on_board):
         current_player = self.new_player.get_current_player(total_marks_on_board)
