@@ -26,7 +26,7 @@ class Game:
     def process_user_input(self):
         user_input_as_string = self.get_user_input()
         position_choice = self.convert_input_to_integer(user_input_as_string)
-        self.new_board.mark_board_with_user_selection(
+        self.new_board.mark_board(
             position_choice, self.board, self.total_marks_on_board
         )
         self.total_marks_on_board = self.new_board.count_marks(
