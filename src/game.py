@@ -42,19 +42,19 @@ class Game:
         return user_input
 
     def play_game(self):
-        current_total_marks_on_board = self.new_board.count_marks(
+        total_marks_on_board = self.new_board.count_marks(
             self.board, self.player_one, self.player_two
         )
-        while current_total_marks_on_board != len(self.board):
-            self.get_prompt(current_total_marks_on_board)
+        while total_marks_on_board != len(self.board):
+            self.get_prompt(total_marks_on_board)
             self.process_user_input()
-            current_total_marks_on_board = self.new_board.count_marks(
+            total_marks_on_board = self.new_board.count_marks(
                 self.board, self.player_one, self.player_two
             )
 
             self.get_formatted_board()
         else:
-            self.get_prompt(current_total_marks_on_board)
+            self.get_prompt(total_marks_on_board)
 
     def run(self):
         message.display_welcome_message(self)
