@@ -41,9 +41,7 @@ class Game:
             self.new_board.mark_board(
                 position_choice, self.board, self.total_marks_on_board
             )
-            self.total_marks_on_board = self.new_board.count_marks(
-                self.board, self.player_one, self.player_two
-            )
+            self.total_marks_on_board = self.new_board.count_marks(self.board)
         # do I need this return?
         return self.board
 
@@ -55,15 +53,11 @@ class Game:
         return user_input
 
     def play_game(self):
-        total_marks_on_board = self.new_board.count_marks(
-            self.board, self.player_one, self.player_two
-        )
+        total_marks_on_board = self.new_board.count_marks(self.board)
         while not self.new_board.is_full(total_marks_on_board, self.board):
             self.get_prompt(total_marks_on_board)
             self.process_user_input()
-            total_marks_on_board = self.new_board.count_marks(
-                self.board, self.player_one, self.player_two
-            )
+            total_marks_on_board = self.new_board.count_marks(self.board)
 
             self.get_formatted_board()
         else:

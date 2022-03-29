@@ -4,9 +4,11 @@ class Board:
         self.player_one = "X"
         self.player_two = "O"
 
-    def count_marks(self, board, player_one, player_two):
+    def count_marks(self, board):
         for mark in board:
-            total_marks_on_board = board.count(player_one) + board.count(player_two)
+            total_marks_on_board = board.count(self.player_one) + board.count(
+                self.player_two
+            )
         return total_marks_on_board
 
     # this is both here and in game, and I'm calling it in two places because of circular imports if I pull it in here
