@@ -9,6 +9,7 @@ class Board:
             total_marks_on_board = board.count(player_one) + board.count(player_two)
         return total_marks_on_board
 
+    # this is both here and in game, and I'm calling it in two places because of circular imports if I pull it in here
     def get_current_player(self, total_marks_on_board):
         if total_marks_on_board % 2 == 0:
             return self.player_one
@@ -34,8 +35,11 @@ class Board:
         else:
             return False
 
+    # tests are passing but not working as expected
     def is_spot_taken(self, board, user_input):
-        if board[user_input] == self.player_one or board[user_input] == self.player_two:
+        if (board[user_input] == self.player_one) or (
+            board[user_input] == self.player_two
+        ):
             return True
         else:
             return False
