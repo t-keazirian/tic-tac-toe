@@ -34,36 +34,6 @@ class TestBoard(unittest.TestCase):
         total_marks_on_board = board.count_marks(current_board)
         self.assertEqual(2, total_marks_on_board)
 
-    def test_X_is_placed_in_index_0_with_input_1(self):
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 1
-        test_mark = "X"
-        board_index = board.assign_board_index_to_current_player_mark(
-            user_input, current_board, test_mark
-        )
-        self.assertEqual(test_mark, board_index)
-
-    def test_O_is_placed_in_index_1_with_input_2(self):
-        board = Board()
-        current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 2
-        test_mark = "O"
-        board_index = board.assign_board_index_to_current_player_mark(
-            user_input, current_board, test_mark
-        )
-        self.assertEqual(test_mark, board_index)
-
-    def test_X_is_placed_in_index_2_with_input_3(self):
-        board = Board()
-        current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 3
-        test_mark = "X"
-        board_index = board.assign_board_index_to_current_player_mark(
-            user_input, current_board, test_mark
-        )
-        self.assertEqual(test_mark, board_index)
-
     def test_if_spot_is_taken_return_true(self):
         board = Board()
         current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]

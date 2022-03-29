@@ -11,13 +11,12 @@ class Board:
             )
         return total_marks_on_board
 
-    def assign_board_index_to_current_player_mark(self, user_input, board, mark):
-        input_index = user_input - 1
-        board[input_index] = mark
-        return board[input_index]
+    def calculate_index(self, user_input):
+        return user_input - 1
 
     def mark_board(self, user_input, board, mark):
-        self.assign_board_index_to_current_player_mark(user_input, board, mark)
+        input_index = self.calculate_index(user_input)
+        board[input_index] = mark
         return board
 
     def is_full(self, total_marks_on_board, board):
