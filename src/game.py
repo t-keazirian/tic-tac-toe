@@ -39,7 +39,9 @@ class Game:
             self.get_prompt_for_occupied_spot(self.board, position_choice)
         else:
             self.new_board.mark_board(
-                position_choice, self.board, self.total_marks_on_board
+                position_choice,
+                self.board,
+                self.get_current_player(self.total_marks_on_board),
             )
             self.total_marks_on_board = self.new_board.count_marks(self.board)
         # do I need this return?

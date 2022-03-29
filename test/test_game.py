@@ -98,10 +98,9 @@ class TestGame(unittest.TestCase):
         current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         new_board_with_marks = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
         user_input = 1
-        total_marks_on_board = 0
         self.assertEqual(
             new_board_with_marks,
-            board.mark_board(user_input, current_board, total_marks_on_board),
+            board.mark_board(user_input, current_board, "X"),
         )
 
     def test_board_is_marked_with_user_selection_when_one_mark_and_O_is_next_player(
@@ -111,10 +110,9 @@ class TestGame(unittest.TestCase):
         current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
         new_board_with_marks = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
         user_input = 2
-        total_marks_on_board = 1
         self.assertEqual(
             new_board_with_marks,
-            board.mark_board(user_input, current_board, total_marks_on_board),
+            board.mark_board(user_input, current_board, "O"),
         )
 
     def test_board_is_marked_with_user_selection_when_two_marks_and_X_is_next_player(
@@ -124,10 +122,9 @@ class TestGame(unittest.TestCase):
         current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
         new_board_with_marks = ["X", "O", "X", "4", "5", "6", "7", "8", "9"]
         user_input = 3
-        total_marks_on_board = 2
         self.assertEqual(
             new_board_with_marks,
-            board.mark_board(user_input, current_board, total_marks_on_board),
+            board.mark_board(user_input, current_board, "X"),
         )
 
     def test_zero_turns_player_x_goes_first(self):
