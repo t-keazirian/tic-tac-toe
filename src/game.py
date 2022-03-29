@@ -34,17 +34,12 @@ class Game:
     def process_user_input(self):
         user_input_as_string = self.get_user_input()
         position_choice = self.convert_input_to_integer(user_input_as_string)
-        # look at - not working - or should it go somewhere else?
-        if self.new_board.is_spot_taken(self.board, position_choice):
-            self.get_prompt_for_occupied_spot(self.board, position_choice)
-        else:
-            self.new_board.mark_board(
-                position_choice,
-                self.board,
-                self.get_current_player(self.total_marks_on_board),
-            )
-            self.total_marks_on_board = self.new_board.count_marks(self.board)
-        # do I need this return?
+        self.new_board.mark_board(
+            position_choice,
+            self.board,
+            self.get_current_player(self.total_marks_on_board),
+        )
+        self.total_marks_on_board = self.new_board.count_marks(self.board)
         return self.board
 
     def convert_input_to_integer(self, user_input):
