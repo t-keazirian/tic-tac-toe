@@ -26,7 +26,7 @@ class Board:
             return False
 
     def is_spot_taken(self, board, user_input):
-        position_choice = board[user_input]
+        position_choice = board[user_input - 1]
         if position_choice == self.player_one or position_choice == self.player_two:
             return True
         else:

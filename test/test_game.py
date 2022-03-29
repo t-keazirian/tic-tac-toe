@@ -39,9 +39,7 @@ class TestGame(unittest.TestCase):
     @patch("builtins.print")
     def test_user_chooses_marked_spot(self, mock_print):
         game = Game()
-        board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 0
-        game.get_prompt_for_occupied_spot(board, user_input)
+        game.get_prompt_for_occupied_spot()
         mock_print.assert_called_with("Spot is taken - please choose another spot")
 
     def test_takes_in_user_input_returns_integer(self):
