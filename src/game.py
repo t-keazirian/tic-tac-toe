@@ -27,14 +27,11 @@ class Game:
         else:
             message.display_prompt_message_for_move(self, current_player)
 
-    def get_prompt_for_occupied_spot(self):
-        message.display_spot_taken_message(self)
-
     def process_user_input(self):
         user_input_as_string = self.get_user_input()
         position_choice = self.convert_input_to_integer(user_input_as_string)
         if self.new_board.is_spot_taken(self.board, position_choice):
-            self.get_prompt_for_occupied_spot()
+            message.display_spot_taken_message(self)
             self.process_user_input()
         self.new_board.mark_board(
             position_choice,
