@@ -25,11 +25,9 @@ class Board:
         else:
             return False
 
-    # tests are passing but not working as expected
     def is_spot_taken(self, board, user_input):
-        if (board[user_input] == self.player_one) or (
-            board[user_input] == self.player_two
-        ):
+        position_choice = board[user_input - 1]
+        if position_choice == self.player_one or position_choice == self.player_two:
             return True
         else:
             return False
