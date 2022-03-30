@@ -69,12 +69,6 @@ class TestGame(unittest.TestCase):
         output = game.process_user_input()
         self.assertEqual(output, ["X", "2", "3", "4", "5", "6", "7", "8", "9"])
 
-    #    @patch("builtins.input", side_effect=["1"])
-    #    def test_process_user_input_when_spot_is_already_occupied(self, mock_input):
-    #        game = Game()
-    #        output = game.process_user_input()
-    #        self.assertEqual(output, "Spot is taken - please choose another spot")
-
     @patch("builtins.input", side_effect=["2"])
     def test_process_user_input_returns_updated_board_when_2_is_inputted(
         self, mock_input
