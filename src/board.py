@@ -4,33 +4,32 @@ class Board:
         self.player_one = "X"
         self.player_two = "O"
 
-    def count_marks(self, board, player_one, player_two):
+    def count_marks(self, board):
         for mark in board:
-            total_marks_on_board = board.count(player_one) + board.count(player_two)
+            total_marks_on_board = board.count(self.player_one) + board.count(
+                self.player_two
+            )
         return total_marks_on_board
 
-    def get_current_player(self, total_marks_on_board):
-        if total_marks_on_board % 2 == 0:
-            return self.player_one
-        else:
-            return self.player_two
+    def calculate_index(self, user_input):
+        return user_input - 1
 
-    def assign_board_index_to_current_player_mark(
-        self, user_input, board, total_marks_on_board
-    ):
-        input_index = user_input - 1
-        board[input_index] = self.get_current_player(total_marks_on_board)
-        return board[input_index]
-
-    # go into a player class
-    def mark_board_with_user_selection(self, user_input, board, total_marks_on_board):
-        self.assign_board_index_to_current_player_mark(
-            user_input, board, total_marks_on_board
-        )
+    def mark_board(self, user_input, board, mark):
+        input_index = self.calculate_index(user_input)
+        board[input_index] = mark
         return board
 
     def is_full(self, total_marks_on_board, board):
         if total_marks_on_board == len(board):
+            return True
+        else:
+            return False
+
+    # tests are passing but not working as expected
+    def is_spot_taken(self, board, user_input):
+        if (board[user_input] == self.player_one) or (
+            board[user_input] == self.player_two
+        ):
             return True
         else:
             return False

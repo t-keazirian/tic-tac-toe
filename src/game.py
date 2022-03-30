@@ -12,24 +12,39 @@ class Game:
         self.total_marks_on_board = 0
 
     def get_formatted_board(self):
-        message.display_formatted_board(self)
+        message.display_formatted_board(self, self.board)
+
+    def get_current_player(self, total_marks_on_board):
+        if total_marks_on_board % 2 == 0:
+            return self.player_one
+        else:
+            return self.player_two
 
     def get_prompt(self, total_marks_on_board):
-        current_player = self.new_board.get_current_player(total_marks_on_board)
+        current_player = self.get_current_player(total_marks_on_board)
         if self.new_board.is_full(total_marks_on_board, self.board):
             message.display_game_over_message(self)
         else:
             message.display_prompt_message_for_move(self, current_player)
 
+    def get_prompt_for_occupied_spot(self, board, user_input):
+        if self.new_board.is_spot_taken(board, user_input):
+            message.display_spot_taken_message(self)
+
     def process_user_input(self):
         user_input_as_string = self.get_user_input()
         position_choice = self.convert_input_to_integer(user_input_as_string)
-        self.new_board.mark_board_with_user_selection(
-            position_choice, self.board, self.total_marks_on_board
-        )
-        self.total_marks_on_board = self.new_board.count_marks(
-            self.board, self.player_one, self.player_two
-        )
+        # look at - not working - or should it go somewhere else?
+        if self.new_board.is_spot_taken(self.board, position_choice):
+            self.get_prompt_for_occupied_spot(self.board, position_choice)
+        else:
+            self.new_board.mark_board(
+                position_choice,
+                self.board,
+                self.get_current_player(self.total_marks_on_board),
+            )
+            self.total_marks_on_board = self.new_board.count_marks(self.board)
+        # do I need this return?
         return self.board
 
     def convert_input_to_integer(self, user_input):
@@ -40,19 +55,15 @@ class Game:
         return user_input
 
     def play_game(self):
-        current_total_marks_on_board = self.new_board.count_marks(
-            self.board, self.player_one, self.player_two
-        )
-        while current_total_marks_on_board != len(self.board):
-            self.get_prompt(current_total_marks_on_board)
+        total_marks_on_board = self.new_board.count_marks(self.board)
+        while not self.new_board.is_full(total_marks_on_board, self.board):
+            self.get_prompt(total_marks_on_board)
             self.process_user_input()
-            current_total_marks_on_board = self.new_board.count_marks(
-                self.board, self.player_one, self.player_two
-            )
+            total_marks_on_board = self.new_board.count_marks(self.board)
 
             self.get_formatted_board()
         else:
-            self.get_prompt(current_total_marks_on_board)
+            self.get_prompt(total_marks_on_board)
 
     def run(self):
         message.display_welcome_message(self)

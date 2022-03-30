@@ -7,77 +7,64 @@ class TestBoard(unittest.TestCase):
     def test_is_full_returns_true_if_board_is_full(self):
         board = Board()
         full_board = ["X", "O", "X", "O", "X", "O", "X", "O", "X"]
-        total_marks_on_board = board.count_marks(full_board, "X", "O")
+        total_marks_on_board = board.count_marks(full_board)
         self.assertEqual(True, board.is_full(total_marks_on_board, full_board))
 
     def test_is_full_returns_false_if_board_isnt_full(self):
         board = Board()
         full_board = ["X", "2", "3", "4", "X", "O", "X", "O", "X"]
-        total_marks_on_board = board.count_marks(full_board, "X", "O")
+        total_marks_on_board = board.count_marks(full_board)
         self.assertEqual(False, board.is_full(total_marks_on_board, full_board))
 
     def test_no_turns_taken_yet(self):
         board = Board()
         current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        total_marks_on_board = board.count_marks(current_board, "X", "O")
+        total_marks_on_board = board.count_marks(current_board)
         self.assertEqual(0, total_marks_on_board)
 
     def test_one_turn_taken_returns_one_mark_on_board(self):
         board = Board()
         current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
-        total_marks_on_board = board.count_marks(current_board, "X", "O")
+        total_marks_on_board = board.count_marks(current_board)
         self.assertEqual(1, total_marks_on_board)
 
     def test_two_turns_taken_returns_two_marks_on_board(self):
         board = Board()
         current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
-        total_marks_on_board = board.count_marks(current_board, "X", "O")
+        total_marks_on_board = board.count_marks(current_board)
         self.assertEqual(2, total_marks_on_board)
 
-    def test_zero_turns_player_x_goes_first(self):
-        board = Board()
-        total_marks_on_board = 0
-        current_player = board.get_current_player(total_marks_on_board)
-        self.assertEqual("X", current_player)
-
-    def test_one_turn_player_o_goes_next(self):
-        board = Board()
-        total_marks_on_board = 1
-        current_player = board.get_current_player(total_marks_on_board)
-        self.assertEqual("O", current_player)
-
-    def test_two_turn_player_x_goes_next(self):
-        board = Board()
-        total_marks_on_board = 2
-        current_player = board.get_current_player(total_marks_on_board)
-        self.assertEqual("X", current_player)
-
-    def test_X_is_placed_in_index_0_with_input_1(self):
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 1
-        total_marks_on_board = 0
-        board_index = board.assign_board_index_to_current_player_mark(
-            user_input, current_board, total_marks_on_board
-        )
-        self.assertEqual("X", board_index)
-
-    def test_O_is_placed_in_index_1_with_input_2(self):
+    def test_if_spot_is_taken_return_true(self):
         board = Board()
         current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 2
-        total_marks_on_board = 1
-        board_index = board.assign_board_index_to_current_player_mark(
-            user_input, current_board, total_marks_on_board
-        )
-        self.assertEqual("O", board_index)
+        user_input = 0
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(True, spot_is_taken)
 
-    def test_X_is_placed_in_index_2_with_input_3(self):
+    def test_if_spot_is_taken_return_true_2(self):
         board = Board()
-        current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 3
-        total_marks_on_board = 2
-        board_index = board.assign_board_index_to_current_player_mark(
-            user_input, current_board, total_marks_on_board
-        )
-        self.assertEqual("X", board_index)
+        current_board = ["1", "X", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 1
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(True, spot_is_taken)
+
+    def test_if_spot_is_not_taken_return_false(self):
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 0
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(False, spot_is_taken)
+
+    def test_if_different_spot_is_taken_return_false(self):
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "X", "7", "8", "9"]
+        user_input = 0
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(False, spot_is_taken)
+
+    def test_if_spot_is_taken_returns_true_with_multiple_spots_taken(self):
+        board = Board()
+        current_board = ["O", "X", "X", "O", "5", "6", "7", "8", "9"]
+        user_input = 4
+        spot_is_taken = board.is_spot_taken(current_board, user_input)
+        self.assertEqual(False, spot_is_taken)
