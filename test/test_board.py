@@ -75,3 +75,51 @@ class TestBoard(unittest.TestCase):
         user_input = 6
         spot_is_taken = board.is_spot_taken(current_board, user_input)
         self.assertEqual(False, spot_is_taken)
+
+    def test_if_three_in_horizontal_first_row_returns_true(self):
+        board = Board()
+        current_board = ["X", "X", "X", "O", "5", "6", "7", "8", "9"]
+        winner = board.is_winner_horizontal(current_board)
+        self.assertEqual(True, winner)
+
+    def test_if_three_in_horizontal_second_row_returns_true(self):
+        board = Board()
+        current_board = ["1", "2", "3", "X", "X", "X", "7", "8", "9"]
+        winner = board.is_winner_horizontal(current_board)
+        self.assertEqual(True, winner)
+
+    def test_if_three_in_horizontal_third_row_returns_true(self):
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "6", "X", "X", "X"]
+        winner = board.is_winner_horizontal(current_board)
+        self.assertEqual(True, winner)
+
+    def test_if_not_three_in_a_horizontal_row_return_false(self):
+        board = Board()
+        current_board = ["X", "2", "X", "4", "X", "6", "7", "8", "9"]
+        winner = board.is_winner_horizontal(current_board)
+        self.assertEqual(False, winner)
+
+    def test_if_three_in_vertical_first_column_returns_true(self):
+        board = Board()
+        current_board = ["X", "2", "3", "X", "5", "6", "X", "8", "9"]
+        winner = board.is_winner_vertical(current_board)
+        self.assertEqual(True, winner)
+
+    def test_if_three_in_vertical_second_column_returns_true(self):
+        board = Board()
+        current_board = ["1", "X", "3", "4", "X", "6", "7", "X", "9"]
+        winner = board.is_winner_vertical(current_board)
+        self.assertEqual(True, winner)
+
+    def test_if_three_in_vertical_third_column_returns_true(self):
+        board = Board()
+        current_board = ["1", "2", "X", "4", "5", "X", "7", "8", "X"]
+        winner = board.is_winner_vertical(current_board)
+        self.assertEqual(True, winner)
+
+    def test_if_not_three_in_vertical_column_return_false(self):
+        board = Board()
+        current_board = ["1", "2", "X", "4", "X", "6", "7", "X", "9"]
+        winner = board.is_winner_vertical(current_board)
+        self.assertEqual(False, winner)

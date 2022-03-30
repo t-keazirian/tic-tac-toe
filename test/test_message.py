@@ -46,3 +46,9 @@ class TestMessage(unittest.TestCase):
         message = Message()
         message.display_spot_taken_message()
         mock_print.assert_called_with("Spot is taken - please choose another spot")
+
+    @patch("builtins.print")
+    def test_display_winner_message(self, mock_print):
+        message = Message()
+        message.display_winner_message()
+        mock_print.assert_called_with("Congrats - you are the winner!")
