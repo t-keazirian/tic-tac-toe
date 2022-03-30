@@ -51,3 +51,13 @@ class Board:
             return True
         else:
             return False
+
+    def is_winner_diagonal(self, board):
+        if board[0] == board[4] and board[4] == board[8] and board[0] == board[8]:
+            return True
+        if board[2] == board[4] and board[4] == board[6] and board[2] == board[6]:
+            return True
+        else:
+            return False
+
+    # how can I get the value of board[i] so I can input the message with Congrats Player [i], you won!
