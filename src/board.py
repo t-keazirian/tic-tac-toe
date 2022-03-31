@@ -59,5 +59,3 @@ class Board:
             return True
         else:
             return False
-
-    # how can I get the value of board[i] so I can input the message with Congrats Player [i], you won!

@@ -19,5 +19,5 @@ class Message:
     def display_spot_taken_message(self):
         print("Spot is taken - please choose another spot")
 
-    def display_winner_message(self):
-        print("Congrats - you are the winner!")
+    def display_winner_message(self, winner):
+        print(f"Congrats Player {winner} - you are the winner!")

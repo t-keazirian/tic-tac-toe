@@ -21,12 +21,6 @@ class Game:
 
     def get_prompt(self, total_marks_on_board):
         current_player = self.get_current_player(total_marks_on_board)
-        #        if (
-        #            self.board.is_winner_diagonal(self.game_board)
-        #            or self.board.is_winner_vertical(self.game_board)
-        #            or self.board.is_winner_horizontal(self.game_board)
-        #        ):
-        #            message.display_winner_message(self)
         if self.board.is_full(total_marks_on_board, self.game_board):
             message.display_game_over_message(self)
         else:
@@ -63,6 +57,13 @@ class Game:
         else:
             return False
 
+    def determine_winner(self, total_marks_on_board):
+        player = self.get_current_player(total_marks_on_board)
+        if player == "X":
+            return "O"
+        else:
+            return "X"
+
     def play_game(self):
         total_marks_on_board = self.board.count_marks(self.game_board)
         while not self.board.is_full(total_marks_on_board, self.game_board):
@@ -71,12 +72,12 @@ class Game:
             total_marks_on_board = self.board.count_marks(self.game_board)
             self.get_formatted_board()
             if self.is_winner(self.game_board):
-                message.display_winner_message(self)
+                winner = self.determine_winner(total_marks_on_board)
+                message.display_winner_message(self, winner)
                 break
             else:
                 self.play_game()
                 break
-
         else:
             self.get_prompt(total_marks_on_board)
 

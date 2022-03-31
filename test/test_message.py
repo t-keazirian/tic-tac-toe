@@ -48,7 +48,8 @@ class TestMessage(unittest.TestCase):
         mock_print.assert_called_with("Spot is taken - please choose another spot")
 
     @patch("builtins.print")
-    def test_display_winner_message(self, mock_print):
+    def test_display_winner_message_with_correct_mark_as_winner(self, mock_print):
         message = Message()
-        message.display_winner_message()
-        mock_print.assert_called_with("Congrats - you are the winner!")
+        winner = "X"
+        message.display_winner_message(winner)
+        mock_print.assert_called_with(f"Congrats Player {winner} - you are the winner!")

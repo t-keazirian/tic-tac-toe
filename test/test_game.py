@@ -154,3 +154,15 @@ class TestGame(unittest.TestCase):
         total_marks_on_board = 2
         current_player = game.get_current_player(total_marks_on_board)
         self.assertEqual("X", current_player)
+
+    def test_if_current_player_is_O_then_X_wins(self):
+        game = Game()
+        total_marks_on_board = 5
+        winner = game.determine_winner(total_marks_on_board)
+        self.assertEqual("X", winner)
+
+    def test_if_current_player_is_X_then_O_wins(self):
+        game = Game()
+        total_marks_on_board = 6
+        winner = game.determine_winner(total_marks_on_board)
+        self.assertEqual("O", winner)
