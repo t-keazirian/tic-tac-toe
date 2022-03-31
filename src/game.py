@@ -74,7 +74,9 @@ class Game:
                 message.display_winner_message(self)
                 break
             else:
+                self.play_game()
                 break
+
         else:
             self.get_prompt(total_marks_on_board)
 
