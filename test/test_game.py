@@ -77,6 +77,30 @@ class TestGame(unittest.TestCase):
         output = game.process_user_input()
         self.assertEqual(output, ["1", "X", "3", "4", "5", "6", "7", "8", "9"])
 
+    def test_is_winner_returns_true_when_third_column_winner(self):
+        game = Game()
+        board = ["1", "2", "X", "4", "5", "X", "7", "8", "X"]
+        winner = game.is_winner(board)
+        self.assertEqual(True, winner)
+
+    def test_is_winner_returns_true_when_first_column_winner(self):
+        game = Game()
+        board = ["X", "2", "3", "X", "5", "6", "X", "8", "9"]
+        winner = game.is_winner(board)
+        self.assertEqual(True, winner)
+
+    def test_is_winner_returns_true_when_first_row_winner(self):
+        game = Game()
+        board = ["X", "X", "X", "4", "5", "6", "7", "8", "9"]
+        winner = game.is_winner(board)
+        self.assertEqual(True, winner)
+
+    def test_is_winner_returns_false_when_not_three_in_row(self):
+        game = Game()
+        board = ["1", "X", "O", "X", "5", "6", "O", "8", "9"]
+        winner = game.is_winner(board)
+        self.assertEqual(False, winner)
+
     def test_board_is_marked_with_user_selection_when_no_marks_and_X_is_going_first(
         self,
     ):
