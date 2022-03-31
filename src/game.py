@@ -48,11 +48,12 @@ class Game:
         return user_input
 
     def is_winner(self, game_board):
-        if self.board.is_winner_horizontal(game_board):
-            return True
-        elif self.board.is_winner_vertical(game_board):
-            return True
-        elif self.board.is_winner_diagonal(game_board):
+
+        if (
+            self.board.is_winner_horizontal(game_board)
+            or self.board.is_winner_vertical(game_board)
+            or self.board.is_winner_diagonal(game_board)
+        ):
             return True
         else:
             return False
