@@ -6,8 +6,6 @@ from src.game import Game
 
 
 class TestGame(unittest.TestCase):
-
-    # mocks print
     @patch("builtins.print")
     def test_prompt_x_for_first_turn(self, mock_print):
         game = Game()
@@ -42,7 +40,6 @@ class TestGame(unittest.TestCase):
         output = 5
         self.assertEqual(user_input, output)
 
-    # mocks user input
     @patch("builtins.input", side_effect=["3"])
     def test_gets_user_input(self, mock_input):
         game = Game()
