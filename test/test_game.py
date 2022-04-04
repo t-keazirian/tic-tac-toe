@@ -6,8 +6,6 @@ from src.game import Game
 
 
 class TestGame(unittest.TestCase):
-
-    # mocks print
     @patch("builtins.print")
     def test_prompt_x_for_first_turn(self, mock_print):
         game = Game()
@@ -42,7 +40,6 @@ class TestGame(unittest.TestCase):
         output = 5
         self.assertEqual(user_input, output)
 
-    # mocks user input
     @patch("builtins.input", side_effect=["3"])
     def test_gets_user_input(self, mock_input):
         game = Game()
@@ -68,12 +65,6 @@ class TestGame(unittest.TestCase):
         game = Game()
         output = game.process_user_input()
         self.assertEqual(output, ["X", "2", "3", "4", "5", "6", "7", "8", "9"])
-
-    #    @patch("builtins.input", side_effect=["1"])
-    #    def test_process_user_input_when_spot_is_already_occupied(self, mock_input):
-    #        game = Game()
-    #        output = game.process_user_input()
-    #        self.assertEqual(output, "Spot is taken - please choose another spot")
 
     @patch("builtins.input", side_effect=["2"])
     def test_process_user_input_returns_updated_board_when_2_is_inputted(
@@ -136,3 +127,15 @@ class TestGame(unittest.TestCase):
         total_marks_on_board = 2
         current_player = game.get_current_player(total_marks_on_board)
         self.assertEqual("X", current_player)
+
+    def test_if_current_player_is_O_then_X_wins(self):
+        game = Game()
+        total_marks_on_board = 5
+        winner = game.determine_winning_mark(total_marks_on_board)
+        self.assertEqual("X", winner)
+
+    def test_if_current_player_is_X_then_O_wins(self):
+        game = Game()
+        total_marks_on_board = 6
+        winner = game.determine_winning_mark(total_marks_on_board)
+        self.assertEqual("O", winner)
