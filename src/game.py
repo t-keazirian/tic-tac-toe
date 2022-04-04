@@ -23,7 +23,7 @@ class Game:
 
     def get_prompt(self, total_marks_on_board):
         current_player = self.get_current_player(total_marks_on_board)
-        if self.board.is_full(total_marks_on_board, self.game_board):
+        if self.board.determine_is_full(total_marks_on_board, self.game_board):
             message.display_game_over_message(self)
         else:
             message.display_prompt_message_for_move(self, current_player)
@@ -31,7 +31,7 @@ class Game:
     def process_user_input(self):
         user_input_as_string = self.get_user_input()
         position_choice = self.convert_input_to_integer(user_input_as_string)
-        if self.board.is_spot_taken(self.game_board, position_choice):
+        if self.board.determine_is_spot_taken(self.game_board, position_choice):
             message.display_spot_taken_message(self)
             self.process_user_input()
         self.board.mark_board(
@@ -58,7 +58,7 @@ class Game:
 
     def play_game(self):
         total_marks_on_board = self.board.count_marks(self.game_board)
-        while not self.board.is_full(total_marks_on_board, self.game_board):
+        while not self.board.determine_is_full(total_marks_on_board, self.game_board):
             self.get_prompt(total_marks_on_board)
             self.process_user_input()
             total_marks_on_board = self.board.count_marks(self.game_board)
