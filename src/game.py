@@ -1,10 +1,12 @@
 from src.board import Board
 from src.message import Message as message
+from src.rules import Rules
 
 
 class Game:
     def __init__(self):
         self.board = Board()
+        self.rules = Rules()
         self.game_board = self.board.starter_board
         self.player_one = self.board.player_one
         self.player_two = self.board.player_two
@@ -61,7 +63,7 @@ class Game:
             self.process_user_input()
             total_marks_on_board = self.board.count_marks(self.game_board)
             self.get_formatted_board()
-            if self.board.determine_is_winner(self.game_board):
+            if self.rules.determine_is_winner(self.game_board):
                 winner = self.determine_winning_mark(total_marks_on_board)
                 message.display_winner_message(self, winner)
                 break
