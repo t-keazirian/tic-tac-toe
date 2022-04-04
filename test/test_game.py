@@ -34,30 +34,6 @@ class TestGame(unittest.TestCase):
         game.get_prompt(total_marks_on_board)
         mock_print.assert_called_with("Game Over!")
 
-    def test_takes_in_user_input_returns_integer(self):
-        game = Game()
-        user_input = game.convert_input_to_integer("5")
-        output = 5
-        self.assertEqual(user_input, output)
-
-    @patch("builtins.input", side_effect=["3"])
-    def test_gets_user_input(self, mock_input):
-        game = Game()
-        output = game.get_user_input()
-        self.assertEqual(output, "3")
-
-    @patch("builtins.input", side_effect=["3"])
-    def test_gets_user_input_returns_string(self, mock_input):
-        game = Game()
-        output = type(game.get_user_input())
-        self.assertEqual(output, str)
-
-    @patch("builtins.input", side_effect=["5"])
-    def test_gets_user_input_function_not_returning_false_positive(self, mock_input):
-        game = Game()
-        output = game.get_user_input()
-        self.assertNotEqual(output, "3")
-
     @patch("builtins.input", side_effect=["1"])
     def test_process_user_input_returns_updated_board_when_1_is_inputted(
         self, mock_input

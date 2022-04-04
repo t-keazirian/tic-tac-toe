@@ -53,3 +53,11 @@ class TestMessage(unittest.TestCase):
         winner = "X"
         message.display_winner_message(winner)
         mock_print.assert_called_with(f"Congrats Player {winner} - you are the winner!")
+
+    @patch("builtins.print")
+    def test_display_incorrect_input_message(self, mock_print):
+        message = Message()
+        message.display_incorrect_input_message()
+        mock_print.assert_called_with(
+            "That input is incorrect.\nPlease input a number 1-9."
+        )

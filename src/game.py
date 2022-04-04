@@ -1,6 +1,7 @@
 from src.board import Board
 from src.message import Message as message
 from src.rules import Rules
+from src.user_interface import UserInterface as user_interface
 
 
 class Game:
@@ -29,8 +30,7 @@ class Game:
             message.display_prompt_message_for_move(self, current_player)
 
     def process_user_input(self):
-        user_input_as_string = self.get_user_input()
-        position_choice = self.convert_input_to_integer(user_input_as_string)
+        position_choice = user_interface.get_user_input(self)
         if self.board.determine_is_spot_taken(self.game_board, position_choice):
             message.display_spot_taken_message(self)
             self.process_user_input()
@@ -41,13 +41,6 @@ class Game:
         )
         self.total_marks_on_board = self.board.count_marks(self.game_board)
         return self.game_board
-
-    def convert_input_to_integer(self, user_input):
-        return int(user_input)
-
-    def get_user_input(self):
-        user_input = input()
-        return user_input
 
     def determine_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)

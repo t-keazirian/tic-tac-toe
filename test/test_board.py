@@ -79,3 +79,6 @@ class TestBoard(unittest.TestCase):
         user_input = 6
         spot_is_taken = board.determine_is_spot_taken(current_board, user_input)
         self.assertEqual(False, spot_is_taken)
+
+        # throws an error if spot isn't on board -> expect an error
+        # throws an error when mark board invalid input

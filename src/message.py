@@ -21,3 +21,6 @@ class Message:
 
     def display_winner_message(self, winner):
         print(f"Congrats Player {winner} - you are the winner!")
+
+    def display_incorrect_input_message(self):
+        print("That input is incorrect.\nPlease input a number 1-9.")
