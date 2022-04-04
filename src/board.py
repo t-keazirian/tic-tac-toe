@@ -59,3 +59,13 @@ class Board:
             return True
         else:
             return False
+
+    def determine_is_winner(self, board):
+        if (
+            self.is_winner_horizontal(board)
+            or self.is_winner_vertical(board)
+            or self.is_winner_diagonal(board)
+        ):
+            return True
+        else:
+            return False

@@ -47,16 +47,6 @@ class Game:
         user_input = input()
         return user_input
 
-    def is_winner(self, game_board):
-        if (
-            self.board.is_winner_horizontal(game_board)
-            or self.board.is_winner_vertical(game_board)
-            or self.board.is_winner_diagonal(game_board)
-        ):
-            return True
-        else:
-            return False
-
     def determine_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
         if player == self.player_one:
@@ -71,7 +61,7 @@ class Game:
             self.process_user_input()
             total_marks_on_board = self.board.count_marks(self.game_board)
             self.get_formatted_board()
-            if self.is_winner(self.game_board):
+            if self.board.determine_is_winner(self.game_board):
                 winner = self.determine_winning_mark(total_marks_on_board)
                 message.display_winner_message(self, winner)
                 break
