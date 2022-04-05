@@ -1,13 +1,14 @@
 from src.board import Board
 from src.message import Message as message
 from src.rules import Rules
-from src.user_interface import UserInterface as user_interface
+from src.user_interface import UserInterface
 
 
 class Game:
     def __init__(self):
         self.board = Board()
         self.rules = Rules()
+        self.user_interface = UserInterface()
         self.game_board = self.board.starter_board
         self.player_one = self.board.player_one
         self.player_two = self.board.player_two
@@ -30,7 +31,7 @@ class Game:
             message.display_prompt_message_for_move(self, current_player)
 
     def process_user_input(self):
-        position_choice = user_interface.get_user_input(self)
+        position_choice = self.user_interface.get_user_input()
         if self.board.determine_is_spot_taken(self.game_board, position_choice):
             message.display_spot_taken_message(self)
             self.process_user_input()
