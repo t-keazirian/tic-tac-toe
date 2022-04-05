@@ -5,10 +5,10 @@ from src.user_interface import UserInterface
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, ui=UserInterface()):
         self.board = Board()
         self.rules = Rules()
-        self.user_interface = UserInterface()
+        self.user_interface = ui
         self.game_board = self.board.starter_board
         self.player_one = self.board.player_one
         self.player_two = self.board.player_two
