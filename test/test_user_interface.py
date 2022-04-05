@@ -23,7 +23,6 @@ class TestUserInterface(unittest.TestCase):
         output = user_interface.determine_is_correct_input(user_input)
         self.assertEqual(False, output)
 
-    # mocks user input
     @patch("builtins.input", side_effect=["3"])
     def test_gets_user_input(self, mock_input):
         user_interface = UserInterface()
@@ -41,13 +40,3 @@ class TestUserInterface(unittest.TestCase):
         user_interface = UserInterface()
         output = user_interface.get_user_input()
         self.assertNotEqual(output, "3")
-
-    @patch("builtins.print")
-    def test_handle_incorrect_input_returns_message_prompt_when_incorrect_input(
-        self, mock_print
-    ):
-        user_interface = UserInterface()
-        user_interface.handle_incorrect_input(12)
-        mock_print.assert_called_with(
-            "That input is incorrect.\nPlease input a number 1-9."
-        )
