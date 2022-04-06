@@ -27,12 +27,6 @@ class TestMessage(unittest.TestCase):
         )
 
     @patch("builtins.print")
-    def test_display_error_prompt_if_spot_is_taken(self, mock_print):
-        message = Message()
-        message.display_error_prompt_for_occupied_spot()
-        mock_print.assert_called_with("Spot is taken - choose another spot")
-
-    @patch("builtins.print")
     def test_display_formatted_board(self, mock_print):
         message = Message()
         board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -45,7 +39,9 @@ class TestMessage(unittest.TestCase):
     def test_display_spot_taken_message(self, mock_print):
         message = Message()
         message.display_spot_taken_message()
-        mock_print.assert_called_with("Spot is taken - please choose another spot")
+        mock_print.assert_called_with(
+            "That spot is already occupied. Please choose another spot on the board."
+        )
 
     @patch("builtins.print")
     def test_display_winner_message_with_correct_mark_as_winner(self, mock_print):
@@ -59,5 +55,5 @@ class TestMessage(unittest.TestCase):
         message = Message()
         message.display_incorrect_input_message()
         mock_print.assert_called_with(
-            "That input is incorrect.\nPlease input a number 1-9."
+            "That input is incorrect. Please input a number 1-9."
         )
