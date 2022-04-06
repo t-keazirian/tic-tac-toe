@@ -73,5 +73,5 @@ class TestMessage(unittest.TestCase):
     @patch("builtins.print")
     def test_display_incorrect_repeat_game_message(self, mock_print):
         message = Message()
-        message.display_incorect_repeat_game_message()
+        message.display_incorrect_repeat_game_message()
         mock_print.assert_called_with("That input is incorrect. Please input Y or N.")

@@ -28,5 +28,5 @@ class Message:
     def display_goodbye_message(self):
         print("Thanks for playing - goodbye!")
 
-    def display_incorect_repeat_game_message(self):
+    def display_incorrect_repeat_game_message(self):
         print("That input is incorrect. Please input Y or N.")

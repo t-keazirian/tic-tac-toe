@@ -4,21 +4,17 @@ from src.board import Board
 
 
 class TestBoard(unittest.TestCase):
-    def test_determine_is_full_returns_true_if_board_is_full(self):
+    def test_is_full_returns_true_if_board_is_full(self):
         board = Board()
         full_board = ["X", "O", "X", "O", "X", "O", "X", "O", "X"]
         total_marks_on_board = board.count_marks(full_board)
-        self.assertEqual(
-            True, board.determine_is_full(total_marks_on_board, full_board)
-        )
+        self.assertEqual(True, board.is_full(total_marks_on_board, full_board))
 
-    def test_determine_is_full_returns_false_if_board_isnt_full(self):
+    def test_is_full_returns_false_if_board_isnt_full(self):
         board = Board()
         full_board = ["X", "2", "3", "4", "X", "O", "X", "O", "X"]
         total_marks_on_board = board.count_marks(full_board)
-        self.assertEqual(
-            False, board.determine_is_full(total_marks_on_board, full_board)
-        )
+        self.assertEqual(False, board.is_full(total_marks_on_board, full_board))
 
     def test_no_turns_taken_yet(self):
         board = Board()

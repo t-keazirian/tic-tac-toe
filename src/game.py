@@ -26,7 +26,7 @@ class Game:
 
     def get_prompt(self, total_marks_on_board):
         current_player = self.get_current_player(total_marks_on_board)
-        if self.board.determine_is_full(total_marks_on_board, self.game_board):
+        if self.board.is_full(total_marks_on_board, self.game_board):
             message.display_game_over_message(self)
         else:
             message.display_prompt_message_for_move(self, current_player)
@@ -53,29 +53,35 @@ class Game:
 
     def repeat_game(self):
         message.display_play_again(self)
-        user_input = self.user_interface.get_play_again_user_input()
-        if user_input.upper() == "Y":
+        if self.user_interface.get_play_again_user_input() == "Y":
+            self.play_again = True
+        while self.play_again:
             self.total_marks_on_board = 0
             self.game_board = Board().starter_board
             self.get_formatted_board()
             self.play_game()
         else:
+            self.play_again = False
             message.display_goodbye_message(self)
 
     def play_game(self):
         total_marks_on_board = self.board.count_marks(self.game_board)
-        if not self.rules.is_winner(self.game_board) or self.board.determine_is_full(
-            total_marks_on_board, self.game_board
-        ):
-            self.get_prompt(total_marks_on_board)
-            self.process_user_input()
-            total_marks_on_board = self.board.count_marks(self.game_board)
-            self.get_formatted_board()
-            self.play_game()
-            winner = self.get_winning_mark(total_marks_on_board)
+        while not self.board.is_full(total_marks_on_board, self.game_board):
+            if self.rules.is_winner(self.game_board):
+                winner = self.get_winning_mark(total_marks_on_board)
+                message.display_winner_message(self, winner)
+                self.repeat_game()
+                break
+            else:
+                self.get_prompt(total_marks_on_board)
+                self.process_user_input()
+                total_marks_on_board = self.board.count_marks(self.game_board)
+                self.get_formatted_board()
+                self.play_game()
+                winner = self.get_winning_mark(total_marks_on_board)
+                break
         else:
-            winner = self.get_winning_mark(total_marks_on_board)
-            message.display_winner_message(self, winner)
+            self.get_prompt(total_marks_on_board)
             self.repeat_game()
 
     def run(self):
