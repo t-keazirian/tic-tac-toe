@@ -79,3 +79,39 @@ class TestBoard(unittest.TestCase):
         user_input = 6
         spot_is_taken = board.determine_is_spot_taken(current_board, user_input)
         self.assertEqual(False, spot_is_taken)
+
+    def test_board_is_marked_with_user_selection_when_no_marks_and_X_is_going_first(
+        self,
+    ):
+        board = Board()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        new_board_with_marks = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 1
+        self.assertEqual(
+            new_board_with_marks,
+            board.mark_board(user_input, current_board, "X"),
+        )
+
+    def test_board_is_marked_with_user_selection_when_one_mark_and_O_is_next_player(
+        self,
+    ):
+        board = Board()
+        current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
+        new_board_with_marks = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
+        user_input = 2
+        self.assertEqual(
+            new_board_with_marks,
+            board.mark_board(user_input, current_board, "O"),
+        )
+
+    def test_board_is_marked_with_user_selection_when_two_marks_and_X_is_next_player(
+        self,
+    ):
+        board = Board()
+        current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
+        new_board_with_marks = ["X", "O", "X", "4", "5", "6", "7", "8", "9"]
+        user_input = 3
+        self.assertEqual(
+            new_board_with_marks,
+            board.mark_board(user_input, current_board, "X"),
+        )
