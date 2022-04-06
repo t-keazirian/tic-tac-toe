@@ -53,6 +53,7 @@ class Game:
 
     def repeat_game(self):
         message.display_play_again(self)
+        self.play_again = False
         if self.user_interface.get_play_again_user_input() == "Y":
             self.play_again = True
         while self.play_again:
@@ -62,7 +63,6 @@ class Game:
             self.play_game()
         else:
             self.play_again = False
-            message.display_goodbye_message(self)
 
     def play_game(self):
         total_marks_on_board = self.board.count_marks(self.game_board)
@@ -88,3 +88,4 @@ class Game:
         message.display_welcome_message(self)
         self.get_formatted_board()
         self.play_game()
+        message.display_goodbye_message(self)
