@@ -70,26 +70,26 @@ class TestRules(unittest.TestCase):
         winner = rules.is_winner_diagonal(current_board)
         self.assertEqual(False, winner)
 
-    def test_if_winner_diagonal_determine_is_winner_return_true(self):
+    def test_if_winner_diagonal_is_winner_return_true(self):
         rules = Rules()
         current_board = ["1", "2", "X", "4", "X", "6", "X", "8", "9"]
-        is_winner_true = rules.determine_is_winner(current_board)
+        is_winner_true = rules.is_winner(current_board)
         self.assertEqual(True, is_winner_true)
 
-    def test_if_winner_horizontal_determine_is_winner_return_true(self):
+    def test_if_winner_horizontal_is_winner_return_true(self):
         rules = Rules()
         current_board = ["1", "2", "3", "4", "5", "6", "X", "X", "X"]
-        is_winner_true = rules.determine_is_winner(current_board)
+        is_winner_true = rules.is_winner(current_board)
         self.assertEqual(True, is_winner_true)
 
-    def test_if_winner_vertical_determine_is_winner_returns_true(self):
+    def test_if_winner_vertical_is_winner_returns_true(self):
         rules = Rules()
         current_board = ["1", "X", "3", "4", "X", "6", "7", "X", "9"]
-        is_winner_true = rules.determine_is_winner(current_board)
+        is_winner_true = rules.is_winner(current_board)
         self.assertEqual(True, is_winner_true)
 
-    def test_if_not_winner_determine_is_winner_returns_false(self):
+    def test_if_not_winner_is_winner_returns_false(self):
         rules = Rules()
         current_board = ["1", "X", "3", "4", "X", "X", "7", "8", "9"]
-        is_winner_true = rules.determine_is_winner(current_board)
+        is_winner_true = rules.is_winner(current_board)
         self.assertEqual(False, is_winner_true)

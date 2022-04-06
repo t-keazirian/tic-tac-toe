@@ -27,7 +27,7 @@ class Rules:
         else:
             return False
 
-    def determine_is_winner(self, board):
+    def is_winner(self, board):
         if (
             self.is_winner_horizontal(board)
             or self.is_winner_vertical(board)

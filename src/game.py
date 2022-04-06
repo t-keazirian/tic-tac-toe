@@ -43,7 +43,7 @@ class Game:
         self.total_marks_on_board = self.board.count_marks(self.game_board)
         return self.game_board
 
-    def determine_winning_mark(self, total_marks_on_board):
+    def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
         if player == self.player_one:
             return self.player_two
@@ -57,8 +57,8 @@ class Game:
             self.process_user_input()
             total_marks_on_board = self.board.count_marks(self.game_board)
             self.get_formatted_board()
-            if self.rules.determine_is_winner(self.game_board):
-                winner = self.determine_winning_mark(total_marks_on_board)
+            if self.rules.is_winner(self.game_board):
+                winner = self.get_winning_mark(total_marks_on_board)
                 message.display_winner_message(self, winner)
                 break
             else:

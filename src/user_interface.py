@@ -6,7 +6,7 @@ from src.message import Message as message
 class UserInterface:
     def get_user_input(self):
         user_input = input()
-        is_integer = self.determine_is_integer(user_input)
+        is_integer = self.is_integer(user_input)
         if is_integer:
             user_integer = int(user_input)
             return self.validate_move(user_integer)
@@ -25,7 +25,7 @@ class UserInterface:
         else:
             return False
 
-    def determine_is_integer(self, user_input):
+    def is_integer(self, user_input):
         if re.match(r"^[0-9]*$", user_input) is None:
             return False
         else:
