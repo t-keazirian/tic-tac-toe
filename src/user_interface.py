@@ -39,3 +39,26 @@ class UserInterface:
             valid_move = self.input_in_range(user_input)
             break
         return user_input
+
+    def get_play_again_user_input(self):
+        play_again_input = input()
+        is_valid_input = self.valid_play_again_input(play_again_input)
+        if is_valid_input:
+            return play_again_input
+        else:
+            return self.handle_invalid_play_again_input(play_again_input)
+
+    def valid_play_again_input(self, user_input):
+        if user_input.upper() == "Y" or user_input.upper() == "N":
+            return True
+        else:
+            return False
+
+    def handle_invalid_play_again_input(self, user_input):
+        valid_input = self.valid_play_again_input(user_input)
+        while valid_input is False:
+            message.display_incorect_repeat_game_message(self)
+            user_input = self.get_play_again_user_input()
+            valid_input = self.valid_play_again_input(user_input)
+            break
+        return user_input
