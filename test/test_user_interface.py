@@ -41,13 +41,13 @@ class TestUserInterface(unittest.TestCase):
         output = user_interface.get_user_input()
         self.assertNotEqual(output, "3")
 
-    def test_try_returns_true_when_input_is_integer(self):
+    def test_is_integer_returns_true_when_input_is_integer(self):
         user_interface = UserInterface()
         user_input = "4"
         result = user_interface.is_integer(user_input)
         self.assertEqual(True, result)
 
-    def test_try_returns_false_when_input_is_not_integer(self):
+    def test_is_integer_returns_true_when_input_is_not_integer(self):
         user_interface = UserInterface()
         user_input = "s"
         result = user_interface.is_integer(user_input)
