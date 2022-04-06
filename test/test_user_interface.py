@@ -78,3 +78,17 @@ class TestUserInterface(unittest.TestCase):
         user_interface = UserInterface()
         user_input = "n"
         self.assertEqual(True, user_interface.valid_play_again_input(user_input))
+
+    def test_handle_invalid_play_again_input_returns_false_when_user_inputs_number(
+        self,
+    ):
+        user_interface = UserInterface()
+        user_input = "7"
+        self.assertEqual(False, user_interface.valid_play_again_input(user_input))
+
+    def test_handle_invalid_play_again_input_returns_false_when_incorrect_letter(
+        self,
+    ):
+        user_interface = UserInterface()
+        user_input = "s"
+        self.assertEqual(False, user_interface.valid_play_again_input(user_input))
