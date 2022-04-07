@@ -54,7 +54,7 @@ class Game:
     def repeat_game(self):
         message.display_play_again(self)
         self.play_again = False
-        if self.user_interface.get_play_again_user_input() == "Y":
+        if self.user_interface.get_play_again_user_input():
             self.play_again = True
         while self.play_again:
             self.total_marks_on_board = 0

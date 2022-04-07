@@ -54,16 +54,16 @@ class TestUserInterface(unittest.TestCase):
         self.assertEqual(False, result)
 
     @patch("builtins.input", side_effect=["Y"])
-    def test_get_play_again_user_input_returns_Y_when_input_is_Y(self, mock_input):
+    def test_get_play_again_user_input_returns_true_when_input_is_Y(self, mock_input):
         user_interface = UserInterface()
         output = user_interface.get_play_again_user_input()
-        self.assertEqual("Y", output)
+        self.assertEqual(True, output)
 
     @patch("builtins.input", side_effect=["N"])
-    def test_get_play_again_user_input_returns_N_when_input_is_N(self, mock_input):
+    def test_get_play_again_user_input_returns_false_when_input_is_N(self, mock_input):
         user_interface = UserInterface()
         output = user_interface.get_play_again_user_input()
-        self.assertEqual("N", output)
+        self.assertEqual(False, output)
 
     def test_handle_invalid_play_again_input_returns_true_when_user_input_is_Y(
         self,

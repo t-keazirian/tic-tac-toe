@@ -45,9 +45,9 @@ class UserInterface:
         is_valid_input = self.valid_play_again_input(play_again_input)
         if is_valid_input:
             if play_again_input.upper() == "Y":
-                return "Y"
-            else:
-                return "N"
+                return True
+            if play_again_input.upper() == "N":
+                return False
         else:
             self.handle_invalid_play_again_input(play_again_input)
 
