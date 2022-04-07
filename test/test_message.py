@@ -74,4 +74,6 @@ class TestMessage(unittest.TestCase):
     def test_display_incorrect_repeat_game_message(self, mock_print):
         message = Message()
         message.display_incorrect_repeat_game_message()
-        mock_print.assert_called_with("That input is incorrect. Please input Y or N.")
+        mock_print.assert_called_with(
+            "That input is incorrect. Please input Y to play again or N to exit the game."
+        )

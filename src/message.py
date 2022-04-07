@@ -29,4 +29,6 @@ class Message:
         print("Thanks for playing - goodbye!")
 
     def display_incorrect_repeat_game_message(self):
-        print("That input is incorrect. Please input Y or N.")
+        print(
+            "That input is incorrect. Please input Y to play again or N to exit the game."
+        )
