@@ -51,18 +51,11 @@ class Game:
         else:
             return self.player_one
 
-    def repeat_game(self):
-        message.display_play_again(self)
-        self.play_again = False
-        if self.user_interface.get_play_again_user_input():
-            self.play_again = True
-        while self.play_again:
-            self.total_marks_on_board = 0
-            self.game_board = Board().starter_board
-            self.get_formatted_board()
-            self.play_game()
-        else:
-            self.play_again = False
+    def new_game(self):
+        self.total_marks_on_board = 0
+        self.game_board = Board().starter_board
+        self.get_formatted_board()
+        self.play_game()
 
     def handle_winning_game(self, board):
         winner = self.get_winning_mark(self.total_marks_on_board)
@@ -75,6 +68,16 @@ class Game:
         self.total_marks_on_board = self.board.count_marks(self.game_board)
         self.get_formatted_board()
         self.play_game()
+
+    def repeat_game(self):
+        message.display_play_again(self)
+        self.play_again = False
+        if self.user_interface.get_play_again_user_input() == "Y":
+            self.play_again = True
+        while self.play_again:
+            self.new_game()
+        else:
+            self.play_again = False
 
     def play_game(self):
         total_marks_on_board = self.board.count_marks(self.game_board)
@@ -91,6 +94,5 @@ class Game:
 
     def run(self):
         message.display_welcome_message(self)
-        self.get_formatted_board()
-        self.play_game()
+        self.new_game()
         message.display_goodbye_message(self)

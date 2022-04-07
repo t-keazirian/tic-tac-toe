@@ -45,9 +45,9 @@ class UserInterface:
         is_valid_input = self.valid_play_again_input(play_again_input)
         if is_valid_input:
             if play_again_input.upper() == "Y":
-                return True
-            if play_again_input.upper() == "N":
-                return False
+                return "Y"
+            else:
+                return "N"
         else:
             self.handle_invalid_play_again_input(play_again_input)
 
@@ -62,5 +62,7 @@ class UserInterface:
         while valid_input is False:
             message.display_incorrect_repeat_game_message(self)
             user_input = self.get_play_again_user_input()
+            print("user_input", user_input)
             valid_input = self.valid_play_again_input(user_input)
             break
+        return user_input
