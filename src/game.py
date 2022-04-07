@@ -44,18 +44,18 @@ class Game:
         self.total_marks_on_board = self.board.count_marks(self.game_board)
         return self.game_board
 
+    def new_game(self):
+        self.total_marks_on_board = 0
+        self.game_board = Board().starter_board
+        self.get_formatted_board()
+        self.play_game()
+
     def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
         if player == self.player_one:
             return self.player_two
         else:
             return self.player_one
-
-    def new_game(self):
-        self.total_marks_on_board = 0
-        self.game_board = Board().starter_board
-        self.get_formatted_board()
-        self.play_game()
 
     def handle_winning_game(self, board):
         winner = self.get_winning_mark(self.total_marks_on_board)
