@@ -57,3 +57,23 @@ class TestMessage(unittest.TestCase):
         mock_print.assert_called_with(
             "That input is incorrect. Please input a number 1-9."
         )
+
+    @patch("builtins.print")
+    def test_display_play_again_message(self, mock_print):
+        message = Message()
+        message.display_play_again()
+        mock_print.assert_called_with("Would you like to play again? (Y/N)")
+
+    @patch("builtins.print")
+    def test_display_goodbye_message(self, mock_print):
+        message = Message()
+        message.display_goodbye_message()
+        mock_print.assert_called_with("Thanks for playing - goodbye!")
+
+    @patch("builtins.print")
+    def test_display_incorrect_repeat_game_message(self, mock_print):
+        message = Message()
+        message.display_incorrect_repeat_game_message()
+        mock_print.assert_called_with(
+            "That input is incorrect. Please input Y to play again or N to exit the game."
+        )

@@ -21,3 +21,14 @@ class Message:
 
     def display_incorrect_input_message(self):
         print("That input is incorrect. Please input a number 1-9.")
+
+    def display_play_again(self):
+        print("Would you like to play again? (Y/N)")
+
+    def display_goodbye_message(self):
+        print("Thanks for playing - goodbye!")
+
+    def display_incorrect_repeat_game_message(self):
+        print(
+            "That input is incorrect. Please input Y to play again or N to exit the game."
+        )
