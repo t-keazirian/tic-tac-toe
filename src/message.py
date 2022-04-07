@@ -2,6 +2,10 @@ class Message:
     def display_welcome_message(self):
         print("Welcome to Tic Tac Toe")
 
+    def print_rules(self):
+        rules = """\nPlay this game by taking turns marking the board. \nWhen prompted, type your a number between 1 and 9 and press enter. \nIf that spot is taken, the computer will prompt you for a different spot. \nThe first player who gets three of their marks in a row wins! \nIf the board is full and neither player has three in a row, it is a draw and the game is over. \nAt the end of every game, you will have the option to play again or to exit.\n"""
+        print(rules)
+
     def display_game_over_message(self):
         print("Game Over!")
 

@@ -94,5 +94,6 @@ class Game:
 
     def run(self):
         message.display_welcome_message(self)
+        message.print_rules(self)
         self.new_game()
         message.display_goodbye_message(self)

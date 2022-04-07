@@ -77,3 +77,10 @@ class TestMessage(unittest.TestCase):
         mock_print.assert_called_with(
             "That input is incorrect. Please input Y to play again or N to exit the game."
         )
+
+    @patch("builtins.print")
+    def test_print_rules_prints_rules_to_console(self, mock_print):
+        message = Message()
+        rules = """\nPlay this game by taking turns marking the board. \nWhen prompted, type your a number between 1 and 9 and press enter. \nIf that spot is taken, the computer will prompt you for a different spot. \nThe first player who gets three of their marks in a row wins! \nIf the board is full and neither player has three in a row, it is a draw and the game is over. \nAt the end of every game, you will have the option to play again or to exit.\n"""
+        message.print_rules()
+        mock_print.assert_called_with(rules)
