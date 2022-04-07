@@ -58,7 +58,7 @@ class Game:
         else:
             return self.player_one
 
-    def handle_winning_game(self, board):
+    def handle_winning_game(self):
         winner = self.get_winning_mark(self.total_marks_on_board)
         self.ui.display_message(self.message.declare_winner(winner))
         self.repeat_game()
@@ -89,14 +89,17 @@ class Game:
         total_marks_on_board = self.board.count_marks(self.game_board)
         while not self.board.is_full(total_marks_on_board, self.game_board):
             if self.rules.is_winner(self.game_board):
-                self.handle_winning_game(self.game_board)
+                self.handle_winning_game()
                 break
             else:
                 self.handle_draw()
                 break
         else:
-            self.get_prompt(total_marks_on_board)
-            self.repeat_game()
+            if self.rules.is_winner(self.game_board):
+                self.handle_winning_game()
+            else:
+                self.get_prompt(total_marks_on_board)
+                self.repeat_game()
 
     def run(self):
         self.ui.display_message(self.message.welcome_message())
