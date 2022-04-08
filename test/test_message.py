@@ -25,7 +25,6 @@ class TestMessage(unittest.TestCase):
         actual_message = message.prompt_for_move(current_player)
         self.assertEqual(expected_message, actual_message)
 
-
     def test_spot_taken_message(self):
         message = Message()
         expected_message = (
