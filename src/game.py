@@ -1,14 +1,15 @@
 from src.board import Board
-from src.message import Message as message
+from src.message import Message
 from src.rules import Rules
 from src.user_interface import UserInterface
 
 
 class Game:
-    def __init__(self, ui=UserInterface()):
+    def __init__(self, ui=UserInterface(), message=Message()):
         self.board = Board()
         self.rules = Rules()
-        self.user_interface = ui
+        self.ui = ui
+        self.message = message
         self.game_board = self.board.starter_board
         self.player_one = self.board.player_one
         self.player_two = self.board.player_two
@@ -16,7 +17,7 @@ class Game:
         self.play_again = False
 
     def get_formatted_board(self):
-        message.display_formatted_board(self, self.game_board)
+        self.ui.display_board(self.board.to_string(self.game_board))
 
     def get_current_player(self, total_marks_on_board):
         if total_marks_on_board % 2 == 0:
@@ -27,14 +28,14 @@ class Game:
     def get_prompt(self, total_marks_on_board):
         current_player = self.get_current_player(total_marks_on_board)
         if self.board.is_full(total_marks_on_board, self.game_board):
-            message.display_game_over_message(self)
+            self.ui.display_message(self.message.game_over_message())
         else:
-            message.display_prompt_message_for_move(self, current_player)
+            self.ui.display_message(self.message.prompt_for_move(current_player))
 
     def process_user_input(self):
-        position_choice = self.user_interface.get_user_input()
+        position_choice = self.ui.get_user_input(self.message.incorrect_board_input())
         if self.board.determine_is_spot_taken(self.game_board, position_choice):
-            message.display_spot_taken_message(self)
+            self.ui.display_message(self.message.spot_taken_message())
             self.process_user_input()
         self.board.mark_board(
             position_choice,
@@ -59,7 +60,7 @@ class Game:
 
     def handle_winning_game(self, board):
         winner = self.get_winning_mark(self.total_marks_on_board)
-        message.display_winner_message(self, winner)
+        self.ui.display_message(self.message.declare_winner(winner))
         self.repeat_game()
 
     def handle_draw(self):
@@ -70,9 +71,14 @@ class Game:
         self.play_game()
 
     def repeat_game(self):
-        message.display_play_again(self)
+        self.ui.display_message(self.message.play_again_prompt())
         self.play_again = False
-        if self.user_interface.get_play_again_user_input() == "Y":
+        if (
+            self.ui.get_play_again_user_input(
+                self.message.incorrect_repeat_game_input()
+            )
+            == "Y"
+        ):
             self.play_again = True
         while self.play_again:
             self.new_game()
@@ -93,6 +99,7 @@ class Game:
             self.repeat_game()
 
     def run(self):
-        message.display_welcome_message(self)
+        self.ui.display_message(self.message.welcome_message())
+        self.ui.display_message(self.message.rules())
         self.new_game()
-        message.display_goodbye_message(self)
+        self.ui.display_message(self.message.goodbye_message())

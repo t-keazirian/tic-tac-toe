@@ -4,6 +4,9 @@ class Board:
         self.player_one = "X"
         self.player_two = "O"
 
+    def to_string(self, board):
+        return f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}"
+
     def count_marks(self, board):
         for mark in board:
             total_marks_on_board = board.count(self.player_one) + board.count(

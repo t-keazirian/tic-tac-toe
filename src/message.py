@@ -1,34 +1,38 @@
 class Message:
-    def display_welcome_message(self):
-        print("Welcome to Tic Tac Toe")
+    def welcome_message(self):
+        return "Welcome to Tic Tac Toe"
 
-    def display_game_over_message(self):
-        print("Game Over!")
+    def rules(self):
+        rules = """
+Play this game by taking turns marking the board.
+When prompted, type a number between 1 and 9 and press enter.
+If that spot is taken, the computer will prompt you for a different spot.
+The first player who gets three of their marks in a row wins!
+If the board is full and neither player has three in a row, it is a draw and the game is over.
+At the end of every game, you will have the option to play again or to exit.\n
+"""
+        return rules
 
-    def display_prompt_message_for_move(self, current_player):
-        print(f"Player {current_player} - enter a number to place your mark")
+    def game_over_message(self):
+        return "Game over - it's a draw!"
 
-    def display_formatted_board(self, board):
-        print(
-            f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}"
-        )
+    def prompt_for_move(self, current_player):
+        return f"Player {current_player} - enter a number to place your mark"
 
-    def display_spot_taken_message(self):
-        print("That spot is already occupied. Please choose another spot on the board.")
+    def spot_taken_message(self):
+        return "That spot is already occupied. Please choose another spot on the board."
 
-    def display_winner_message(self, winner):
-        print(f"Congrats Player {winner} - you are the winner!")
+    def declare_winner(self, winner):
+        return f"Congrats Player {winner} - you are the winner!"
 
-    def display_incorrect_input_message(self):
-        print("That input is incorrect. Please input a number 1-9.")
+    def incorrect_board_input(self):
+        return "That input is incorrect. Please input a number 1-9."
 
-    def display_play_again(self):
-        print("Would you like to play again? (Y/N)")
+    def play_again_prompt(self):
+        return "Would you like to play again? (Y/N)"
 
-    def display_goodbye_message(self):
-        print("Thanks for playing - goodbye!")
+    def goodbye_message(self):
+        return "Thanks for playing - goodbye!"
 
-    def display_incorrect_repeat_game_message(self):
-        print(
-            "That input is incorrect. Please input Y to play again or N to exit the game."
-        )
+    def incorrect_repeat_game_input(self):
+        return "That input is incorrect. Please input Y to play again or N to exit the game."

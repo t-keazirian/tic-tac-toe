@@ -4,6 +4,13 @@ from src.board import Board
 
 
 class TestBoard(unittest.TestCase):
+    def test_board_to_string(self):
+        board = Board()
+        game_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        expected_message = f"{game_board[0]} | {game_board[1]} | {game_board[2]}\n--+--+--\n{game_board[3]} | {game_board[4]} | {game_board[5]}\n--+--+--\n{game_board[6]} | {game_board[7]} | {game_board[8]}"
+        actual_message = board.to_string(game_board)
+        self.assertEqual(expected_message, actual_message)
+
     def test_is_full_returns_true_if_board_is_full(self):
         board = Board()
         full_board = ["X", "O", "X", "O", "X", "O", "X", "O", "X"]

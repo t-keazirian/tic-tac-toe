@@ -4,34 +4,46 @@ from unittest.mock import patch
 from src.game import Game
 
 
+class MockMessage:
+    def prompt_for_move(self, current_player):
+        return f"Player {current_player} - prompt for turn"
+
+    def game_over_message(self):
+        return "Game over message"
+
+
 class TestGame(unittest.TestCase):
     @patch("builtins.print")
     def test_prompt_x_for_first_turn(self, mock_print):
-        game = Game()
+        mockMessage = MockMessage()
+        game = Game(message=mockMessage)
         total_marks_on_board = 0
         game.get_prompt(total_marks_on_board)
-        mock_print.assert_called_with("Player X - enter a number to place your mark")
+        mock_print.assert_called_with("Player X - prompt for turn")
 
     @patch("builtins.print")
     def test_prompt_o_for_second_turn(self, mock_print):
-        game = Game()
+        mockMessage = MockMessage()
+        game = Game(message=mockMessage)
         total_marks_on_board = 1
         game.get_prompt(total_marks_on_board)
-        mock_print.assert_called_with("Player O - enter a number to place your mark")
+        mock_print.assert_called_with("Player O - prompt for turn")
 
     @patch("builtins.print")
     def test_prompt_x_for_third_turn(self, mock_print):
-        game = Game()
+        mockMessage = MockMessage()
+        game = Game(message=mockMessage)
         total_marks_on_board = 2
         game.get_prompt(total_marks_on_board)
-        mock_print.assert_called_with("Player X - enter a number to place your mark")
+        mock_print.assert_called_with("Player X - prompt for turn")
 
     @patch("builtins.print")
     def test_full_board_game_over(self, mock_print):
-        game = Game()
+        mockMessage = MockMessage()
+        game = Game(message=mockMessage)
         total_marks_on_board = 9
         game.get_prompt(total_marks_on_board)
-        mock_print.assert_called_with("Game Over!")
+        mock_print.assert_called_with("Game over message")
 
     @patch("builtins.input", side_effect=["1"])
     def test_process_user_input_returns_updated_board_when_1_is_inputted(
