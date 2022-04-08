@@ -26,12 +26,12 @@ class TestUserInterface(unittest.TestCase):
         )
 
     @patch("builtins.print")
-    def test_display_message_prints_formatted_board(self, mock_print):
+    def test_display_board_prints_formatted_board(self, mock_print):
         user_interface = UserInterface()
         message = Message()
         board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        message = message.formatted_board(board)
-        user_interface.display_message(message)
+        output = message.formatted_board(board)
+        user_interface.display_board(output)
         mock_print.assert_called_with(
             f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}"
         )
