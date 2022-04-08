@@ -14,7 +14,7 @@ class Game:
         self.player_one = self.board.player_one
         self.player_two = self.board.player_two
         self.total_marks_on_board = 0
-        self.play_again = False
+        self.playing = True
 
     def get_formatted_board(self):
         self.ui.display_board(self.board.to_string(self.game_board))
@@ -49,7 +49,6 @@ class Game:
         self.total_marks_on_board = 0
         self.game_board = Board().starter_board
         self.get_formatted_board()
-        self.play_game()
 
     def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
@@ -75,37 +74,33 @@ class Game:
         self.process_user_input()
         self.total_marks_on_board = self.board.count_marks(self.game_board)
         self.get_formatted_board()
-        self.play_game()
 
     def repeat_game(self):
         self.ui.display_message(self.message.play_again_prompt())
-        self.play_again = False
         if (
             self.ui.get_play_again_user_input(
                 self.message.incorrect_repeat_game_input()
             )
             == "Y"
         ):
-            self.play_again = True
             self.new_game()
         else:
-            self.play_again = False
+            self.playing = False
 
-    def play_game(self):
-        total_marks_on_board = self.board.count_marks(self.game_board)
-        while not self.board.is_full(total_marks_on_board, self.game_board):
+    def game_loop(self):
+        while self.playing:
             if self.rules.is_winner(self.game_board):
                 self.handle_winning_game()
-                break
+            elif self.board.is_full(
+                self.board.count_marks(self.game_board), self.game_board
+            ):
+                self.handle_full_board()
             else:
                 self.take_turns()
-                break
-        else:
-            self.handle_full_board()
 
     def run(self):
         self.ui.display_message(self.message.welcome_message())
         self.ui.display_message(self.message.rules())
         self.ui.display_board(self.board.to_string(self.game_board))
-        self.play_game()
+        self.game_loop()
         self.ui.display_message(self.message.goodbye_message())
