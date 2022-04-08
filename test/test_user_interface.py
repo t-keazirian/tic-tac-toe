@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch
 
-from src.message import Message
 from src.user_interface import UserInterface
 
 

@@ -1,7 +1,5 @@
 import re
 
-from src.message import Message as message
-
 
 class UserInterface:
     def display_message(self, message):
