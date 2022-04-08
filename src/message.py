@@ -19,9 +19,6 @@ At the end of every game, you will have the option to play again or to exit.\n
     def prompt_for_move(self, current_player):
         return f"Player {current_player} - enter a number to place your mark"
 
-    def formatted_board(self, board):
-        return f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}"
-
     def spot_taken_message(self):
         return "That spot is already occupied. Please choose another spot on the board."
 

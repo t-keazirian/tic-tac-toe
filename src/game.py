@@ -17,7 +17,7 @@ class Game:
         self.play_again = False
 
     def get_formatted_board(self):
-        self.ui.display_board(self.message.formatted_board(self.game_board))
+        self.ui.display_board(self.board.to_string(self.game_board))
 
     def get_current_player(self, total_marks_on_board):
         if total_marks_on_board % 2 == 0:
