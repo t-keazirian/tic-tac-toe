@@ -4,6 +4,11 @@ from unittest.mock import patch
 from src.user_interface import UserInterface
 
 
+class MockMessage:
+    def incorrect_board_input(self):
+        return "Incorrect board input"
+
+
 class TestUserInterface(unittest.TestCase):
     @patch("builtins.print")
     def test_display_message_prints_welcome_message_passed_in(self, mock_print):
@@ -33,19 +38,22 @@ class TestUserInterface(unittest.TestCase):
     @patch("builtins.input", side_effect=["3"])
     def test_gets_user_input(self, mock_input):
         user_interface = UserInterface()
-        output = user_interface.get_user_input()
+        message = MockMessage()
+        output = user_interface.get_user_input(message)
         self.assertEqual(output, 3)
 
     @patch("builtins.input", side_effect=["3"])
     def test_gets_user_input_returns_string(self, mock_input):
         user_interface = UserInterface()
-        output = type(user_interface.get_user_input())
+        message = MockMessage()
+        output = type(user_interface.get_user_input(message))
         self.assertEqual(output, int)
 
     @patch("builtins.input", side_effect=["5"])
     def test_gets_user_input_function_not_returning_false_positive(self, mock_input):
         user_interface = UserInterface()
-        output = user_interface.get_user_input()
+        message = MockMessage()
+        output = user_interface.get_user_input(message)
         self.assertNotEqual(output, "3")
 
     def test_is_integer_returns_true_when_input_is_integer(self):
@@ -63,13 +71,15 @@ class TestUserInterface(unittest.TestCase):
     @patch("builtins.input", side_effect=["Y"])
     def test_get_play_again_user_input_returns_true_when_input_is_Y(self, mock_input):
         user_interface = UserInterface()
-        output = user_interface.get_play_again_user_input()
+        message = MockMessage()
+        output = user_interface.get_play_again_user_input(message)
         self.assertEqual("Y", output)
 
     @patch("builtins.input", side_effect=["N"])
     def test_get_play_again_user_input_returns_false_when_input_is_N(self, mock_input):
         user_interface = UserInterface()
-        output = user_interface.get_play_again_user_input()
+        message = MockMessage()
+        output = user_interface.get_play_again_user_input(message)
         self.assertEqual("N", output)
 
     def test_handle_invalid_play_again_input_returns_true_when_user_input_is_Y(

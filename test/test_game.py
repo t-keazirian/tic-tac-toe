@@ -3,12 +3,14 @@ from unittest.mock import patch
 
 from src.game import Game
 
-class MockMessage():
+
+class MockMessage:
     def prompt_for_move(self, current_player):
-       return f"Player {current_player} - prompt for turn"
+        return f"Player {current_player} - prompt for turn"
 
     def game_over_message(self):
-        return "Game over message" 
+        return "Game over message"
+
 
 class TestGame(unittest.TestCase):
     @patch("builtins.print")
