@@ -31,7 +31,7 @@ class TestGame(unittest.TestCase):
         game = Game()
         total_marks_on_board = 9
         game.get_prompt(total_marks_on_board)
-        mock_print.assert_called_with("Game Over!")
+        mock_print.assert_called_with("Game over - it's a draw!")
 
     @patch("builtins.input", side_effect=["1"])
     def test_process_user_input_returns_updated_board_when_1_is_inputted(

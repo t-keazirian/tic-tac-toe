@@ -1,86 +1,78 @@
 import unittest
-from unittest.mock import patch
 
 from src.message import Message
 
 
 class TestMessage(unittest.TestCase):
-    @patch("builtins.print")
-    def test_welcome_message_prints_to_console(self, mock_print):
+    def test_welcome_message_prints_to_console(self):
         message = Message()
-        message.display_welcome_message()
-        mock_print.assert_called_with("Welcome to Tic Tac Toe")
+        expected_messaage = "Welcome to Tic Tac Toe"
+        actual_message = message.welcome_message()
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_game_over_prints_to_console(self, mock_print):
+    def test_game_over_prints_to_console(self):
         message = Message()
-        message.display_game_over_message()
-        mock_print.assert_called_with("Game Over!")
+        expected_messaage = "Game over - it's a draw!"
+        actual_message = message.game_over_message()
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_X_player_is_prompted_for_move_when_is_current_player(self, mock_print):
+    def test_X_player_is_prompted_for_move_when_is_current_player(self):
         message = Message()
         current_player = "X"
-        message.display_prompt_message_for_move(current_player)
-        mock_print.assert_called_with(
+        expected_messaage = (
             f"Player {current_player} - enter a number to place your mark"
         )
+        actual_message = message.prompt_for_move(current_player)
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_display_formatted_board(self, mock_print):
+    def test_formatted_board(self):
         message = Message()
         board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        message.display_formatted_board(board)
-        mock_print.assert_called_with(
-            "1 | 2 | 3\n--+--+--\n4 | 5 | 6\n--+--+--\n7 | 8 | 9",
-        )
+        expected_messaage = f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}"
+        actual_message = message.formatted_board(board)
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_display_spot_taken_message(self, mock_print):
+    def test_spot_taken_message(self):
         message = Message()
-        message.display_spot_taken_message()
-        mock_print.assert_called_with(
+        expected_messaage = (
             "That spot is already occupied. Please choose another spot on the board."
         )
+        actual_message = message.spot_taken_message()
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_display_winner_message_with_correct_mark_as_winner(self, mock_print):
+    def test_declare_winner_with_correct_mark_as_winner(self):
         message = Message()
         winner = "X"
-        message.display_winner_message(winner)
-        mock_print.assert_called_with(f"Congrats Player {winner} - you are the winner!")
+        expected_messaage = f"Congrats Player {winner} - you are the winner!"
+        actual_message = message.declare_winner(winner)
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_display_incorrect_input_message(self, mock_print):
+    def test_incorrect_board_input(self):
         message = Message()
-        message.display_incorrect_input_message()
-        mock_print.assert_called_with(
-            "That input is incorrect. Please input a number 1-9."
-        )
+        expected_messaage = "That input is incorrect. Please input a number 1-9."
+        actual_message = message.incorrect_board_input()
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_display_play_again_message(self, mock_print):
+    def test_play_again_prompt(self):
         message = Message()
-        message.display_play_again()
-        mock_print.assert_called_with("Would you like to play again? (Y/N)")
+        expected_messaage = "Would you like to play again? (Y/N)"
+        actual_message = message.play_again_prompt()
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_display_goodbye_message(self, mock_print):
+    def test_goodbye_message(self):
         message = Message()
-        message.display_goodbye_message()
-        mock_print.assert_called_with("Thanks for playing - goodbye!")
+        expected_messaage = "Thanks for playing - goodbye!"
+        actual_message = message.goodbye_message()
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_display_incorrect_repeat_game_message(self, mock_print):
+    def test_incorrect_repeat_game_message(self):
         message = Message()
-        message.display_incorrect_repeat_game_message()
-        mock_print.assert_called_with(
-            "That input is incorrect. Please input Y to play again or N to exit the game."
-        )
+        expected_messaage = "That input is incorrect. Please input Y to play again or N to exit the game."
+        actual_message = message.incorrect_repeat_game_input()
+        self.assertEqual(expected_messaage, actual_message)
 
-    @patch("builtins.print")
-    def test_print_rules_prints_rules_to_console(self, mock_print):
+    def test_print_rules_prints_rules_to_console(self):
         message = Message()
         rules = """\nPlay this game by taking turns marking the board. \nWhen prompted, type your a number between 1 and 9 and press enter. \nIf that spot is taken, the computer will prompt you for a different spot. \nThe first player who gets three of their marks in a row wins! \nIf the board is full and neither player has three in a row, it is a draw and the game is over. \nAt the end of every game, you will have the option to play again or to exit.\n"""
-        message.print_rules()
-        mock_print.assert_called_with(rules)
+        actual_message = message.rules()
+        self.assertEqual(rules, actual_message)

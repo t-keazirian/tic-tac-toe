@@ -4,6 +4,9 @@ from src.message import Message as message
 
 
 class UserInterface:
+    def display_message(self, message):
+        print(message)
+
     def get_user_input(self):
         user_input = input()
         is_integer = self.is_integer(user_input)
