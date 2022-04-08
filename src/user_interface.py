@@ -38,7 +38,7 @@ class UserInterface:
     def handle_incorrect_input(self, user_input, message):
         valid_move = self.input_in_range(user_input)
         while valid_move is False:
-            self.display_message(message.incorrect_board_input())
+            self.display_message(message)
             user_input = self.get_user_input(message)
             valid_move = self.input_in_range(user_input)
             break
@@ -64,7 +64,7 @@ class UserInterface:
     def handle_invalid_play_again_input(self, user_input, message):
         valid_input = self.valid_play_again_input(user_input)
         while valid_input is False:
-            self.display_message(message.incorrect_repeat_game_input())
+            self.display_message(message)
             user_input = self.get_play_again_user_input(message)
             valid_input = self.valid_play_again_input(user_input)
             break

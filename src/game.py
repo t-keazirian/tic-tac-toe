@@ -33,7 +33,7 @@ class Game:
             self.ui.display_message(self.message.prompt_for_move(current_player))
 
     def process_user_input(self):
-        position_choice = self.ui.get_user_input(self.message)
+        position_choice = self.ui.get_user_input(self.message.incorrect_board_input())
         if self.board.determine_is_spot_taken(self.game_board, position_choice):
             self.ui.display_message(self.message.spot_taken_message())
             self.process_user_input()
@@ -73,7 +73,12 @@ class Game:
     def repeat_game(self):
         self.ui.display_message(self.message.play_again_prompt())
         self.play_again = False
-        if self.ui.get_play_again_user_input(self.message) == "Y":
+        if (
+            self.ui.get_play_again_user_input(
+                self.message.incorrect_repeat_game_input()
+            )
+            == "Y"
+        ):
             self.play_again = True
         while self.play_again:
             self.new_game()
