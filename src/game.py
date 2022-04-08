@@ -63,6 +63,13 @@ class Game:
         self.ui.display_message(self.message.declare_winner(winner))
         self.repeat_game()
 
+    def handle_full_board(self):
+        if self.rules.is_winner(self.game_board):
+            self.handle_winning_game()
+        else:
+            self.get_prompt(self.total_marks_on_board)
+            self.repeat_game()
+
     def take_turns(self):
         self.get_prompt(self.total_marks_on_board)
         self.process_user_input()
@@ -94,10 +101,11 @@ class Game:
                 self.take_turns()
                 break
         else:
-            self.handle_winning_game()
+            self.handle_full_board()
 
     def run(self):
         self.ui.display_message(self.message.welcome_message())
         self.ui.display_message(self.message.rules())
-        self.new_game()
+        self.ui.display_board(self.board.to_string(self.game_board))
+        self.play_game()
         self.ui.display_message(self.message.goodbye_message())
