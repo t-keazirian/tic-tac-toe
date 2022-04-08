@@ -70,13 +70,6 @@ class Game:
         self.get_formatted_board()
         self.play_game()
 
-    def handle_full_board(self):
-        if self.rules.is_winner(self.game_board):
-            self.handle_winning_game()
-        else:
-            self.get_prompt(self.total_marks_on_board)
-            self.repeat_game()
-
     def repeat_game(self):
         self.ui.display_message(self.message.play_again_prompt())
         self.play_again = False
@@ -87,7 +80,6 @@ class Game:
             == "Y"
         ):
             self.play_again = True
-        while self.play_again:
             self.new_game()
         else:
             self.play_again = False
@@ -102,7 +94,7 @@ class Game:
                 self.take_turns()
                 break
         else:
-            self.handle_full_board()
+            self.handle_winning_game()
 
     def run(self):
         self.ui.display_message(self.message.welcome_message())
