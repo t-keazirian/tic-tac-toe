@@ -56,11 +56,10 @@ class Game:
 
     def handle_incorrect_input(self, user_input):
         valid_move = self.input_in_range(user_input)
-        while valid_move is False:
+        if valid_move is False:
             self.ui.display_message(self.message.incorrect_board_input())
             user_input = self.validate_move()
             valid_move = self.input_in_range(user_input)
-            break
         return user_input
 
     def get_prompt(self, total_marks_on_board):
