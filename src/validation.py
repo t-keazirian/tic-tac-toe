@@ -6,10 +6,11 @@ from src.user_interface import UserInterface as ui
 
 class Validation:
     def validate_move_for_range(self, user_input):
+        user_input = int(user_input)
         if self.input_in_range(user_input):
             return user_input
         else:
-            return self.handle_incorrect_board_placement_input(user_input)
+            return self.handle_invalid_board_placement_input(user_input)
 
     def input_in_range(self, user_input):
         if user_input in range(1, 10):
@@ -27,12 +28,11 @@ class Validation:
         user_input = ui.get_user_input(self)
         is_integer = self.is_integer(user_input)
         if is_integer:
-            user_integer = int(user_input)
-            return self.validate_move_for_range(user_integer)
+            return self.validate_move_for_range(user_input)
         else:
-            return self.handle_incorrect_board_placement_input(user_input)
+            return self.handle_invalid_board_placement_input(user_input)
 
-    def handle_incorrect_board_placement_input(self, user_input):
+    def handle_invalid_board_placement_input(self, user_input):
         valid_move = self.input_in_range(user_input)
         if valid_move is False:
             ui.display_message(self, message.incorrect_board_input(self))
