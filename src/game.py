@@ -1,5 +1,3 @@
-import re
-
 from src.board import Board
 from src.message import Message
 from src.rules import Rules
