@@ -4,12 +4,14 @@ from src.board import Board
 from src.message import Message
 from src.rules import Rules
 from src.user_interface import UserInterface
+from src.validation import Validation
 
 
 class Game:
     def __init__(self, ui=UserInterface(), message=Message()):
         self.board = Board()
         self.rules = Rules()
+        self.validation = Validation()
         self.ui = ui
         self.message = message
         self.game_board = self.board.starter_board
@@ -27,41 +29,6 @@ class Game:
         else:
             return self.player_two
 
-    def validate_move(self):
-        user_input = self.ui.get_user_input()
-        is_integer = self.is_integer(user_input)
-        if is_integer:
-            user_integer = int(user_input)
-            return self.validate_move_for_range(user_integer)
-        else:
-            return self.handle_incorrect_input(user_input)
-
-    def validate_move_for_range(self, user_input):
-        if self.input_in_range(user_input):
-            return user_input
-        else:
-            return self.handle_incorrect_input(user_input)
-
-    def input_in_range(self, user_input):
-        if user_input in range(1, 10):
-            return True
-        else:
-            return False
-
-    def is_integer(self, user_input):
-        if re.match(r"^[0-9]*$", user_input) is None:
-            return False
-        else:
-            return True
-
-    def handle_incorrect_input(self, user_input):
-        valid_move = self.input_in_range(user_input)
-        if valid_move is False:
-            self.ui.display_message(self.message.incorrect_board_input())
-            user_input = self.validate_move()
-            valid_move = self.input_in_range(user_input)
-        return user_input
-
     def get_prompt(self, total_marks_on_board):
         current_player = self.get_current_player(total_marks_on_board)
         if self.board.is_full(total_marks_on_board, self.game_board):
@@ -70,7 +37,7 @@ class Game:
             self.ui.display_message(self.message.prompt_for_move(current_player))
 
     def process_user_input(self):
-        position_choice = self.validate_move()
+        position_choice = self.validation.validate_move()
         if self.board.determine_is_spot_taken(self.game_board, position_choice):
             self.ui.display_message(self.message.spot_taken_message())
             self.process_user_input()

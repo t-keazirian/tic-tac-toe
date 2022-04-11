@@ -90,35 +90,3 @@ class TestGame(unittest.TestCase):
         total_marks_on_board = 6
         winner = game.get_winning_mark(total_marks_on_board)
         self.assertEqual("O", winner)
-
-        # validation tests
-
-    def test_is_integer_returns_true_when_input_is_integer(self):
-        game = Game()
-        user_input = "4"
-        result = game.is_integer(user_input)
-        self.assertEqual(True, result)
-
-    def test_is_integer_returns_true_when_input_is_not_integer(self):
-        game = Game()
-        user_input = "s"
-        result = game.is_integer(user_input)
-        self.assertEqual(False, result)
-
-    def test_if_correct_input_return_true(self):
-        game = Game()
-        user_input = 8
-        output = game.input_in_range(user_input)
-        self.assertEqual(True, output)
-
-    def test_if_incorrect_input_return_false(self):
-        game = Game()
-        user_input = 10
-        output = game.input_in_range(user_input)
-        self.assertEqual(False, output)
-
-    def test_if_NaN_inputted_return_false(self):
-        game = Game()
-        user_input = "one"
-        output = game.input_in_range(user_input)
-        self.assertEqual(False, output)
