@@ -40,7 +40,7 @@ class Validation:
             valid_move = self.input_in_range(user_input)
         return user_input
 
-    def validate_play_again_input(self):
+    def valid_play_again_input(self):
         user_input = ui.get_play_again_user_input(self)
         valid_input = self.is_valid_play_again_input(user_input)
         if valid_input:
@@ -61,6 +61,6 @@ class Validation:
         valid_input = self.is_valid_play_again_input(user_input)
         if valid_input is False:
             ui.display_message(self, message.incorrect_repeat_game_input(self))
-            user_input = self.validate_play_again_input()
+            user_input = self.valid_play_again_input()
             valid_input = self.is_valid_play_again_input(user_input)
         return user_input

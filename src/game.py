@@ -81,7 +81,7 @@ class Game:
 
     def repeat_game(self):
         self.ui.display_message(self.message.play_again_prompt())
-        if self.validation.validate_play_again_input() == "Y":
+        if self.validation.valid_play_again_input() == "Y":
             self.new_game()
         else:
             self.playing = False

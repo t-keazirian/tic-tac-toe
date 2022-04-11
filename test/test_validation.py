@@ -34,7 +34,7 @@ class TestValidation(unittest.TestCase):
         output = validation.input_in_range(user_input)
         self.assertEqual(False, output)
 
-    def test_validate_play_again_input_returns_Y_if_valid_input_and_Y_inputted(
+    def test_valid_play_again_input_returns_Y_if_valid_input_and_Y_inputted(
         self,
     ):
         validation = Validation()
