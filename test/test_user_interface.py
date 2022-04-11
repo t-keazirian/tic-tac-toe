@@ -30,43 +30,7 @@ class TestUserInterface(unittest.TestCase):
         self.assertNotEqual(output, "3")
 
     @patch("builtins.input", side_effect=["Y"])
-    def test_get_play_again_user_input_returns_true_when_input_is_Y(self, mock_input):
+    def test_get_play_again_user_input_returns_input(self, mock_input):
         user_interface = UserInterface()
-        message = MockMessage()
-        output = user_interface.get_play_again_user_input(message)
+        output = user_interface.get_play_again_user_input()
         self.assertEqual("Y", output)
-
-    @patch("builtins.input", side_effect=["N"])
-    def test_get_play_again_user_input_returns_false_when_input_is_N(self, mock_input):
-        user_interface = UserInterface()
-        message = MockMessage()
-        output = user_interface.get_play_again_user_input(message)
-        self.assertEqual("N", output)
-
-    def test_handle_invalid_play_again_input_returns_true_when_user_input_is_Y(
-        self,
-    ):
-        user_interface = UserInterface()
-        user_input = "y"
-        self.assertEqual(True, user_interface.valid_play_again_input(user_input))
-
-    def test_handle_invalid_play_again_input_returns_true_when_user_input_is_N(
-        self,
-    ):
-        user_interface = UserInterface()
-        user_input = "n"
-        self.assertEqual(True, user_interface.valid_play_again_input(user_input))
-
-    def test_handle_invalid_play_again_input_returns_false_when_user_inputs_number(
-        self,
-    ):
-        user_interface = UserInterface()
-        user_input = "7"
-        self.assertEqual(False, user_interface.valid_play_again_input(user_input))
-
-    def test_handle_invalid_play_again_input_returns_false_when_incorrect_letter(
-        self,
-    ):
-        user_interface = UserInterface()
-        user_input = "s"
-        self.assertEqual(False, user_interface.valid_play_again_input(user_input))
