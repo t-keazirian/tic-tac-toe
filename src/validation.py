@@ -25,12 +25,19 @@ class Validation:
             return True
 
     def validate_move(self):
-        user_input = ui.get_user_input(self)
+        user_input = ui.get_move(self)
         is_integer = self.is_integer(user_input)
         if is_integer:
             return self.validate_move_for_range(user_input)
         else:
             return self.handle_invalid_board_placement_input(user_input)
+
+    def is_spot_taken(self, board, user_input, player_one, player_two):
+        move = board[user_input - 1]
+        if move == player_one or move == player_two:
+            return True
+        else:
+            return False
 
     def handle_invalid_board_placement_input(self, user_input):
         valid_move = self.input_in_range(user_input)

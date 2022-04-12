@@ -18,15 +18,15 @@ class TestUserInterface(unittest.TestCase):
         mock_print.assert_called_with("Welcome to Tic Tac Toe")
 
     @patch("builtins.input", side_effect=["3"])
-    def test_get_user_input_returns_input(self, mock_input):
+    def test_get_move_returns_input(self, mock_input):
         user_interface = UserInterface()
-        result = user_interface.get_user_input()
+        result = user_interface.get_move()
         self.assertEqual("3", result)
 
     @patch("builtins.input", side_effect=["5"])
     def test_gets_user_input_function_not_returning_false_positive(self, mock_input):
         user_interface = UserInterface()
-        output = user_interface.get_user_input()
+        output = user_interface.get_move()
         self.assertNotEqual(output, "3")
 
     @patch("builtins.input", side_effect=["Y"])

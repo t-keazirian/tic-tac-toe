@@ -5,7 +5,7 @@ class UserInterface:
     def display_board(self, board):
         print(board)
 
-    def get_user_input(self):
+    def get_move(self):
         user_input = input()
         return user_input
 
