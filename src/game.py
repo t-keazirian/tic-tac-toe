@@ -35,7 +35,7 @@ class Game:
             self.ui.display_message(self.message.prompt_for_move(current_player))
 
     def process_user_input(self):
-        move = self.ui.get_move()
+        move = self.validation.validate_move()
         if self.validation.is_spot_taken(
             self.game_board, move, self.player_one, self.player_two
         ):
