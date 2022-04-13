@@ -42,7 +42,7 @@ class Game:
             move = self.ui.get_user_input()
             valid_move = self.validator.is_valid_move(self.game_board, move)
         else:
-            self.board.mark_board(
+            self.game_board = self.board.mark_board(
                 move,
                 self.game_board,
                 self.get_current_player(self.total_marks_on_board),
@@ -65,11 +65,9 @@ class Game:
     def handle_winning_game(self):
         winner = self.get_winning_mark(self.total_marks_on_board)
         self.ui.display_message(self.message.declare_winner(winner))
-        self.repeat_game()
 
     def handle_draw(self):
         self.ui.display_message(self.message.game_over_message())
-        self.repeat_game()
 
     def handle_full_board(self):
         if self.rules.is_winner(self.game_board):
@@ -83,7 +81,7 @@ class Game:
         self.total_marks_on_board = self.board.count_marks(self.game_board)
         self.get_formatted_board()
 
-    def repeat_game(self):
+    def ask_to_play_again(self):
         self.ui.display_message(self.message.play_again_prompt())
         answer = self.ui.get_user_input()
         while not self.validator.is_valid_play_again_input(answer):
@@ -98,10 +96,12 @@ class Game:
         while self.playing:
             if self.rules.is_winner(self.game_board):
                 self.handle_winning_game()
+                self.ask_to_play_again()
             elif self.board.is_full(
                 self.board.count_marks(self.game_board), self.game_board
             ):
                 self.handle_full_board()
+                self.ask_to_play_again()
             else:
                 self.take_turns()
 
