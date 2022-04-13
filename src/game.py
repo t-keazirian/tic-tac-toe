@@ -83,16 +83,12 @@ class Game:
         self.total_marks_on_board = self.board.count_marks(self.game_board)
         self.get_formatted_board()
 
-    def play_again_prompt(self):
-        self.ui.display_message(self.message.play_again_prompt())
-        return self.ui.get_user_input()
-
     def repeat_game(self):
         self.ui.display_message(self.message.play_again_prompt())
         answer = self.ui.get_user_input()
         while not self.validator.is_valid_play_again_input(answer):
             self.ui.display_message(self.message.incorrect_repeat_game_input())
-            answer = self.play_again_prompt()
+            answer = self.ui.get_user_input()
         if answer.upper() == "Y":
             self.new_game()
         else:
