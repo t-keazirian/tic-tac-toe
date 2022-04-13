@@ -25,14 +25,6 @@ class TestMessage(unittest.TestCase):
         actual_message = message.prompt_for_move(current_player)
         self.assertEqual(expected_message, actual_message)
 
-    def test_spot_taken_message(self):
-        message = Message()
-        expected_message = (
-            "That spot is already occupied. Please choose another spot on the board."
-        )
-        actual_message = message.spot_taken_message()
-        self.assertEqual(expected_message, actual_message)
-
     def test_declare_winner_with_correct_mark_as_winner(self):
         message = Message()
         winner = "X"
@@ -42,7 +34,7 @@ class TestMessage(unittest.TestCase):
 
     def test_incorrect_board_input(self):
         message = Message()
-        expected_message = "That input is incorrect. Please input a number 1-9."
+        expected_message = "That input is incorrect. Please input a number 1-9 for a spot that is not occupied."
         actual_message = message.incorrect_board_input()
         self.assertEqual(expected_message, actual_message)
 

@@ -19,14 +19,11 @@ At the end of every game, you will have the option to play again or to exit.\n
     def prompt_for_move(self, current_player):
         return f"Player {current_player} - enter a number to place your mark"
 
-    def spot_taken_message(self):
-        return "That spot is already occupied. Please choose another spot on the board."
-
     def declare_winner(self, winner):
         return f"Congrats Player {winner} - you are the winner!"
 
     def incorrect_board_input(self):
-        return "That input is incorrect. Please input a number 1-9."
+        return "That input is incorrect. Please input a number 1-9 for a spot that is not occupied."
 
     def play_again_prompt(self):
         return "Would you like to play again? (Y/N)"

@@ -2,7 +2,6 @@ from src.board import Board
 from src.message import Message
 from src.rules import Rules
 from src.user_interface import UserInterface
-from src.validation import Validation
 from src.validator import Validator
 
 
@@ -10,7 +9,6 @@ class Game:
     def __init__(self, ui=UserInterface(), message=Message()):
         self.board = Board()
         self.rules = Rules()
-        self.validation = Validation()
         self.validator = Validator()
         self.ui = ui
         self.message = message
@@ -32,17 +30,14 @@ class Game:
     def prompt_for_full_board(self):
         self.ui.display_message(self.message.game_over_message())
 
-    def get_prompt(self, total_marks_on_board):
+    def prompt_for_move(self, total_marks_on_board):
         current_player = self.get_current_player(total_marks_on_board)
-        if self.board.is_full(total_marks_on_board, self.game_board):
-            self.ui.display_message(self.message.game_over_message())
-        else:
-            self.ui.display_message(self.message.prompt_for_move(current_player))
+        self.ui.display_message(self.message.prompt_for_move(current_player))
 
     def handle_mark_board(self):
         move = self.ui.get_user_input()
         valid_move = self.validator.is_valid_move(self.game_board, move)
-        if not valid_move:
+        while not valid_move:
             self.ui.display_message(self.message.incorrect_board_input())
             move = self.ui.get_user_input()
             valid_move = self.validator.is_valid_move(self.game_board, move)
@@ -83,7 +78,7 @@ class Game:
             self.handle_draw()
 
     def take_turns(self):
-        self.get_prompt(self.total_marks_on_board)
+        self.prompt_for_move(self.total_marks_on_board)
         self.handle_mark_board()
         self.total_marks_on_board = self.board.count_marks(self.game_board)
         self.get_formatted_board()

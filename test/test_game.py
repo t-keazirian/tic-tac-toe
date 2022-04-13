@@ -18,7 +18,7 @@ class TestGame(unittest.TestCase):
         mockMessage = MockMessage()
         game = Game(message=mockMessage)
         total_marks_on_board = 0
-        game.get_prompt(total_marks_on_board)
+        game.prompt_for_move(total_marks_on_board)
         mock_print.assert_called_with("Player X - prompt for turn")
 
     @patch("builtins.print")
@@ -26,7 +26,7 @@ class TestGame(unittest.TestCase):
         mockMessage = MockMessage()
         game = Game(message=mockMessage)
         total_marks_on_board = 1
-        game.get_prompt(total_marks_on_board)
+        game.prompt_for_move(total_marks_on_board)
         mock_print.assert_called_with("Player O - prompt for turn")
 
     @patch("builtins.print")
@@ -34,7 +34,7 @@ class TestGame(unittest.TestCase):
         mockMessage = MockMessage()
         game = Game(message=mockMessage)
         total_marks_on_board = 2
-        game.get_prompt(total_marks_on_board)
+        game.prompt_for_move(total_marks_on_board)
         mock_print.assert_called_with("Player X - prompt for turn")
 
     @patch("builtins.print")
@@ -42,7 +42,7 @@ class TestGame(unittest.TestCase):
         mockMessage = MockMessage()
         game = Game(message=mockMessage)
         total_marks_on_board = 9
-        game.get_prompt(total_marks_on_board)
+        game.prompt_for_full_board()
         mock_print.assert_called_with("Game over message")
 
     @patch("builtins.input", side_effect=["1"])
