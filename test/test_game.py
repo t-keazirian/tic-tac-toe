@@ -38,11 +38,11 @@ class TestGame(unittest.TestCase):
         mock_print.assert_called_with("Player X - prompt for turn")
 
     @patch("builtins.print")
-    def test_full_board_game_over(self, mock_print):
+    def test_handle_draw_displays_game_over_message(self, mock_print):
         mockMessage = MockMessage()
         game = Game(message=mockMessage)
         total_marks_on_board = 9
-        game.prompt_for_full_board()
+        game.handle_draw()
         mock_print.assert_called_with("Game over message")
 
     @patch("builtins.input", side_effect=["1"])
