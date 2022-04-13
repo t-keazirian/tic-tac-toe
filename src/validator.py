@@ -19,7 +19,9 @@ class Validator:
         return not Board().is_spot_taken(game_board, spot)
 
     def is_valid_move(self, game_board, move):
-        if self.is_integer(move):
+        if self.is_empty_string(move):
+            return False
+        elif self.is_integer(move):
             spot = int(move)
             if self.is_in_range(spot) and self.spot_is_available(game_board, spot):
                 return True
@@ -27,6 +29,12 @@ class Validator:
 
     def is_valid_play_again_input(self, user_input):
         if user_input.upper() == "Y" or user_input.upper() == "N":
+            return True
+        else:
+            return False
+
+    def is_empty_string(self, user_input):
+        if user_input == "":
             return True
         else:
             return False

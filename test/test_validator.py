@@ -109,3 +109,13 @@ class TestValidator(unittest.TestCase):
         validator = Validator()
         user_input = "y"
         self.assertEqual(True, validator.is_valid_play_again_input(user_input))
+
+    def test_is_empty_string_returns_true_if_string_is_empty(self):
+        validator = Validator()
+        user_input = ""
+        self.assertEqual(True, validator.is_empty_string(user_input))
+
+    def test_is_empty_string_returns_false_if_string_is_not_empty(self):
+        validator = Validator()
+        user_input = "blah"
+        self.assertEqual(False, validator.is_empty_string(user_input))
