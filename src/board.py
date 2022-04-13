@@ -1,6 +1,3 @@
-from multiprocessing.connection import wait
-
-
 class Board:
     def __init__(self):
         self.starter_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -18,6 +15,7 @@ class Board:
         return total_marks_on_board
 
     def calculate_index(self, user_input):
+        user_input = int(user_input)
         return user_input - 1
 
     def is_spot_taken(self, board, move):

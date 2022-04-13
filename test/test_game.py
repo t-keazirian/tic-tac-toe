@@ -46,19 +46,19 @@ class TestGame(unittest.TestCase):
         mock_print.assert_called_with("Game over message")
 
     @patch("builtins.input", side_effect=["1"])
-    def test_process_user_input_returns_updated_board_when_1_is_inputted(
+    def test_handle_mark_board_returns_updated_board_when_1_is_inputted(
         self, mock_input
     ):
         game = Game()
-        output = game.process_user_input()
+        output = game.handle_mark_board()
         self.assertEqual(output, ["X", "2", "3", "4", "5", "6", "7", "8", "9"])
 
     @patch("builtins.input", side_effect=["2"])
-    def test_process_user_input_returns_updated_board_when_2_is_inputted(
+    def test_handle_mark_board_returns_updated_board_when_2_is_inputted(
         self, mock_input
     ):
         game = Game()
-        output = game.process_user_input()
+        output = game.handle_mark_board()
         self.assertEqual(output, ["1", "X", "3", "4", "5", "6", "7", "8", "9"])
 
     def test_zero_turns_player_x_goes_first(self):
