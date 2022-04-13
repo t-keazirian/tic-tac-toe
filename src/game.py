@@ -27,9 +27,6 @@ class Game:
         else:
             return self.player_two
 
-    def prompt_for_full_board(self):
-        self.ui.display_message(self.message.game_over_message())
-
     def prompt_for_move(self, total_marks_on_board):
         current_player = self.get_current_player(total_marks_on_board)
         self.ui.display_message(self.message.prompt_for_move(current_player))
