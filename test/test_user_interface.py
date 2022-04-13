@@ -5,7 +5,7 @@ from src.user_interface import UserInterface
 
 
 class MockMessage:
-    def incorrect_board_input(self):
+    def invalid_board_input(self):
         return "Incorrect board input"
 
 

@@ -38,7 +38,7 @@ class Game:
         move = self.ui.get_user_input()
         valid_move = self.validator.is_valid_move(self.game_board, move)
         while not valid_move:
-            self.ui.display_message(self.message.incorrect_board_input())
+            self.ui.display_message(self.message.invalid_board_input())
             move = self.ui.get_user_input()
             valid_move = self.validator.is_valid_move(self.game_board, move)
         else:
@@ -87,7 +87,7 @@ class Game:
         self.ui.display_message(self.message.play_again_prompt())
         answer = self.ui.get_user_input()
         while not self.validator.is_valid_play_again_input(answer):
-            self.ui.display_message(self.message.incorrect_repeat_game_input())
+            self.ui.display_message(self.message.invalid_repeat_game_input())
             answer = self.ui.get_user_input()
         if answer.upper() == "Y":
             self.new_game()

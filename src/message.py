@@ -22,7 +22,7 @@ At the end of every game, you will have the option to play again or to exit.\n
     def declare_winner(self, winner):
         return f"Congrats Player {winner} - you are the winner!"
 
-    def incorrect_board_input(self):
+    def invalid_board_input(self):
         return "That input is incorrect. Please input a number 1-9 for a spot that is not occupied."
 
     def play_again_prompt(self):
@@ -31,5 +31,5 @@ At the end of every game, you will have the option to play again or to exit.\n
     def goodbye_message(self):
         return "Thanks for playing - goodbye!"
 
-    def incorrect_repeat_game_input(self):
+    def invalid_repeat_game_input(self):
         return "That input is incorrect. Please input Y to play again or N to exit the game."
