@@ -75,6 +75,12 @@ class TestValidator(unittest.TestCase):
         test_move = "5"
         self.assertTrue(validator.is_valid_move(test_board, test_move))
 
+    def test_move_is_not_valid_if_empty_string(self):
+        validator = Validator()
+        test_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        test_move = ""
+        self.assertFalse(validator.is_valid_move(test_board, test_move))
+
     def test_valid_play_again_input_returns_Y_if_valid_input_and_Y_inputted(
         self,
     ):
