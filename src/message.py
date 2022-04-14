@@ -29,6 +29,9 @@ Choose one of the options below:
     def invalid_choose_symbol_input(self):
         return "That input is invalid. Please enter 1 or 2."
 
+    def invalid_symbol_option(self):
+        return "That input is invalid. Please enter a number 1-10."
+
     def choose_symbol_player_one(self):
         return "Player One - please choose your mark:"
 

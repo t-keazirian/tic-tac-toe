@@ -38,7 +38,7 @@ class Game:
         symbol = self.ui.get_user_input()
         valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
         while not valid_symbol:
-            self.ui.display_message(self.message.invalid_choose_symbol_input())
+            self.ui.display_message(self.message.invalid_symbol_option())
             symbol = self.ui.get_user_input()
             valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
         self.player_one = self.symbol.get_symbols(symbol)
@@ -49,7 +49,7 @@ class Game:
         symbol = self.ui.get_user_input()
         valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
         while not valid_symbol:
-            self.ui.display_message(self.message.invalid_choose_symbol_input())
+            self.ui.display_message(self.message.invalid_symbol_option())
             symbol = self.ui.get_user_input()
             valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
         self.player_two = self.symbol.get_symbols(symbol)
