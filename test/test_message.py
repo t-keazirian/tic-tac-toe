@@ -25,14 +25,6 @@ class TestMessage(unittest.TestCase):
         actual_message = message.prompt_for_move(current_player)
         self.assertEqual(expected_message, actual_message)
 
-    def test_spot_taken_message(self):
-        message = Message()
-        expected_message = (
-            "That spot is already occupied. Please choose another spot on the board."
-        )
-        actual_message = message.spot_taken_message()
-        self.assertEqual(expected_message, actual_message)
-
     def test_declare_winner_with_correct_mark_as_winner(self):
         message = Message()
         winner = "X"
@@ -40,10 +32,10 @@ class TestMessage(unittest.TestCase):
         actual_message = message.declare_winner(winner)
         self.assertEqual(expected_message, actual_message)
 
-    def test_incorrect_board_input(self):
+    def test_invalid_board_input(self):
         message = Message()
-        expected_message = "That input is incorrect. Please input a number 1-9."
-        actual_message = message.incorrect_board_input()
+        expected_message = "That input is incorrect. Please input a number 1-9 for a spot that is not occupied."
+        actual_message = message.invalid_board_input()
         self.assertEqual(expected_message, actual_message)
 
     def test_play_again_prompt(self):
@@ -58,10 +50,10 @@ class TestMessage(unittest.TestCase):
         actual_message = message.goodbye_message()
         self.assertEqual(expected_message, actual_message)
 
-    def test_incorrect_repeat_game_message(self):
+    def test_invalid_repeat_game_message(self):
         message = Message()
         expected_message = "That input is incorrect. Please input Y to play again or N to exit the game."
-        actual_message = message.incorrect_repeat_game_input()
+        actual_message = message.invalid_repeat_game_input()
         self.assertEqual(expected_message, actual_message)
 
     def test_print_rules_prints_rules_to_console(self):

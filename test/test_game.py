@@ -18,7 +18,7 @@ class TestGame(unittest.TestCase):
         mockMessage = MockMessage()
         game = Game(message=mockMessage)
         total_marks_on_board = 0
-        game.get_prompt(total_marks_on_board)
+        game.prompt_for_move(total_marks_on_board)
         mock_print.assert_called_with("Player X - prompt for turn")
 
     @patch("builtins.print")
@@ -26,7 +26,7 @@ class TestGame(unittest.TestCase):
         mockMessage = MockMessage()
         game = Game(message=mockMessage)
         total_marks_on_board = 1
-        game.get_prompt(total_marks_on_board)
+        game.prompt_for_move(total_marks_on_board)
         mock_print.assert_called_with("Player O - prompt for turn")
 
     @patch("builtins.print")
@@ -34,32 +34,15 @@ class TestGame(unittest.TestCase):
         mockMessage = MockMessage()
         game = Game(message=mockMessage)
         total_marks_on_board = 2
-        game.get_prompt(total_marks_on_board)
+        game.prompt_for_move(total_marks_on_board)
         mock_print.assert_called_with("Player X - prompt for turn")
 
     @patch("builtins.print")
-    def test_full_board_game_over(self, mock_print):
+    def test_handle_draw_displays_game_over_message(self, mock_print):
         mockMessage = MockMessage()
         game = Game(message=mockMessage)
-        total_marks_on_board = 9
-        game.get_prompt(total_marks_on_board)
+        game.handle_draw()
         mock_print.assert_called_with("Game over message")
-
-    @patch("builtins.input", side_effect=["1"])
-    def test_process_user_input_returns_updated_board_when_1_is_inputted(
-        self, mock_input
-    ):
-        game = Game()
-        output = game.process_user_input()
-        self.assertEqual(output, ["X", "2", "3", "4", "5", "6", "7", "8", "9"])
-
-    @patch("builtins.input", side_effect=["2"])
-    def test_process_user_input_returns_updated_board_when_2_is_inputted(
-        self, mock_input
-    ):
-        game = Game()
-        output = game.process_user_input()
-        self.assertEqual(output, ["1", "X", "3", "4", "5", "6", "7", "8", "9"])
 
     def test_zero_turns_player_x_goes_first(self):
         game = Game()

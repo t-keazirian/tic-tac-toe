@@ -4,11 +4,6 @@ from unittest.mock import patch
 from src.user_interface import UserInterface
 
 
-class MockMessage:
-    def incorrect_board_input(self):
-        return "Incorrect board input"
-
-
 class TestUserInterface(unittest.TestCase):
     @patch("builtins.print")
     def test_display_message_prints_welcome_message_passed_in(self, mock_print):
@@ -17,95 +12,21 @@ class TestUserInterface(unittest.TestCase):
         user_interface.display_message(message)
         mock_print.assert_called_with("Welcome to Tic Tac Toe")
 
-    def test_if_correct_input_return_true(self):
+    @patch("builtins.print")
+    def test_display_board_prints_board(self, mock_print):
         user_interface = UserInterface()
-        user_input = 8
-        output = user_interface.input_in_range(user_input)
-        self.assertEqual(True, output)
-
-    def test_if_incorrect_input_return_false(self):
-        user_interface = UserInterface()
-        user_input = 10
-        output = user_interface.input_in_range(user_input)
-        self.assertEqual(False, output)
-
-    def test_if_NaN_inputted_return_false(self):
-        user_interface = UserInterface()
-        user_input = "one"
-        output = user_interface.input_in_range(user_input)
-        self.assertEqual(False, output)
+        board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        user_interface.display_board(board)
+        mock_print.assert_called_with(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
 
     @patch("builtins.input", side_effect=["3"])
-    def test_gets_user_input(self, mock_input):
+    def test_get_user_input_returns_input(self, mock_input):
         user_interface = UserInterface()
-        message = MockMessage()
-        output = user_interface.get_user_input(message)
-        self.assertEqual(output, 3)
-
-    @patch("builtins.input", side_effect=["3"])
-    def test_gets_user_input_returns_string(self, mock_input):
-        user_interface = UserInterface()
-        message = MockMessage()
-        output = type(user_interface.get_user_input(message))
-        self.assertEqual(output, int)
+        result = user_interface.get_user_input()
+        self.assertEqual("3", result)
 
     @patch("builtins.input", side_effect=["5"])
     def test_gets_user_input_function_not_returning_false_positive(self, mock_input):
         user_interface = UserInterface()
-        message = MockMessage()
-        output = user_interface.get_user_input(message)
+        output = user_interface.get_user_input()
         self.assertNotEqual(output, "3")
-
-    def test_is_integer_returns_true_when_input_is_integer(self):
-        user_interface = UserInterface()
-        user_input = "4"
-        result = user_interface.is_integer(user_input)
-        self.assertEqual(True, result)
-
-    def test_is_integer_returns_true_when_input_is_not_integer(self):
-        user_interface = UserInterface()
-        user_input = "s"
-        result = user_interface.is_integer(user_input)
-        self.assertEqual(False, result)
-
-    @patch("builtins.input", side_effect=["Y"])
-    def test_get_play_again_user_input_returns_true_when_input_is_Y(self, mock_input):
-        user_interface = UserInterface()
-        message = MockMessage()
-        output = user_interface.get_play_again_user_input(message)
-        self.assertEqual("Y", output)
-
-    @patch("builtins.input", side_effect=["N"])
-    def test_get_play_again_user_input_returns_false_when_input_is_N(self, mock_input):
-        user_interface = UserInterface()
-        message = MockMessage()
-        output = user_interface.get_play_again_user_input(message)
-        self.assertEqual("N", output)
-
-    def test_handle_invalid_play_again_input_returns_true_when_user_input_is_Y(
-        self,
-    ):
-        user_interface = UserInterface()
-        user_input = "y"
-        self.assertEqual(True, user_interface.valid_play_again_input(user_input))
-
-    def test_handle_invalid_play_again_input_returns_true_when_user_input_is_N(
-        self,
-    ):
-        user_interface = UserInterface()
-        user_input = "n"
-        self.assertEqual(True, user_interface.valid_play_again_input(user_input))
-
-    def test_handle_invalid_play_again_input_returns_false_when_user_inputs_number(
-        self,
-    ):
-        user_interface = UserInterface()
-        user_input = "7"
-        self.assertEqual(False, user_interface.valid_play_again_input(user_input))
-
-    def test_handle_invalid_play_again_input_returns_false_when_incorrect_letter(
-        self,
-    ):
-        user_interface = UserInterface()
-        user_input = "s"
-        self.assertEqual(False, user_interface.valid_play_again_input(user_input))
