@@ -68,3 +68,23 @@ At the end of every game, you will have the option to play again or to exit.\n
 """
         actual_message = message.rules()
         self.assertEqual(rules, actual_message)
+
+    def test_display_symbols_displays_symbols_and_message(self):
+        message = Message()
+        symbols = {
+            1: "😃",
+            2: "😡",
+            3: "😎",
+            4: "😜",
+            5: "😈",
+            6: "👻",
+            7: "👽",
+            8: "🤖",
+            9: "👾",
+            10: "🤡",
+        }
+        expected_message = (
+            f"Type a number to choose the associated symbol from this list: {symbols}"
+        )
+        actual_message = message.display_symbols()
+        self.assertEqual(expected_message, actual_message)

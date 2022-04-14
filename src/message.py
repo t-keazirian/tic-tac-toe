@@ -2,6 +2,39 @@ class Message:
     def welcome_message(self):
         return "Welcome to Tic Tac Toe"
 
+    def menu(self):
+        return """
+Choose one of the options below:
+1. Play game with symbols 'X' and 'O'
+2. Choose your own symbols
+"""
+
+    def display_symbols(self):
+        symbols = {
+            1: "😃",
+            2: "😡",
+            3: "😎",
+            4: "😜",
+            5: "😈",
+            6: "👻",
+            7: "👽",
+            8: "🤖",
+            9: "👾",
+            10: "🤡",
+        }
+        return (
+            f"Type a number to choose the associated symbol from this list: {symbols}"
+        )
+
+    def invalid_choose_symbol_input(self):
+        return "That input is invalid. Please enter 1 or 2."
+
+    def choose_symbol_player_one(self):
+        return "Player One - please choose your mark:"
+
+    def choose_symbol_player_two(self):
+        return "Player Two - please choose your mark:"
+
     def rules(self):
         rules = """
 Play this game by taking turns marking the board.
@@ -33,4 +66,3 @@ At the end of every game, you will have the option to play again or to exit.\n
 
     def invalid_repeat_game_input(self):
         return "That input is incorrect. Please input Y to play again or N to exit the game."
-

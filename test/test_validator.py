@@ -130,19 +130,27 @@ class TestValidator(unittest.TestCase):
         user_input = "blah"
         self.assertEqual(False, validator.is_empty_string(user_input))
 
-    def test_is_valid_symbol_returns_false_if_input_contains_numbers(self):
+    def test_is_valid_menu_choice_returns_false_if_choice_is_3(self):
         validator = Validator()
-        user_input = "1"
-        self.assertEqual(False, validator.is_valid_symbol(user_input))
+        user_input = "3"
+        self.assertEqual(False, validator.is_valid_menu_choice(user_input))
 
-    def test_is_valid_symbol_returns_false_if_input_contains_empty_string(self):
+    def test_is_valid_menu_choice_returns_true_if_choice_is_2(self):
+        validator = Validator()
+        user_input = "2"
+        self.assertEqual(True, validator.is_valid_menu_choice(user_input))
+
+    def test_is_valid_menu_choice_returns_false_if_empty_string(self):
         validator = Validator()
         user_input = ""
-        self.assertEqual(False, validator.is_valid_symbol(user_input))
+        self.assertEqual(False, validator.is_valid_menu_choice(user_input))
 
-    def test_is_valid_symbol_returns_true_if_input_is_a_letter(self):
+    def test_is_valid_symbol_choice_input_returns_true_if_choice_is_3(self):
         validator = Validator()
-        mockSymbol = MockSymbol()
         user_input = "1"
-        symbol_choice = mockSymbol.symbol_generator(user_input)
-        self.assertEqual(True, validator.is_valid_symbol(symbol_choice))
+        self.assertEqual(True, validator.is_valid_symbol_choice_input(user_input))
+
+    def test_is_valid_symbol_choice_returns_false_if_choice_is_11(self):
+        validator = Validator()
+        user_input = "11"
+        self.assertEqual(False, validator.is_valid_symbol_choice_input(user_input))

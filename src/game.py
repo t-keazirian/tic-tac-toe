@@ -3,6 +3,7 @@ from src.message import Message
 from src.rules import Rules
 from src.user_interface import UserInterface
 from src.validator import Validator
+from src.symbol import SymbolOptions
 
 
 class Game:
@@ -10,6 +11,7 @@ class Game:
         self.board = Board()
         self.rules = Rules()
         self.validator = Validator()
+        self.symbol = SymbolOptions()
         self.ui = ui
         self.message = message
         self.game_board = self.board.starter_board
@@ -17,6 +19,47 @@ class Game:
         self.player_two = "O"
         self.total_marks_on_board = 0
         self.playing = True
+
+    def should_change_symbols(self):
+        self.ui.display_message(self.message.menu())
+        user_input = self.ui.get_user_input()
+        valid_user_input = self.validator.is_valid_menu_choice(user_input)
+        while valid_user_input is False:
+            self.ui.display_message(self.message.invalid_choose_symbol_input())
+            user_input = self.ui.get_user_input()
+            valid_user_input = self.validator.is_valid_menu_choice(user_input)
+        if user_input == "1":
+            self.ui.display_board(self.board.to_string(self.game_board))
+            self.game_loop()
+        if user_input == "2":
+            self.ui.display_message(self.message.display_symbols())
+            self.ui.display_message(self.message.choose_symbol_player_one())
+            self.set_player_one_symbol()
+            self.ui.display_message(self.message.choose_symbol_player_two())
+            self.set_player_two_symbol()
+            self.game_loop()
+
+    def set_player_one_symbol(self):
+        self.ui.display_message(self.message.choose_symbol_player_one())
+        symbol = self.ui.get_user_input()
+        valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
+        while not valid_symbol:
+            self.ui.display_message(self.message.invalid_choose_symbol_input())
+            symbol = self.ui.get_user_input()
+            valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
+        self.player_one = self.symbol.get_symbols(symbol)
+        return self.player_one
+
+    def set_player_two_symbol(self):
+        self.ui.display_message(self.message.choose_symbol_player_two())
+        symbol = self.ui.get_user_input()
+        valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
+        while not valid_symbol:
+            self.ui.display_message(self.message.invalid_choose_symbol_input())
+            symbol = self.ui.get_user_input()
+            valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
+        self.player_two = self.symbol.get_symbols(symbol)
+        return self.player_two
 
     def get_formatted_board(self):
         self.ui.display_board(self.board.to_string(self.game_board))
@@ -110,6 +153,8 @@ class Game:
     def run(self):
         self.ui.display_message(self.message.welcome_message())
         self.ui.display_message(self.message.rules())
+        self.should_change_symbols()
+        self.ui.display_message(self.message.menu())
         self.ui.display_board(self.board.to_string(self.game_board))
         self.game_loop()
         self.ui.display_message(self.message.goodbye_message())
