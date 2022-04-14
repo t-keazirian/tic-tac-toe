@@ -28,9 +28,6 @@ class Game:
             self.ui.display_message(self.message.invalid_choose_symbol_input())
             user_input = self.ui.get_user_input()
             valid_user_input = self.validator.is_valid_menu_choice(user_input)
-        if user_input == "1":
-            self.ui.display_board(self.board.to_string(self.game_board))
-            self.game_loop()
         if user_input == "2":
             self.ui.display_message(self.message.display_symbols())
             self.set_player_one_symbol()
