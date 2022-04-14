@@ -33,11 +33,8 @@ class Game:
             self.game_loop()
         if user_input == "2":
             self.ui.display_message(self.message.display_symbols())
-            self.ui.display_message(self.message.choose_symbol_player_one())
             self.set_player_one_symbol()
-            self.ui.display_message(self.message.choose_symbol_player_two())
             self.set_player_two_symbol()
-            self.game_loop()
 
     def set_player_one_symbol(self):
         self.ui.display_message(self.message.choose_symbol_player_one())
@@ -93,7 +90,8 @@ class Game:
     def new_game(self):
         self.total_marks_on_board = 0
         self.game_board = Board().starter_board
-        self.get_formatted_board()
+        self.player_one = "X"
+        self.player_two = "O"
 
     def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
@@ -131,6 +129,7 @@ class Game:
             answer = self.ui.get_user_input()
         if answer.upper() == "Y":
             self.new_game()
+            self.should_change_symbols()
         else:
             self.playing = False
 
@@ -154,7 +153,6 @@ class Game:
         self.ui.display_message(self.message.welcome_message())
         self.ui.display_message(self.message.rules())
         self.should_change_symbols()
-        self.ui.display_message(self.message.menu())
         self.ui.display_board(self.board.to_string(self.game_board))
         self.game_loop()
         self.ui.display_message(self.message.goodbye_message())

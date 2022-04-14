@@ -23,7 +23,7 @@ Choose one of the options below:
             10: "🤡",
         }
         return (
-            f"Type a number to choose the associated symbol from this list: {symbols}"
+            f"Type a number to choose the associated symbol from this list: \n{symbols}"
         )
 
     def invalid_choose_symbol_input(self):
@@ -38,11 +38,12 @@ Choose one of the options below:
     def rules(self):
         rules = """
 Play this game by taking turns marking the board.
+You will start by choosing between using the default X and O symbols, or your own symbol instead.
 When prompted, type a number between 1 and 9 and press enter.
 If that spot is taken, the computer will prompt you for a different spot.
 The first player who gets three of their marks in a row wins!
 If the board is full and neither player has three in a row, it is a draw and the game is over.
-At the end of every game, you will have the option to play again or to exit.\n
+At the end of every game, you will have the option to play again or to exit.
 """
         return rules
 
