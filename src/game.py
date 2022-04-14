@@ -38,14 +38,12 @@ class Game:
             self.ui.display_message(self.message.invalid_board_input())
             move = self.ui.get_user_input()
             valid_move = self.validator.is_valid_move(self.game_board, move)
-        else:
-            self.game_board = self.board.mark_board(
-                move,
-                self.game_board,
-                self.get_current_player(self.total_marks_on_board),
-            )
-            self.total_marks_on_board = self.board.count_marks(self.game_board)
-            return self.game_board
+        self.game_board = self.board.mark_board(
+            move,
+            self.game_board,
+            self.get_current_player(self.total_marks_on_board),
+        )
+        self.total_marks_on_board = self.board.count_marks(self.game_board)
 
     def new_game(self):
         self.total_marks_on_board = 0
