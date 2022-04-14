@@ -20,7 +20,7 @@ class Game:
         self.total_marks_on_board = 0
         self.playing = True
 
-    def should_change_symbols(self):
+    def change_symbols(self):
         self.ui.display_message(self.message.menu())
         user_input = self.ui.get_user_input()
         valid_user_input = self.validator.is_valid_menu_choice(user_input)
@@ -126,7 +126,7 @@ class Game:
             answer = self.ui.get_user_input()
         if answer.upper() == "Y":
             self.new_game()
-            self.should_change_symbols()
+            self.change_symbols()
         else:
             self.playing = False
 
@@ -149,7 +149,7 @@ class Game:
     def run(self):
         self.ui.display_message(self.message.welcome_message())
         self.ui.display_message(self.message.rules())
-        self.should_change_symbols()
+        self.change_symbols()
         self.ui.display_board(self.board.to_string(self.game_board))
         self.game_loop()
         self.ui.display_message(self.message.goodbye_message())
