@@ -85,3 +85,9 @@ class TestGame(unittest.TestCase):
         game = Game()
         result = game.set_player_one_symbol()
         self.assertEqual("😡", result)
+
+    @patch("builtins.input", side_effect=["4"])
+    def test_set_player_two_symbol_returns_symbol_with_input_4(self, mock_input):
+        game = Game()
+        result = game.set_player_one_symbol()
+        self.assertEqual("😜", result)
