@@ -3,16 +3,6 @@ import unittest
 from src.validator import Validator
 
 
-class MockSymbol:
-    def symbol_generator(self, user_input):
-        symbols = {
-            "1": "😃",
-            "2": "😡",
-            "3": "😎",
-        }
-        return symbols[user_input]
-
-
 class TestValidator(unittest.TestCase):
     def test_is_integer_returns_true_when_input_is_integer(self):
         validator = Validator()
