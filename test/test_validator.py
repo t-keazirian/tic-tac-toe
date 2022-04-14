@@ -3,6 +3,16 @@ import unittest
 from src.validator import Validator
 
 
+class MockSymbol:
+    def symbol_generator(self, user_input):
+        symbols = {
+            "1": "😃",
+            "2": "😡",
+            "3": "😎",
+        }
+        return symbols[user_input]
+
+
 class TestValidator(unittest.TestCase):
     def test_is_integer_returns_true_when_input_is_integer(self):
         validator = Validator()
@@ -119,3 +129,20 @@ class TestValidator(unittest.TestCase):
         validator = Validator()
         user_input = "blah"
         self.assertEqual(False, validator.is_empty_string(user_input))
+
+    def test_is_valid_symbol_returns_false_if_input_contains_numbers(self):
+        validator = Validator()
+        user_input = "1"
+        self.assertEqual(False, validator.is_valid_symbol(user_input))
+
+    def test_is_valid_symbol_returns_false_if_input_contains_empty_string(self):
+        validator = Validator()
+        user_input = ""
+        self.assertEqual(False, validator.is_valid_symbol(user_input))
+
+    def test_is_valid_symbol_returns_true_if_input_is_a_letter(self):
+        validator = Validator()
+        mockSymbol = MockSymbol()
+        user_input = "1"
+        symbol_choice = mockSymbol.symbol_generator(user_input)
+        self.assertEqual(True, validator.is_valid_symbol(symbol_choice))

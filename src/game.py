@@ -13,8 +13,8 @@ class Game:
         self.ui = ui
         self.message = message
         self.game_board = self.board.starter_board
-        self.player_one = self.board.player_one
-        self.player_two = self.board.player_two
+        self.player_one = "X"
+        self.player_two = "O"
         self.total_marks_on_board = 0
         self.playing = True
 
@@ -43,7 +43,9 @@ class Game:
             self.game_board,
             self.get_current_player(self.total_marks_on_board),
         )
-        self.total_marks_on_board = self.board.count_marks(self.game_board)
+        self.total_marks_on_board = self.board.count_marks(
+            self.game_board, self.player_one, self.player_two
+        )
 
     def new_game(self):
         self.total_marks_on_board = 0
@@ -73,7 +75,9 @@ class Game:
     def take_turns(self):
         self.prompt_for_move(self.total_marks_on_board)
         self.handle_mark_board()
-        self.total_marks_on_board = self.board.count_marks(self.game_board)
+        self.total_marks_on_board = self.board.count_marks(
+            self.game_board, self.player_one, self.player_two
+        )
         self.get_formatted_board()
 
     def ask_to_play_again(self):
@@ -93,7 +97,10 @@ class Game:
                 self.handle_winning_game()
                 self.ask_to_play_again()
             elif self.board.is_full(
-                self.board.count_marks(self.game_board), self.game_board
+                self.board.count_marks(
+                    self.game_board, self.player_one, self.player_two
+                ),
+                self.game_board,
             ):
                 self.handle_full_board()
                 self.ask_to_play_again()

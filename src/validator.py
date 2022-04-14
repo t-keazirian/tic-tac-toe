@@ -38,3 +38,9 @@ class Validator:
             return True
         else:
             return False
+
+    def is_valid_symbol(self, user_input):
+        if self.is_integer(user_input) or self.is_empty_string(user_input):
+            return False
+        else:
+            return True
