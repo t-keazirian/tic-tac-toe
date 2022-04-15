@@ -21,3 +21,16 @@ This project uses [unittest](https://docs.python.org/3/library/unittest.html), a
 
 #### To run the tests:
 `python -m unittest -v`
+
+#### Code Coverage:
+We are using [Coverage.py](https://coverage.readthedocs.io/en/6.3.2/) for code coverage
+
+`pip install coverage`
+
+To Run:
+`coverage -m unittest -v`
+
+Generate HTML report:
+`coverage html`
+
+This will generate an HTML report and folder that where you can view the report.
