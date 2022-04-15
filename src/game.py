@@ -30,20 +30,22 @@ class Game:
             valid_user_input = self.validator.is_valid_menu_choice(user_input)
         if user_input == "2":
             self.ui.display_message(self.message.display_symbols())
-            self.set_player_symbol(self.player_one)
-            self.set_player_symbol(self.player_two)
+            self.player_one = self.set_player_symbol(
+                self.message.choose_symbol_player_one()
+            )
+            self.player_two = self.set_player_symbol(
+                self.message.choose_symbol_player_two()
+            )
 
-    def set_player_symbol(self, player):
-        self.ui.display_message(self.message.choose_symbol_player_one())
+    def set_player_symbol(self, message):
+        self.ui.display_message(message)
         symbol = self.ui.get_user_input()
         valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
         while not valid_symbol:
             self.ui.display_message(self.message.invalid_symbol_option())
             symbol = self.ui.get_user_input()
             valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
-        player = self.symbol.get_symbol(symbol)
-        print(player, "player")
-        return player
+        return self.symbol.get_symbol(symbol)
 
     def set_player_one_symbol(self):
         self.ui.display_message(self.message.choose_symbol_player_one())
@@ -130,6 +132,11 @@ class Game:
         )
         self.get_formatted_board()
 
+    def repeat_game(self):
+        self.new_game()
+        self.change_symbols()
+        self.ui.display_board(self.board.to_string(self.game_board))
+
     def ask_to_play_again(self):
         self.ui.display_message(self.message.play_again_prompt())
         answer = self.ui.get_user_input()
@@ -137,9 +144,7 @@ class Game:
             self.ui.display_message(self.message.invalid_repeat_game_input())
             answer = self.ui.get_user_input()
         if answer.upper() == "Y":
-            self.new_game()
-            self.change_symbols()
-            self.ui.display_board(self.board.to_string(self.game_board))
+            self.repeat_game()
         else:
             self.playing = False
 
