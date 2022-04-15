@@ -1,3 +1,7 @@
+from symtable import Symbol
+from src.symbol import SymbolOptions
+
+
 class Message:
     def welcome_message(self):
         return "Welcome to Tic Tac Toe"
@@ -10,18 +14,7 @@ Choose one of the options below:
 """
 
     def display_symbols(self):
-        symbols = {
-            1: "😃",
-            2: "😡",
-            3: "😎",
-            4: "😜",
-            5: "😈",
-            6: "👻",
-            7: "👽",
-            8: "🤖",
-            9: "👾",
-            10: "🤡",
-        }
+        symbols = SymbolOptions().symbols
         return (
             f"Type a number to choose the associated symbol from this list: \n{symbols}"
         )

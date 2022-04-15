@@ -30,8 +30,20 @@ class Game:
             valid_user_input = self.validator.is_valid_menu_choice(user_input)
         if user_input == "2":
             self.ui.display_message(self.message.display_symbols())
-            self.set_player_one_symbol()
-            self.set_player_two_symbol()
+            self.set_player_symbol(self.player_one)
+            self.set_player_symbol(self.player_two)
+
+    def set_player_symbol(self, player):
+        self.ui.display_message(self.message.choose_symbol_player_one())
+        symbol = self.ui.get_user_input()
+        valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
+        while not valid_symbol:
+            self.ui.display_message(self.message.invalid_symbol_option())
+            symbol = self.ui.get_user_input()
+            valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
+        player = self.symbol.get_symbol(symbol)
+        print(player, "player")
+        return player
 
     def set_player_one_symbol(self):
         self.ui.display_message(self.message.choose_symbol_player_one())

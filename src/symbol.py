@@ -1,6 +1,6 @@
 class SymbolOptions:
-    def get_symbol(self, user_input):
-        symbols = {
+    def __init__(self):
+        self.symbols = {
             "1": "😃",
             "2": "😡",
             "3": "😎",
@@ -9,7 +9,9 @@ class SymbolOptions:
             "6": "👻",
             "7": "👽",
             "8": "🤖",
-            "9": "👾",
+            "9": "💋",
             "10": "🤡",
         }
-        return symbols[user_input]
+
+    def get_symbol(self, user_input):
+        return self.symbols[user_input]

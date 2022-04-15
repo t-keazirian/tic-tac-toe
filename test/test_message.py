@@ -1,6 +1,7 @@
 import unittest
 
 from src.message import Message
+from src.symbol import SymbolOptions
 
 
 class TestMessage(unittest.TestCase):
@@ -23,18 +24,8 @@ Choose one of the options below:
 
     def test_display_symbols_displays_symbols_and_message(self):
         message = Message()
-        symbols = {
-            1: "😃",
-            2: "😡",
-            3: "😎",
-            4: "😜",
-            5: "😈",
-            6: "👻",
-            7: "👽",
-            8: "🤖",
-            9: "👾",
-            10: "🤡",
-        }
+        symbols = SymbolOptions().symbols
+
         expected_message = (
             f"Type a number to choose the associated symbol from this list: \n{symbols}"
         )
