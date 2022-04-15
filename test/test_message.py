@@ -10,6 +10,49 @@ class TestMessage(unittest.TestCase):
         actual_message = message.welcome_message()
         self.assertEqual(expected_message, actual_message)
 
+    def test_menu_returns_menu_for_symbol_options(self):
+        message = Message()
+        expected_message = """
+Choose one of the options below:
+1. Play game with symbols 'X' and 'O'
+2. Choose your own symbols
+"""
+
+        actual_message = message.menu()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_display_symbols_displays_symbols_and_message(self):
+        message = Message()
+        symbols = {
+            1: "😃",
+            2: "😡",
+            3: "😎",
+            4: "😜",
+            5: "😈",
+            6: "👻",
+            7: "👽",
+            8: "🤖",
+            9: "👾",
+            10: "🤡",
+        }
+        expected_message = (
+            f"Type a number to choose the associated symbol from this list: \n{symbols}"
+        )
+        actual_message = message.display_symbols()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_invalid_choose_symbol_input_prints_message(self):
+        message = Message()
+        expected_message = "That input is invalid. Please enter 1 or 2."
+        actual_message = message.invalid_choose_symbol_input()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_invalid_symbol_option_prints_message(self):
+        message = Message()
+        expected_message = "That input is invalid. Please enter a number 1-10."
+        actual_message = message.invalid_symbol_option()
+        self.assertEqual(expected_message, actual_message)
+
     def test_game_over_prints_to_console(self):
         message = Message()
         expected_message = "Game over - it's a draw!"
@@ -69,23 +112,3 @@ At the end of every game, you will have the option to play again or to exit.
 """
         actual_message = message.rules()
         self.assertEqual(rules, actual_message)
-
-    def test_display_symbols_displays_symbols_and_message(self):
-        message = Message()
-        symbols = {
-            1: "😃",
-            2: "😡",
-            3: "😎",
-            4: "😜",
-            5: "😈",
-            6: "👻",
-            7: "👽",
-            8: "🤖",
-            9: "👾",
-            10: "🤡",
-        }
-        expected_message = (
-            f"Type a number to choose the associated symbol from this list: \n{symbols}"
-        )
-        actual_message = message.display_symbols()
-        self.assertEqual(expected_message, actual_message)

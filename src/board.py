@@ -3,7 +3,7 @@ class Board:
         self.starter_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
     def to_string(self, board):
-        return f"{board[0]} | {board[1]} | {board[2]}\n--+--+--\n{board[3]} | {board[4]} | {board[5]}\n--+--+--\n{board[6]} | {board[7]} | {board[8]}"
+        return f" {board[0]} | {board[1]} | {board[2]} \n---+---+---\n {board[3]} | {board[4]} | {board[5]} \n---+---+---\n {board[6]} | {board[7]} | {board[8]}"
 
     def count_marks(self, board, player_one, player_two):
         for mark in board:

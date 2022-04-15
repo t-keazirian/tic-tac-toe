@@ -141,7 +141,7 @@ class TestValidator(unittest.TestCase):
         user_input = ""
         self.assertEqual(False, validator.is_valid_menu_choice(user_input))
 
-    def test_is_valid_symbol_choice_input_returns_true_if_choice_is_3(self):
+    def test_is_valid_symbol_choice_input_returns_true_if_choice_is_1(self):
         validator = Validator()
         user_input = "1"
         self.assertEqual(True, validator.is_valid_symbol_choice_input(user_input))

@@ -1,5 +1,5 @@
 class SymbolOptions:
-    def get_symbols(self, user_input):
+    def get_symbol(self, user_input):
         symbols = {
             "1": "😃",
             "2": "😡",

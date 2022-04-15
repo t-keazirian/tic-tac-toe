@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 
 from src.game import Game
+from src.symbol import SymbolOptions
 
 
 class MockMessage:
@@ -77,17 +78,26 @@ class TestGame(unittest.TestCase):
     @patch("builtins.input", side_effect=["3"])
     def test_set_player_one_symbol_returns_symbol_with_input_3(self, mock_input):
         game = Game()
+        expected_symbol = SymbolOptions().get_symbol("3")
+
         result = game.set_player_one_symbol()
-        self.assertEqual("😎", result)
+
+        self.assertEqual(expected_symbol, result)
 
     @patch("builtins.input", side_effect=["2"])
     def test_set_player_two_symbol_returns_symbol_with_input_2(self, mock_input):
         game = Game()
+        expected_symbol = SymbolOptions().get_symbol("2")
+
         result = game.set_player_one_symbol()
-        self.assertEqual("😡", result)
+
+        self.assertEqual(expected_symbol, result)
 
     @patch("builtins.input", side_effect=["4"])
     def test_set_player_two_symbol_returns_symbol_with_input_4(self, mock_input):
         game = Game()
+        expected_symbol = SymbolOptions().get_symbol("4")
+
         result = game.set_player_one_symbol()
-        self.assertEqual("😜", result)
+
+        self.assertEqual(expected_symbol, result)
