@@ -3,6 +3,7 @@ from src.message import Message
 from src.rules import Rules
 from src.user_interface import UserInterface
 from src.validator import Validator
+from src.symbol import SymbolOptions
 
 
 class Game:
@@ -10,13 +11,41 @@ class Game:
         self.board = Board()
         self.rules = Rules()
         self.validator = Validator()
+        self.symbol = SymbolOptions()
         self.ui = ui
         self.message = message
         self.game_board = self.board.starter_board
-        self.player_one = self.board.player_one
-        self.player_two = self.board.player_two
+        self.player_one = "X"
+        self.player_two = "O"
         self.total_marks_on_board = 0
         self.playing = True
+
+    def change_symbols(self):
+        self.ui.display_message(self.message.menu())
+        user_input = self.ui.get_user_input()
+        valid_user_input = self.validator.is_valid_menu_choice(user_input)
+        while valid_user_input is False:
+            self.ui.display_message(self.message.invalid_choose_symbol_input())
+            user_input = self.ui.get_user_input()
+            valid_user_input = self.validator.is_valid_menu_choice(user_input)
+        if user_input == "2":
+            self.ui.display_message(self.message.display_symbols())
+            self.player_one = self.set_player_symbol(
+                self.message.choose_symbol_player_one()
+            )
+            self.player_two = self.set_player_symbol(
+                self.message.choose_symbol_player_two()
+            )
+
+    def set_player_symbol(self, message):
+        self.ui.display_message(message)
+        symbol = self.ui.get_user_input()
+        valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
+        while not valid_symbol:
+            self.ui.display_message(self.message.invalid_symbol_option())
+            symbol = self.ui.get_user_input()
+            valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
+        return self.symbol.get_symbol(symbol)
 
     def get_formatted_board(self):
         self.ui.display_board(self.board.to_string(self.game_board))
@@ -43,12 +72,15 @@ class Game:
             self.game_board,
             self.get_current_player(self.total_marks_on_board),
         )
-        self.total_marks_on_board = self.board.count_marks(self.game_board)
+        self.total_marks_on_board = self.board.count_marks(
+            self.game_board, self.player_one, self.player_two
+        )
 
     def new_game(self):
         self.total_marks_on_board = 0
         self.game_board = Board().starter_board
-        self.get_formatted_board()
+        self.player_one = "X"
+        self.player_two = "O"
 
     def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
@@ -73,8 +105,15 @@ class Game:
     def take_turns(self):
         self.prompt_for_move(self.total_marks_on_board)
         self.handle_mark_board()
-        self.total_marks_on_board = self.board.count_marks(self.game_board)
+        self.total_marks_on_board = self.board.count_marks(
+            self.game_board, self.player_one, self.player_two
+        )
         self.get_formatted_board()
+
+    def repeat_game(self):
+        self.new_game()
+        self.change_symbols()
+        self.ui.display_board(self.board.to_string(self.game_board))
 
     def ask_to_play_again(self):
         self.ui.display_message(self.message.play_again_prompt())
@@ -83,7 +122,7 @@ class Game:
             self.ui.display_message(self.message.invalid_repeat_game_input())
             answer = self.ui.get_user_input()
         if answer.upper() == "Y":
-            self.new_game()
+            self.repeat_game()
         else:
             self.playing = False
 
@@ -93,7 +132,10 @@ class Game:
                 self.handle_winning_game()
                 self.ask_to_play_again()
             elif self.board.is_full(
-                self.board.count_marks(self.game_board), self.game_board
+                self.board.count_marks(
+                    self.game_board, self.player_one, self.player_two
+                ),
+                self.game_board,
             ):
                 self.handle_full_board()
                 self.ask_to_play_again()
@@ -103,6 +145,7 @@ class Game:
     def run(self):
         self.ui.display_message(self.message.welcome_message())
         self.ui.display_message(self.message.rules())
+        self.change_symbols()
         self.ui.display_board(self.board.to_string(self.game_board))
         self.game_loop()
         self.ui.display_message(self.message.goodbye_message())

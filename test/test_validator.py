@@ -75,6 +75,12 @@ class TestValidator(unittest.TestCase):
         test_move = "5"
         self.assertTrue(validator.is_valid_move(test_board, test_move))
 
+    def test_move_is_not_valid_if_empty_string(self):
+        validator = Validator()
+        test_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        test_move = ""
+        self.assertFalse(validator.is_valid_move(test_board, test_move))
+
     def test_valid_play_again_input_returns_Y_if_valid_input_and_Y_inputted(
         self,
     ):
@@ -119,3 +125,28 @@ class TestValidator(unittest.TestCase):
         validator = Validator()
         user_input = "blah"
         self.assertEqual(False, validator.is_empty_string(user_input))
+
+    def test_is_valid_menu_choice_returns_false_if_choice_is_3(self):
+        validator = Validator()
+        user_input = "3"
+        self.assertEqual(False, validator.is_valid_menu_choice(user_input))
+
+    def test_is_valid_menu_choice_returns_true_if_choice_is_2(self):
+        validator = Validator()
+        user_input = "2"
+        self.assertEqual(True, validator.is_valid_menu_choice(user_input))
+
+    def test_is_valid_menu_choice_returns_false_if_empty_string(self):
+        validator = Validator()
+        user_input = ""
+        self.assertEqual(False, validator.is_valid_menu_choice(user_input))
+
+    def test_is_valid_symbol_choice_input_returns_true_if_choice_is_1(self):
+        validator = Validator()
+        user_input = "1"
+        self.assertEqual(True, validator.is_valid_symbol_choice_input(user_input))
+
+    def test_is_valid_symbol_choice_returns_false_if_choice_is_11(self):
+        validator = Validator()
+        user_input = "11"
+        self.assertEqual(False, validator.is_valid_symbol_choice_input(user_input))

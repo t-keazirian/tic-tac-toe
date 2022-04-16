@@ -1,6 +1,7 @@
 import unittest
 
 from src.message import Message
+from src.symbol import SymbolOptions
 
 
 class TestMessage(unittest.TestCase):
@@ -8,6 +9,51 @@ class TestMessage(unittest.TestCase):
         message = Message()
         expected_message = "Welcome to Tic Tac Toe"
         actual_message = message.welcome_message()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_menu_returns_menu_for_symbol_options(self):
+        message = Message()
+        expected_message = """
+Choose one of the options below:
+1. Play game with symbols 'X' and 'O'
+2. Choose your own symbols
+"""
+
+        actual_message = message.menu()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_display_symbols_displays_symbols_and_message(self):
+        message = Message()
+        symbols = SymbolOptions().symbols
+
+        expected_message = (
+            f"Type a number to choose the associated symbol from this list: \n{symbols}"
+        )
+        actual_message = message.display_symbols()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_invalid_choose_symbol_input_prints_message(self):
+        message = Message()
+        expected_message = "That input is invalid. Please enter 1 or 2."
+        actual_message = message.invalid_choose_symbol_input()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_invalid_symbol_option_prints_message(self):
+        message = Message()
+        expected_message = "That input is invalid. Please enter a number 1-10."
+        actual_message = message.invalid_symbol_option()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_choose_symbol_player_one_prints_message(self):
+        message = Message()
+        expected_message = "Player One - please choose your mark:"
+        actual_message = message.choose_symbol_player_one()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_choose_symbol_player_two_prints_message(self):
+        message = Message()
+        expected_message = "Player Two - please choose your mark:"
+        actual_message = message.choose_symbol_player_two()
         self.assertEqual(expected_message, actual_message)
 
     def test_game_over_prints_to_console(self):
@@ -60,11 +106,12 @@ class TestMessage(unittest.TestCase):
         message = Message()
         rules = """
 Play this game by taking turns marking the board.
+You will start by choosing between using the default X and O symbols, or your own symbol instead.
 When prompted, type a number between 1 and 9 and press enter.
 If that spot is taken, the computer will prompt you for a different spot.
 The first player who gets three of their marks in a row wins!
 If the board is full and neither player has three in a row, it is a draw and the game is over.
-At the end of every game, you will have the option to play again or to exit.\n
+At the end of every game, you will have the option to play again or to exit.
 """
         actual_message = message.rules()
         self.assertEqual(rules, actual_message)
