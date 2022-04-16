@@ -44,6 +44,18 @@ Choose one of the options below:
         actual_message = message.invalid_symbol_option()
         self.assertEqual(expected_message, actual_message)
 
+    def test_choose_symbol_player_one_prints_message(self):
+        message = Message()
+        expected_message = "Player One - please choose your mark:"
+        actual_message = message.choose_symbol_player_one()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_choose_symbol_player_two_prints_message(self):
+        message = Message()
+        expected_message = "Player Two - please choose your mark:"
+        actual_message = message.choose_symbol_player_two()
+        self.assertEqual(expected_message, actual_message)
+
     def test_game_over_prints_to_console(self):
         message = Message()
         expected_message = "Game over - it's a draw!"
