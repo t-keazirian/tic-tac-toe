@@ -12,6 +12,9 @@ class MockMessage:
     def game_over_message(self):
         return "Game over message"
 
+    def choose_player_symbol(self):
+        return "Player __ Choose your symbol:"
+
 
 class TestGame(unittest.TestCase):
     @patch("builtins.print")
@@ -78,26 +81,38 @@ class TestGame(unittest.TestCase):
     @patch("builtins.input", side_effect=["3"])
     def test_set_player_one_symbol_returns_symbol_with_input_3(self, mock_input):
         game = Game()
+        message = MockMessage()
+
         expected_symbol = SymbolOptions().get_symbol("3")
 
-        result = game.set_player_one_symbol()
+        message = message.choose_player_symbol()
+
+        result = game.set_player_symbol(message)
 
         self.assertEqual(expected_symbol, result)
 
     @patch("builtins.input", side_effect=["2"])
     def test_set_player_two_symbol_returns_symbol_with_input_2(self, mock_input):
         game = Game()
+        message = MockMessage()
+
         expected_symbol = SymbolOptions().get_symbol("2")
 
-        result = game.set_player_one_symbol()
+        message = message.choose_player_symbol()
+
+        result = game.set_player_symbol(message)
 
         self.assertEqual(expected_symbol, result)
 
     @patch("builtins.input", side_effect=["4"])
     def test_set_player_two_symbol_returns_symbol_with_input_4(self, mock_input):
         game = Game()
+        message = MockMessage()
+
         expected_symbol = SymbolOptions().get_symbol("4")
 
-        result = game.set_player_one_symbol()
+        message = message.choose_player_symbol()
+
+        result = game.set_player_symbol(message)
 
         self.assertEqual(expected_symbol, result)

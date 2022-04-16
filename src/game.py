@@ -47,28 +47,6 @@ class Game:
             valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
         return self.symbol.get_symbol(symbol)
 
-    def set_player_one_symbol(self):
-        self.ui.display_message(self.message.choose_symbol_player_one())
-        symbol = self.ui.get_user_input()
-        valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
-        while not valid_symbol:
-            self.ui.display_message(self.message.invalid_symbol_option())
-            symbol = self.ui.get_user_input()
-            valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
-        self.player_one = self.symbol.get_symbol(symbol)
-        return self.player_one
-
-    def set_player_two_symbol(self):
-        self.ui.display_message(self.message.choose_symbol_player_two())
-        symbol = self.ui.get_user_input()
-        valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
-        while not valid_symbol:
-            self.ui.display_message(self.message.invalid_symbol_option())
-            symbol = self.ui.get_user_input()
-            valid_symbol = self.validator.is_valid_symbol_choice_input(symbol)
-        self.player_two = self.symbol.get_symbol(symbol)
-        return self.player_two
-
     def get_formatted_board(self):
         self.ui.display_board(self.board.to_string(self.game_board))
 
