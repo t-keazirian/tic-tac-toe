@@ -39,7 +39,7 @@ class Validator:
         else:
             return False
 
-    def is_valid_menu_choice(self, user_input):
+    def is_valid_menu_or_language_choice(self, user_input):
         if user_input == "1" or user_input == "2":
             return True
         else:

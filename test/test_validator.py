@@ -126,20 +126,20 @@ class TestValidator(unittest.TestCase):
         user_input = "blah"
         self.assertEqual(False, validator.is_empty_string(user_input))
 
-    def test_is_valid_menu_choice_returns_false_if_choice_is_3(self):
+    def test_is_valid_menu_or_language_choice_returns_false_if_choice_is_3(self):
         validator = Validator()
         user_input = "3"
-        self.assertEqual(False, validator.is_valid_menu_choice(user_input))
+        self.assertEqual(False, validator.is_valid_menu_or_language_choice(user_input))
 
-    def test_is_valid_menu_choice_returns_true_if_choice_is_2(self):
+    def test_is_valid_menu_or_language_choice_returns_true_if_choice_is_2(self):
         validator = Validator()
         user_input = "2"
-        self.assertEqual(True, validator.is_valid_menu_choice(user_input))
+        self.assertEqual(True, validator.is_valid_menu_or_language_choice(user_input))
 
-    def test_is_valid_menu_choice_returns_false_if_empty_string(self):
+    def test_is_valid_menu_or_language_choice_returns_false_if_empty_string(self):
         validator = Validator()
         user_input = ""
-        self.assertEqual(False, validator.is_valid_menu_choice(user_input))
+        self.assertEqual(False, validator.is_valid_menu_or_language_choice(user_input))
 
     def test_is_valid_symbol_choice_input_returns_true_if_choice_is_1(self):
         validator = Validator()

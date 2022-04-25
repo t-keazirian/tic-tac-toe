@@ -1,6 +1,7 @@
 from src.board import Board
 from src.message import Message
 from src.rules import Rules
+from src.spanish_message import SpanishMessage
 from src.user_interface import UserInterface
 from src.validator import Validator
 from src.symbol import SymbolOptions
@@ -13,21 +14,39 @@ class Game:
         self.validator = Validator()
         self.symbol = SymbolOptions()
         self.ui = ui
-        self.message = message
+        self.set_language(message)
         self.game_board = self.board.starter_board
         self.player_one = "X"
         self.player_two = "O"
         self.total_marks_on_board = 0
         self.playing = True
 
+    def set_language(self, message):
+        self.message = message
+
+    def change_language(self):
+        self.ui.display_message(self.message.choose_language())
+        user_input = self.ui.get_user_input()
+        valid_user_input = self.validator.is_valid_menu_or_language_choice(user_input)
+        while valid_user_input is False:
+            self.ui.display_message(self.message.invalid_choose_language_input())
+            user_input = self.ui.get_user_input()
+            valid_user_input = self.validator.is_valid_menu_or_language_choice(
+                user_input
+            )
+        if user_input == "2":
+            self.set_language(SpanishMessage())
+
     def change_symbols(self):
         self.ui.display_message(self.message.menu())
         user_input = self.ui.get_user_input()
-        valid_user_input = self.validator.is_valid_menu_choice(user_input)
+        valid_user_input = self.validator.is_valid_menu_or_language_choice(user_input)
         while valid_user_input is False:
             self.ui.display_message(self.message.invalid_choose_symbol_input())
             user_input = self.ui.get_user_input()
-            valid_user_input = self.validator.is_valid_menu_choice(user_input)
+            valid_user_input = self.validator.is_valid_menu_or_language_choice(
+                user_input
+            )
         if user_input == "2":
             self.ui.display_message(self.message.display_symbols())
             self.player_one = self.set_player_symbol(
@@ -144,6 +163,7 @@ class Game:
 
     def run(self):
         self.ui.display_message(self.message.welcome_message())
+        self.change_language()
         self.ui.display_message(self.message.rules())
         self.change_symbols()
         self.ui.display_board(self.board.to_string(self.game_board))

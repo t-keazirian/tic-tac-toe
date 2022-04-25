@@ -63,3 +63,13 @@ At the end of every game, you will have the option to play again or to exit.
 
     def invalid_repeat_game_input(self):
         return "That input is incorrect. Please input Y to play again or N to exit the game."
+
+    def choose_language(self):
+        return """
+Choose your language:
+1. English
+2. Spanish
+"""
+
+    def invalid_choose_language_input(self):
+        return "That input is incorrect. Please input 1 for English or 2 for Spanish."

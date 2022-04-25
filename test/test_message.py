@@ -115,3 +115,21 @@ At the end of every game, you will have the option to play again or to exit.
 """
         actual_message = message.rules()
         self.assertEqual(rules, actual_message)
+
+    def test_choose_language_prints_to_console(self):
+        message = Message()
+        expected_message = """
+Choose your language:
+1. English
+2. Spanish
+"""
+        actual_message = message.choose_language()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_invalid_choose_language_prints_to_console(self):
+        message = Message()
+        expected_message = (
+            "That input is incorrect. Please input 1 for English or 2 for Spanish."
+        )
+        actual_message = message.invalid_choose_language_input()
+        self.assertEqual(expected_message, actual_message)
