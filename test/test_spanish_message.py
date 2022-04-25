@@ -8,7 +8,7 @@ class TestSpanishMessage(unittest.TestCase):
     def test_welcome_message_prints_to_console(self):
         spanish_message = SpanishMessage()
         expected_message = "Bienvenidos a Tic Tac Toe"
-        actual_message = spanish_message.welcome()
+        actual_message = spanish_message.welcome_message()
         self.assertEqual(expected_message, actual_message)
 
     def test_menu_returns_menu_for_symbol_options(self):
@@ -46,19 +46,19 @@ Elija una de las siguientes opciones:
     def test_choose_symbol_player_one_prints_message(self):
         spanish_message = SpanishMessage()
         expected_message = "Jugador uno: elija su marca"
-        actual_message = spanish_message.choose_player_one_symbol()
+        actual_message = spanish_message.choose_symbol_player_one()
         self.assertEqual(expected_message, actual_message)
 
     def test_choose_symbol_player_two_prints_message(self):
         spanish_message = SpanishMessage()
         expected_message = "Jugador dos: elija su marca"
-        actual_message = spanish_message.choose_player_two_symbol()
+        actual_message = spanish_message.choose_symbol_player_two()
         self.assertEqual(expected_message, actual_message)
 
     def test_game_over_prints_to_console(self):
         spanish_message = SpanishMessage()
         expected_message = "Se acabó el juego: ¡empate!"
-        actual_message = spanish_message.game_over()
+        actual_message = spanish_message.game_over_message()
         self.assertEqual(expected_message, actual_message)
 
     def test_X_player_is_prompted_for_move_when_is_current_player(self):
@@ -92,7 +92,7 @@ Elija una de las siguientes opciones:
     def test_goodbye_message(self):
         spanish_message = SpanishMessage()
         expected_message = "¡Gracias por jugar - adios!"
-        actual_message = spanish_message.goodbye()
+        actual_message = spanish_message.goodbye_message()
         self.assertEqual(expected_message, actual_message)
 
     def test_invalid_repeat_game_message(self):

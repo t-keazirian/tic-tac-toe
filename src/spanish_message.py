@@ -3,7 +3,7 @@ from src.symbol import SymbolOptions
 
 
 class SpanishMessage:
-    def welcome(self):
+    def welcome_message(self):
         return "Bienvenidos a Tic Tac Toe"
 
     def menu(self):
@@ -23,10 +23,10 @@ Elija una de las siguientes opciones:
     def invalid_symbol_option(self):
         return "Ese ingreso no es válido. Por favor ingrese un número del 1 al 10."
 
-    def choose_player_one_symbol(self):
+    def choose_symbol_player_one(self):
         return "Jugador uno: elija su marca"
 
-    def choose_player_two_symbol(self):
+    def choose_symbol_player_two(self):
         return "Jugador dos: elija su marca"
 
     def rules(self):
@@ -40,7 +40,7 @@ Al final de cada juego, tendrás la opción de jugar de nuevo o salir.
 """
         return rules
 
-    def game_over(self):
+    def game_over_message(self):
         return "Se acabó el juego: ¡empate!"
 
     def prompt_for_move(self, current_player):
@@ -55,7 +55,7 @@ Al final de cada juego, tendrás la opción de jugar de nuevo o salir.
     def play_again_prompt(self):
         return "¿Quieres jugar de nuevo? (Y/N)"
 
-    def goodbye(self):
+    def goodbye_message(self):
         return "¡Gracias por jugar - adios!"
 
     def invalid_repeat_game_input(self):
