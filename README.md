@@ -17,26 +17,48 @@ This game uses `python 3.1.0`
 - Type `python tic_tac_toe.py` into your command line prompt while in this repo's directory.
 - The game will go through a series of prompts for a two-player TTT game.
 - You will be notified if you input an incorrect value and be re-prompted to correct the value.
-- The game will declare a winner and gives the option to play again.
+- The game will declare a winner and give the option to play again.
 
-### Testing:
+## Testing:
 
-This project uses [unittest](https://docs.python.org/3/library/unittest.html), a Python testing framework.
+This project uses [unittest][1], a Python testing framework.
 
-#### To run the tests:
+This project also uses [pytest][2] for acceptance testing.
 
-`python -m unittest -v`
+### To run the tests:
 
-#### Code Coverage:
+```
+python -m unittest -v
+```
 
-We are using [Coverage.py](https://coverage.readthedocs.io/en/6.3.2/) for code coverage
+### To run tests with `pytest` (this command will also run the unit-tests)
 
-`pip install coverage`
+```
+pytest test
+```
 
-To Run:
-`coverage -m unittest -v`
+### Code Coverage:
 
-Generate HTML report:
-`coverage html`
+We are using [Coverage.py][3] for code coverage
+
+```
+pip install coverage
+```
+
+### To Run:
+
+```
+coverage -m unittest -v
+```
+
+### Generate HTML report:
+
+```
+coverage html
+```
 
 This will generate an HTML report and folder where you can view the report.
+
+[1]: https://docs.python.org/3/library/unittest.html
+[2]: https://docs.pytest.org/en/7.1.x/index.html
+[3]: https://coverage.readthedocs.io/en/6.3.2/
