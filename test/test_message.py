@@ -32,10 +32,10 @@ Choose one of the options below:
         actual_message = message.display_symbols()
         self.assertEqual(expected_message, actual_message)
 
-    def test_invalid_choose_symbol_input_prints_message(self):
+    def test_invalid_menu_input_prints_message(self):
         message = Message()
         expected_message = "That input is invalid. Please enter 1 or 2."
-        actual_message = message.invalid_choose_symbol_input()
+        actual_message = message.invalid_menu_input()
         self.assertEqual(expected_message, actual_message)
 
     def test_invalid_symbol_option_prints_message(self):
@@ -124,12 +124,4 @@ Choose your language:
 2. Spanish
 """
         actual_message = message.choose_language()
-        self.assertEqual(expected_message, actual_message)
-
-    def test_invalid_choose_language_prints_to_console(self):
-        message = Message()
-        expected_message = (
-            "That input is incorrect. Please input 1 for English or 2 for Spanish."
-        )
-        actual_message = message.invalid_choose_language_input()
         self.assertEqual(expected_message, actual_message)

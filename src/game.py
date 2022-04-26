@@ -33,7 +33,7 @@ class Game:
             self.set_language(SpanishMessage())
 
     def get_language_choice(self, user_input, message):
-        valid_user_input = self.validator.is_valid_menu_or_language_choice(user_input)
+        valid_user_input = self.validator.is_valid_menu_choice(user_input)
         if not valid_user_input:
             self.ui.display_message(message)
             new_user_input = self.ui.get_user_input()
@@ -43,13 +43,11 @@ class Game:
     def change_symbols(self):
         self.ui.display_message(self.message.menu())
         user_input = self.ui.get_user_input()
-        valid_user_input = self.validator.is_valid_menu_or_language_choice(user_input)
+        valid_user_input = self.validator.is_valid_menu_choice(user_input)
         while valid_user_input is False:
-            self.ui.display_message(self.message.invalid_choose_symbol_input())
+            self.ui.display_message(self.message.invalid_menu_input())
             user_input = self.ui.get_user_input()
-            valid_user_input = self.validator.is_valid_menu_or_language_choice(
-                user_input
-            )
+            valid_user_input = self.validator.is_valid_menu_choice(user_input)
         if user_input == "2":
             self.ui.display_message(self.message.display_symbols())
             self.player_one = self.set_player_symbol(

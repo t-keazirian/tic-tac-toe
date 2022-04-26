@@ -19,7 +19,7 @@ Choose one of the options below:
             f"Type a number to choose the associated symbol from this list: \n{symbols}"
         )
 
-    def invalid_choose_symbol_input(self):
+    def invalid_menu_input(self):
         return "That input is invalid. Please enter 1 or 2."
 
     def invalid_symbol_option(self):
@@ -70,6 +70,3 @@ Choose your language:
 1. English
 2. Spanish
 """
-
-    def invalid_choose_language_input(self):
-        return "That input is incorrect. Please input 1 for English or 2 for Spanish."

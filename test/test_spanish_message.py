@@ -29,10 +29,10 @@ Elija una de las siguientes opciones:
         actual_message = spanish_message.display_symbols()
         self.assertEqual(expected_message, actual_message)
 
-    def test_invalid_choose_symbol_input_prints_message(self):
+    def test_invalid_menu_input_prints_message(self):
         spanish_message = SpanishMessage()
         expected_message = "Ese ingreso no es válido. Por favor ingrese 1 o 2."
-        actual_message = spanish_message.invalid_choose_symbol_input()
+        actual_message = spanish_message.invalid_menu_input()
         self.assertEqual(expected_message, actual_message)
 
     def test_invalid_symbol_options_prints_message(self):

@@ -17,7 +17,7 @@ Elija una de las siguientes opciones:
         symbols = SymbolOptions().symbols
         return f"Ingrese un número para elegir el símbolo asociado de esta lista: \n{symbols}"
 
-    def invalid_choose_symbol_input(self):
+    def invalid_menu_input(self):
         return "Ese ingreso no es válido. Por favor ingrese 1 o 2."
 
     def invalid_symbol_option(self):
