@@ -24,30 +24,27 @@ class Game:
     def set_language(self, message):
         self.message = message
 
-    def change_language(self):
-        self.ui.display_message(self.message.choose_language())
-        user_input = self.get_language_choice(
-            self.ui.get_user_input(), self.message.invalid_choose_language_input()
-        )
-        if user_input == "2":
-            self.set_language(SpanishMessage())
-
-    def get_language_choice(self, user_input, message):
+    def get_menu_choice(self, user_input, message):
         valid_user_input = self.validator.is_valid_menu_choice(user_input)
         if not valid_user_input:
             self.ui.display_message(message)
             new_user_input = self.ui.get_user_input()
-            return self.get_language_choice(new_user_input)
+            return self.get_menu_choice(new_user_input, message)
         return user_input
+
+    def change_language(self):
+        self.ui.display_message(self.message.choose_language())
+        user_input = self.get_menu_choice(
+            self.ui.get_user_input(), self.message.invalid_menu_input()
+        )
+        if user_input == "2":
+            self.set_language(SpanishMessage())
 
     def change_symbols(self):
         self.ui.display_message(self.message.menu())
-        user_input = self.ui.get_user_input()
-        valid_user_input = self.validator.is_valid_menu_choice(user_input)
-        while valid_user_input is False:
-            self.ui.display_message(self.message.invalid_menu_input())
-            user_input = self.ui.get_user_input()
-            valid_user_input = self.validator.is_valid_menu_choice(user_input)
+        user_input = self.get_menu_choice(
+            self.ui.get_user_input(), self.message.invalid_menu_input()
+        )
         if user_input == "2":
             self.ui.display_message(self.message.display_symbols())
             self.player_one = self.set_player_symbol(
