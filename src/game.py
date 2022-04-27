@@ -5,6 +5,7 @@ from src.spanish_message import SpanishMessage
 from src.user_interface import UserInterface
 from src.validator import Validator
 from src.symbol import SymbolOptions
+from src.config import config
 
 
 class Game:
@@ -16,8 +17,8 @@ class Game:
         self.ui = ui
         self.set_language(message)
         self.game_board = self.board.starter_board
-        self.player_one = "X"
-        self.player_two = "O"
+        self.player_one = config["player_one"]
+        self.player_two = config["player_two"]
         self.total_marks_on_board = 0
         self.playing = True
 
@@ -37,7 +38,7 @@ class Game:
         user_input = self.get_menu_choice(
             self.ui.get_user_input(), self.message.invalid_menu_input()
         )
-        if user_input == "2":
+        if user_input == config["play_in_spanish"]:
             self.set_language(SpanishMessage())
 
     def change_symbols(self):
@@ -45,7 +46,7 @@ class Game:
         user_input = self.get_menu_choice(
             self.ui.get_user_input(), self.message.invalid_menu_input()
         )
-        if user_input == "2":
+        if user_input == config["play_with_symbols"]:
             self.ui.display_message(self.message.display_symbols())
             self.player_one = self.set_player_symbol(
                 self.message.choose_symbol_player_one()
@@ -138,7 +139,7 @@ class Game:
         while not self.validator.is_valid_play_again_input(answer):
             self.ui.display_message(self.message.invalid_repeat_game_input())
             answer = self.ui.get_user_input()
-        if answer.upper() == "Y":
+        if answer.upper() == config["play_again"]:
             self.repeat_game()
         else:
             self.playing = False
