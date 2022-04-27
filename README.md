@@ -23,23 +23,15 @@ This game uses `python 3.1.0`
 
 This project uses [unittest][1], a Python testing framework.
 
-This project also uses [pytest][2] for acceptance testing.
-
 ### To run the tests:
 
 ```
 python -m unittest -v
 ```
 
-### To run tests with `pytest` (this command will also run the unit-tests)
-
-```
-pytest test
-```
-
 ### Code Coverage:
 
-We are using [Coverage.py][3] for code coverage
+We are using [Coverage.py][2] for code coverage
 
 ```
 pip install coverage
@@ -48,7 +40,7 @@ pip install coverage
 ### To Run:
 
 ```
-coverage -m unittest -v
+coverage run -m unittest -v
 ```
 
 ### Generate HTML report:
@@ -60,5 +52,4 @@ coverage html
 This will generate an HTML report and folder where you can view the report.
 
 [1]: https://docs.python.org/3/library/unittest.html
-[2]: https://docs.pytest.org/en/7.1.x/index.html
-[3]: https://coverage.readthedocs.io/en/6.3.2/
+[2]: https://coverage.readthedocs.io/en/6.3.2/
