@@ -18,8 +18,11 @@ class MockMessage:
     def invalid_symbol_option(self):
         return "invalid_symbol_option"
 
-    def choose_player_symbol(self):
-        return "choose_player_symbol"
+    def choose_symbol_player_one(self):
+        return "Player One - please choose your mark:"
+
+    def choose_symbol_player_two(self):
+        return "Player Two - please choose your mark:"
 
     def rules(self):
         return "rules"
