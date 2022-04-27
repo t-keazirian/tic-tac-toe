@@ -97,8 +97,8 @@ class Game:
     def new_game(self):
         self.total_marks_on_board = 0
         self.game_board = Board().starter_board
-        self.player_one = "X"
-        self.player_two = "O"
+        self.player_one = config["player_one"]
+        self.player_two = config["player_two"]
 
     def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
