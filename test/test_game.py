@@ -3,50 +3,40 @@ from unittest.mock import patch
 
 from src.game import Game
 from src.symbol import SymbolOptions
-
-
-class MockMessage:
-    def prompt_for_move(self, current_player):
-        return f"Player {current_player} - prompt for turn"
-
-    def game_over_message(self):
-        return "Game over message"
-
-    def choose_player_symbol(self):
-        return "Player __ Choose your symbol:"
+from test.mocks.mock_message import MockMessage
 
 
 class TestGame(unittest.TestCase):
     @patch("builtins.print")
     def test_prompt_x_for_first_turn(self, mock_print):
-        mockMessage = MockMessage()
-        game = Game(message=mockMessage)
+        mock_message = MockMessage()
+        game = Game(message=mock_message)
         total_marks_on_board = 0
         game.prompt_for_move(total_marks_on_board)
-        mock_print.assert_called_with("Player X - prompt for turn")
+        mock_print.assert_called_with(mock_message.prompt_for_move("X"))
 
     @patch("builtins.print")
     def test_prompt_o_for_second_turn(self, mock_print):
-        mockMessage = MockMessage()
-        game = Game(message=mockMessage)
+        mock_message = MockMessage()
+        game = Game(message=mock_message)
         total_marks_on_board = 1
         game.prompt_for_move(total_marks_on_board)
-        mock_print.assert_called_with("Player O - prompt for turn")
+        mock_print.assert_called_with(mock_message.prompt_for_move("O"))
 
     @patch("builtins.print")
     def test_prompt_x_for_third_turn(self, mock_print):
-        mockMessage = MockMessage()
-        game = Game(message=mockMessage)
+        mock_message = MockMessage()
+        game = Game(message=mock_message)
         total_marks_on_board = 2
         game.prompt_for_move(total_marks_on_board)
-        mock_print.assert_called_with("Player X - prompt for turn")
+        mock_print.assert_called_with(mock_message.prompt_for_move("X"))
 
     @patch("builtins.print")
     def test_handle_draw_displays_game_over_message(self, mock_print):
-        mockMessage = MockMessage()
-        game = Game(message=mockMessage)
+        mock_message = MockMessage()
+        game = Game(message=mock_message)
         game.handle_draw()
-        mock_print.assert_called_with("Game over message")
+        mock_print.assert_called_with(mock_message.game_over_message())
 
     def test_zero_turns_player_x_goes_first(self):
         game = Game()
