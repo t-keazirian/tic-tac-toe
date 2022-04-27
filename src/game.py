@@ -1,9 +1,11 @@
 from src.board import Board
 from src.message import Message
 from src.rules import Rules
+from src.spanish_message import SpanishMessage
 from src.user_interface import UserInterface
 from src.validator import Validator
 from src.symbol import SymbolOptions
+from src.config import config
 
 
 class Game:
@@ -13,22 +15,38 @@ class Game:
         self.validator = Validator()
         self.symbol = SymbolOptions()
         self.ui = ui
-        self.message = message
+        self.set_language(message)
         self.game_board = self.board.starter_board
-        self.player_one = "X"
-        self.player_two = "O"
+        self.player_one = config["player_one"]
+        self.player_two = config["player_two"]
         self.total_marks_on_board = 0
         self.playing = True
 
+    def set_language(self, message):
+        self.message = message
+
+    def get_menu_choice(self, user_input, message):
+        valid_user_input = self.validator.is_valid_menu_choice(user_input)
+        if not valid_user_input:
+            self.ui.display_message(message)
+            new_user_input = self.ui.get_user_input()
+            return self.get_menu_choice(new_user_input, message)
+        return user_input
+
+    def change_language(self):
+        self.ui.display_message(self.message.choose_language())
+        user_input = self.get_menu_choice(
+            self.ui.get_user_input(), self.message.invalid_menu_input()
+        )
+        if user_input == config["play_in_spanish"]:
+            self.set_language(SpanishMessage())
+
     def change_symbols(self):
         self.ui.display_message(self.message.menu())
-        user_input = self.ui.get_user_input()
-        valid_user_input = self.validator.is_valid_menu_choice(user_input)
-        while valid_user_input is False:
-            self.ui.display_message(self.message.invalid_choose_symbol_input())
-            user_input = self.ui.get_user_input()
-            valid_user_input = self.validator.is_valid_menu_choice(user_input)
-        if user_input == "2":
+        user_input = self.get_menu_choice(
+            self.ui.get_user_input(), self.message.invalid_menu_input()
+        )
+        if user_input == config["play_with_symbols"]:
             self.ui.display_message(self.message.display_symbols())
             self.player_one = self.set_player_symbol(
                 self.message.choose_symbol_player_one()
@@ -79,8 +97,8 @@ class Game:
     def new_game(self):
         self.total_marks_on_board = 0
         self.game_board = Board().starter_board
-        self.player_one = "X"
-        self.player_two = "O"
+        self.player_one = config["player_one"]
+        self.player_two = config["player_two"]
 
     def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
@@ -121,7 +139,7 @@ class Game:
         while not self.validator.is_valid_play_again_input(answer):
             self.ui.display_message(self.message.invalid_repeat_game_input())
             answer = self.ui.get_user_input()
-        if answer.upper() == "Y":
+        if answer.upper() == config["play_again"]:
             self.repeat_game()
         else:
             self.playing = False
@@ -144,6 +162,7 @@ class Game:
 
     def run(self):
         self.ui.display_message(self.message.welcome_message())
+        self.change_language()
         self.ui.display_message(self.message.rules())
         self.change_symbols()
         self.ui.display_board(self.board.to_string(self.game_board))

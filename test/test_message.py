@@ -32,10 +32,10 @@ Choose one of the options below:
         actual_message = message.display_symbols()
         self.assertEqual(expected_message, actual_message)
 
-    def test_invalid_choose_symbol_input_prints_message(self):
+    def test_invalid_menu_input_prints_message(self):
         message = Message()
         expected_message = "That input is invalid. Please enter 1 or 2."
-        actual_message = message.invalid_choose_symbol_input()
+        actual_message = message.invalid_menu_input()
         self.assertEqual(expected_message, actual_message)
 
     def test_invalid_symbol_option_prints_message(self):
@@ -115,3 +115,13 @@ At the end of every game, you will have the option to play again or to exit.
 """
         actual_message = message.rules()
         self.assertEqual(rules, actual_message)
+
+    def test_choose_language_prints_to_console(self):
+        message = Message()
+        expected_message = """
+Choose your language:
+1. English
+2. Spanish
+"""
+        actual_message = message.choose_language()
+        self.assertEqual(expected_message, actual_message)
