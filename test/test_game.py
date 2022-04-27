@@ -75,7 +75,7 @@ class TestGame(unittest.TestCase):
 
         expected_symbol = SymbolOptions().get_symbol("3")
 
-        message = message.choose_player_symbol()
+        message = message.choose_symbol_player_one()
 
         result = game.set_player_symbol(message)
 
@@ -88,7 +88,7 @@ class TestGame(unittest.TestCase):
 
         expected_symbol = SymbolOptions().get_symbol("2")
 
-        message = message.choose_player_symbol()
+        message = message.choose_symbol_player_two()
 
         result = game.set_player_symbol(message)
 
@@ -101,7 +101,7 @@ class TestGame(unittest.TestCase):
 
         expected_symbol = SymbolOptions().get_symbol("4")
 
-        message = message.choose_player_symbol()
+        message = message.choose_symbol_player_two()
 
         result = game.set_player_symbol(message)
 
