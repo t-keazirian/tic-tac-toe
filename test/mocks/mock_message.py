@@ -12,6 +12,9 @@ class MockMessage:
         symbols = SymbolOptions().symbols
         return f"display_symbols {symbols}"
 
+    def invalid_menu_input(self):
+        return "invalid_menu_input"
+
     def invalid_choose_symbol_input(self):
         return "invalid_choose_symbol_input"
 
@@ -47,3 +50,6 @@ class MockMessage:
 
     def invalid_repeat_game_input(self):
         return "invalid_repeat_game_input"
+
+    def choose_language(self):
+        return "choose_language"
