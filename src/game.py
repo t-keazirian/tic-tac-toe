@@ -114,12 +114,6 @@ class Game:
     def handle_draw(self):
         self.ui.display_message(self.message.game_over_message())
 
-    def handle_full_board(self):
-        if self.rules.is_winner(self.game_board):
-            self.handle_winning_game()
-        else:
-            self.handle_draw()
-
     def take_turns(self):
         self.prompt_for_move(self.total_marks_on_board)
         self.handle_mark_board()
@@ -155,7 +149,7 @@ class Game:
                 ),
                 self.game_board,
             ):
-                self.handle_full_board()
+                self.handle_draw()
                 self.ask_to_play_again()
             else:
                 self.take_turns()

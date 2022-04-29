@@ -133,11 +133,29 @@ class TestAcceptance(unittest.TestCase):
 
     @patch(
         "builtins.input",
-        side_effect=["1", "2", "h", "1", "2", "1", "2", "3", "4", "5", "6", "7", "n"],
+        side_effect=[
+            "1",
+            "blah",
+            "2",
+            "blah",
+            "1",
+            "2",
+            "1",
+            "blah",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "blah",
+            "n",
+        ],
     )
-    def test_invalid_symbol_input(self, mock_input):
-        expected_message = MockMessage.declare_winner(self, "😃")
-
+    def test_invalid_inputs(self, mock_input):
         game_output = self.game_playthrough()
 
-        self.assertIn(expected_message, game_output)
+        self.assertIn(MockMessage.invalid_board_input(self), game_output)
+        self.assertIn(MockMessage.invalid_menu_input(self), game_output)
+        self.assertIn(MockMessage.invalid_repeat_game_input(self), game_output)
+        self.assertIn(MockMessage.invalid_symbol_option(self), game_output)

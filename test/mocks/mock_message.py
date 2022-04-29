@@ -15,9 +15,6 @@ class MockMessage:
     def invalid_menu_input(self):
         return "invalid_menu_input"
 
-    def invalid_choose_symbol_input(self):
-        return "invalid_choose_symbol_input"
-
     def invalid_symbol_option(self):
         return "invalid_symbol_option"
 
