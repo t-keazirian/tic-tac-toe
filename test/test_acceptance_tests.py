@@ -111,17 +111,6 @@ class TestAcceptance(unittest.TestCase):
 
     @patch(
         "builtins.input",
-        side_effect=["h", "1", "1", "1", "2", "3", "4", "5", "6", "7", "h", "n"],
-    )
-    def test_invalid_input_for_menu(self, mock_input):
-        expected_message = MockMessage.declare_winner(self, "X")
-
-        game_output = self.game_playthrough()
-
-        self.assertIn(expected_message, game_output)
-
-    @patch(
-        "builtins.input",
         side_effect=["1", "1", "1", "1", "2", "3", "4", "6", "7", "5", "8", "9", "n"],
     )
     def test_play_through_and_X_wins_when_board_is_full(self, mock_input):
