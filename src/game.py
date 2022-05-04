@@ -40,14 +40,15 @@ class Game:
         return computer_move
 
     def handle_computer_marks_board(self):
-        self.game_board = self.board.mark_board(
-            self.valid_computer_move(),
-            self.game_board,
-            self.get_current_player(self.total_marks_on_board),
-        )
-        self.total_marks_on_board = self.board.count_marks(
-            self.game_board, self.player_one, self.player_two
-        )
+        if not self.rules.is_winner(self.game_board):
+            self.game_board = self.board.mark_board(
+                self.valid_computer_move(),
+                self.game_board,
+                self.get_current_player(self.total_marks_on_board),
+            )
+            self.total_marks_on_board = self.board.count_marks(
+                self.game_board, self.player_one, self.player_two
+            )
 
     def take_turns_with_computer(self):
         self.prompt_for_move(self.total_marks_on_board)
