@@ -106,3 +106,11 @@ class TestGame(unittest.TestCase):
         result = game.set_player_symbol(message)
 
         self.assertEqual(expected_symbol, result)
+
+    def test_computer_input_returns_random_str_int_bn_1_and_9(self):
+        game = Game()
+        options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        result = game.computer_input()
+
+        self.assertIn(result, options)

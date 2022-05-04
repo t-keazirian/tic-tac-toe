@@ -1,3 +1,5 @@
+import random
+from traceback import print_tb
 from src.board import Board
 from src.message import Message
 from src.rules import Rules
@@ -22,6 +24,41 @@ class Game:
         self.total_marks_on_board = 0
         self.playing = True
 
+    def computer_input(self):
+        return random.randint(1, 9)
+
+    def valid_computer_move(self):
+        computer_move = self.computer_input()
+        valid_computer_move = self.validator.spot_is_available(
+            self.game_board, computer_move
+        )
+        while not valid_computer_move:
+            computer_move = self.computer_input()
+            valid_computer_move = self.validator.spot_is_available(
+                self.game_board, computer_move
+            )
+        return computer_move
+
+    def handle_computer_marks_board(self):
+        self.game_board = self.board.mark_board(
+            self.valid_computer_move(),
+            self.game_board,
+            self.get_current_player(self.total_marks_on_board),
+        )
+        self.total_marks_on_board = self.board.count_marks(
+            self.game_board, self.player_one, self.player_two
+        )
+
+    def take_turns_with_computer(self):
+        self.prompt_for_move(self.total_marks_on_board)
+        self.handle_mark_board()
+        self.ui.display_message("Computer took turn")
+        self.handle_computer_marks_board()
+        self.total_marks_on_board = self.board.count_marks(
+            self.game_board, self.player_one, self.player_two
+        )
+        self.get_formatted_board()
+
     def set_language(self, message):
         self.message = message
 
@@ -32,6 +69,9 @@ class Game:
             new_user_input = self.ui.get_user_input()
             return self.get_menu_choice(new_user_input, message)
         return user_input
+
+    # def set_players(self):
+    #     self.ui.display_message(self.message.choose_players())
 
     def change_language(self):
         self.ui.display_message(self.message.choose_language())
@@ -153,6 +193,7 @@ class Game:
                 self.ask_to_play_again()
             else:
                 self.take_turns()
+                # self.take_turns_with_computer()
 
     def run(self):
         self.ui.display_message(self.message.welcome_message())
