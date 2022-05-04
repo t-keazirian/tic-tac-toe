@@ -62,3 +62,10 @@ Al final de cada juego, tendrás la opción de jugar de nuevo o salir.
         return (
             "Esa elección es incorrecta. Ingrese Y para jugar de nuevo o N para salir."
         )
+
+    def choose_players(self):
+        return """
+Por favor, haga una selección de las opciones:
+1. Humano contra humano (2 jugadores)
+2. Humano contra computadora (1 jugador)
+"""

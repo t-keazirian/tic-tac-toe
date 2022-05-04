@@ -115,3 +115,13 @@ Al final de cada juego, tendrás la opción de jugar de nuevo o salir.
 """
         actual_message = spanish_message.rules()
         self.assertEqual(rules, actual_message)
+
+    def test_choose_players_prints_to_console(self):
+        spanish_message = SpanishMessage()
+        expected_message = """
+Por favor, haga una selección de las opciones:
+1. Humano contra humano (2 jugadores)
+2. Humano contra computadora (1 jugador)
+"""
+        actual_message = spanish_message.choose_players()
+        self.assertEqual(expected_message, actual_message)

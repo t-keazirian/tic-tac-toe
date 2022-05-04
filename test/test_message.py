@@ -125,3 +125,13 @@ Choose your language:
 """
         actual_message = message.choose_language()
         self.assertEqual(expected_message, actual_message)
+
+    def test_choose_players_prints_to_console(self):
+        message = Message()
+        expected_message = """
+Please make a selection from the options:
+1. Human vs Human (2 players)
+2. Human vs Computer (1 player)
+"""
+        actual_message = message.choose_players()
+        self.assertEqual(expected_message, actual_message)

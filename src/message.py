@@ -70,3 +70,10 @@ Choose your language:
 1. English
 2. Spanish
 """
+
+    def choose_players(self):
+        return """
+Please make a selection from the options:
+1. Human vs Human (2 players)
+2. Human vs Computer (1 player)
+"""

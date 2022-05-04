@@ -50,3 +50,6 @@ class MockMessage:
 
     def choose_language(self):
         return "choose_language"
+
+    def choose_players(self):
+        return "choose_players"
