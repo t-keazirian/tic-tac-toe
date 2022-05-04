@@ -125,3 +125,9 @@ Por favor, haga una selección de las opciones:
 """
         actual_message = spanish_message.choose_players()
         self.assertEqual(expected_message, actual_message)
+
+    def test_computer_took_turn_prints_to_console(self):
+        spanish_message = SpanishMessage()
+        expected_message = "La computadora marcó el tablero"
+        actual_message = spanish_message.computer_took_turn()
+        self.assertEqual(expected_message, actual_message)

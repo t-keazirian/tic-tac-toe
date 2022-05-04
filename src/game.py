@@ -163,7 +163,7 @@ class Game:
     def take_turns_comp_vs_human(self):
         self.prompt_for_move(self.total_marks_on_board)
         self.handle_mark_board()
-        self.ui.display_message("Computer took turn")
+        self.ui.display_message(self.message.computer_took_turn())
         self.handle_computer_mark_board()
         self.total_marks_on_board = self.board.count_marks(
             self.game_board, self.player_one, self.player_two

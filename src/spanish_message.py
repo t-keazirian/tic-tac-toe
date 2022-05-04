@@ -69,3 +69,6 @@ Por favor, haga una selección de las opciones:
 1. Humano contra humano (2 jugadores)
 2. Humano contra computadora (1 jugador)
 """
+
+    def computer_took_turn(self):
+        return "La computadora marcó el tablero"
