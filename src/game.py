@@ -8,6 +8,7 @@ from src.user_interface import UserInterface
 from src.validator import Validator
 from src.symbol import SymbolOptions
 from src.config import config
+from src.computer_player import ComputerPlayer
 
 
 class Game:
@@ -16,6 +17,7 @@ class Game:
         self.rules = Rules()
         self.validator = Validator()
         self.symbol = SymbolOptions()
+        self.computer_player = ComputerPlayer()
         self.ui = ui
         self.set_language(message)
         self.game_board = self.board.starter_board
@@ -23,23 +25,21 @@ class Game:
         self.player_two = config["player_two"]
         self.total_marks_on_board = 0
         self.playing = True
-
-    def computer_input(self):
-        return random.randint(1, 9)
+        self.play_against_computer = False
 
     def valid_computer_move(self):
-        computer_move = self.computer_input()
+        computer_move = self.computer_player.computer_input()
         valid_computer_move = self.validator.spot_is_available(
             self.game_board, computer_move
         )
         while not valid_computer_move:
-            computer_move = self.computer_input()
+            computer_move = self.computer_player.computer_input()
             valid_computer_move = self.validator.spot_is_available(
                 self.game_board, computer_move
             )
         return computer_move
 
-    def handle_computer_marks_board(self):
+    def handle_computer_mark_board(self):
         if not self.rules.is_winner(self.game_board):
             self.game_board = self.board.mark_board(
                 self.valid_computer_move(),
@@ -49,16 +49,6 @@ class Game:
             self.total_marks_on_board = self.board.count_marks(
                 self.game_board, self.player_one, self.player_two
             )
-
-    def take_turns_with_computer(self):
-        self.prompt_for_move(self.total_marks_on_board)
-        self.handle_mark_board()
-        self.ui.display_message("Computer took turn")
-        self.handle_computer_marks_board()
-        self.total_marks_on_board = self.board.count_marks(
-            self.game_board, self.player_one, self.player_two
-        )
-        self.get_formatted_board()
 
     def set_language(self, message):
         self.message = message
@@ -71,8 +61,15 @@ class Game:
             return self.get_menu_choice(new_user_input, message)
         return user_input
 
-    # def set_players(self):
-    #     self.ui.display_message(self.message.choose_players())
+    def choose_players(self):
+        self.ui.display_message(self.message.choose_players())
+        user_input = self.get_menu_choice(
+            self.ui.get_user_input(), self.message.invalid_menu_input()
+        )
+        if user_input == config["human_vs_comp"]:
+            self.play_against_computer = True
+        else:
+            self.play_against_computer = False
 
     def change_language(self):
         self.ui.display_message(self.message.choose_language())
@@ -155,7 +152,7 @@ class Game:
     def handle_draw(self):
         self.ui.display_message(self.message.game_over_message())
 
-    def take_turns(self):
+    def take_turns_human_vs_human(self):
         self.prompt_for_move(self.total_marks_on_board)
         self.handle_mark_board()
         self.total_marks_on_board = self.board.count_marks(
@@ -163,8 +160,25 @@ class Game:
         )
         self.get_formatted_board()
 
+    def take_turns_comp_vs_human(self):
+        self.prompt_for_move(self.total_marks_on_board)
+        self.handle_mark_board()
+        self.ui.display_message("Computer took turn")
+        self.handle_computer_mark_board()
+        self.total_marks_on_board = self.board.count_marks(
+            self.game_board, self.player_one, self.player_two
+        )
+        self.get_formatted_board()
+
+    def take_turns(self):
+        if self.play_against_computer:
+            self.take_turns_comp_vs_human()
+        else:
+            self.take_turns_human_vs_human()
+
     def repeat_game(self):
         self.new_game()
+        self.choose_players()
         self.change_symbols()
         self.ui.display_board(self.board.to_string(self.game_board))
 
@@ -194,11 +208,11 @@ class Game:
                 self.ask_to_play_again()
             else:
                 self.take_turns()
-                # self.take_turns_with_computer()
 
     def run(self):
         self.ui.display_message(self.message.welcome_message())
         self.change_language()
+        self.choose_players()
         self.ui.display_message(self.message.rules())
         self.change_symbols()
         self.ui.display_board(self.board.to_string(self.game_board))
