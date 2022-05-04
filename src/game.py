@@ -1,5 +1,4 @@
 import random
-from traceback import print_tb
 from src.board import Board
 from src.message import Message
 from src.rules import Rules
@@ -68,7 +67,7 @@ class Game:
         )
         if user_input == config["human_vs_comp"]:
             self.play_against_computer = True
-        else:
+        if user_input == config["human_vs_human"]:
             self.play_against_computer = False
 
     def change_language(self):
