@@ -20,28 +20,13 @@ class Game:
         self.ui = ui
         self.set_language(message)
         self.game_board = self.board.starter_board
-        self.player_one = config["player_one"]
-        self.player_two = config["player_two"]
+        # self.player_one = config["player_one"]
+        # self.player_two = config["player_two"]
+        self.player_one_mark = config["player_one_mark"]
+        self.player_two_mark = config["player_two_mark"]
         self.total_marks_on_board = 0
         self.playing = True
         self.play_against_computer = False
-
-    def valid_computer_move(self, move):
-        if not self.validator.spot_is_available(self.game_board, move):
-            return self.valid_computer_move(self.computer_player.computer_input())
-        return move
-
-    def handle_computer_mark_board(self):
-        computer_move = self.computer_player.computer_input()
-        if not self.rules.is_winner(self.game_board):
-            self.game_board = self.board.mark_board(
-                self.valid_computer_move(computer_move),
-                self.game_board,
-                self.get_current_player(self.total_marks_on_board),
-            )
-            self.total_marks_on_board = self.board.count_marks(
-                self.game_board, self.player_one, self.player_two
-            )
 
     def set_language(self, message):
         self.message = message
@@ -79,10 +64,10 @@ class Game:
         )
         if user_input == config["play_with_symbols"]:
             self.ui.display_message(self.message.display_symbols())
-            self.player_one = self.set_player_symbol(
+            self.player_one_mark = self.set_player_symbol(
                 self.message.choose_symbol_player_one()
             )
-            self.player_two = self.set_player_symbol(
+            self.player_two_mark = self.set_player_symbol(
                 self.message.choose_symbol_player_two()
             )
 
@@ -101,9 +86,9 @@ class Game:
 
     def get_current_player(self, total_marks_on_board):
         if total_marks_on_board % 2 == 0:
-            return self.player_one
+            return self.player_one_mark
         else:
-            return self.player_two
+            return self.player_two_mark
 
     def prompt_for_move(self, total_marks_on_board):
         current_player = self.get_current_player(total_marks_on_board)
@@ -122,21 +107,38 @@ class Game:
             self.get_current_player(self.total_marks_on_board),
         )
         self.total_marks_on_board = self.board.count_marks(
-            self.game_board, self.player_one, self.player_two
+            self.game_board, self.player_one_mark, self.player_two_mark
         )
+
+    def handle_computer_mark_board(self):
+        computer_move = self.computer_player.computer_input()
+        if not self.rules.is_winner(self.game_board):
+            self.game_board = self.board.mark_board(
+                self.valid_computer_move(computer_move),
+                self.game_board,
+                self.get_current_player(self.total_marks_on_board),
+            )
+            self.total_marks_on_board = self.board.count_marks(
+                self.game_board, self.player_one_mark, self.player_two_mark
+            )
+
+    def valid_computer_move(self, move):
+        if not self.validator.spot_is_available(self.game_board, move):
+            return self.valid_computer_move(self.computer_player.computer_input())
+        return move
 
     def new_game(self):
         self.total_marks_on_board = 0
         self.game_board = Board().starter_board
-        self.player_one = config["player_one"]
-        self.player_two = config["player_two"]
+        self.player_one_mark = config["player_one_mark"]
+        self.player_two_mark = config["player_two_mark"]
 
     def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
-        if player == self.player_one:
-            return self.player_two
+        if player == self.player_one_mark:
+            return self.player_two_mark
         else:
-            return self.player_one
+            return self.player_one_mark
 
     def handle_winning_game(self):
         winner = self.get_winning_mark(self.total_marks_on_board)
@@ -149,7 +151,7 @@ class Game:
         self.prompt_for_move(self.total_marks_on_board)
         self.handle_mark_board()
         self.total_marks_on_board = self.board.count_marks(
-            self.game_board, self.player_one, self.player_two
+            self.game_board, self.player_one_mark, self.player_two_mark
         )
         self.get_formatted_board()
 
@@ -159,7 +161,7 @@ class Game:
         self.ui.display_message(self.message.computer_took_turn())
         self.handle_computer_mark_board()
         self.total_marks_on_board = self.board.count_marks(
-            self.game_board, self.player_one, self.player_two
+            self.game_board, self.player_one_mark, self.player_two_mark
         )
         self.get_formatted_board()
 
@@ -193,7 +195,7 @@ class Game:
                 self.ask_to_play_again()
             elif self.board.is_full(
                 self.board.count_marks(
-                    self.game_board, self.player_one, self.player_two
+                    self.game_board, self.player_one_mark, self.player_two_mark
                 ),
                 self.game_board,
             ):

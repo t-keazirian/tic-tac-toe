@@ -1,6 +1,6 @@
 config = {
-    "player_one": "X",
-    "player_two": "O",
+    "player_one_mark": "X",
+    "player_two_mark": "O",
     "play_in_spanish": "2",
     "play_with_symbols": "2",
     "play_again": "Y",
