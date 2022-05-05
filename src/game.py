@@ -1,5 +1,6 @@
 import random
 from src.board import Board
+from src.human_player import HumanPlayer
 from src.message import Message
 from src.rules import Rules
 from src.spanish_message import SpanishMessage
@@ -17,6 +18,7 @@ class Game:
         self.validator = Validator()
         self.symbol = SymbolOptions()
         self.computer_player = ComputerPlayer()
+        self.human_player = HumanPlayer()
         self.ui = ui
         self.set_language(message)
         self.game_board = self.board.starter_board
@@ -26,22 +28,18 @@ class Game:
         self.playing = True
         self.play_against_computer = False
 
-    def valid_computer_move(self):
-        computer_move = self.computer_player.computer_input()
-        valid_computer_move = self.validator.spot_is_available(
-            self.game_board, computer_move
-        )
-        while not valid_computer_move:
-            computer_move = self.computer_player.computer_input()
-            valid_computer_move = self.validator.spot_is_available(
-                self.game_board, computer_move
-            )
-        return computer_move
+    def valid_computer_move(self, move):
+        valid_computer_move = self.validator.spot_is_available(self.game_board, move)
+        if not valid_computer_move:
+            new_computer_move = self.computer_player.computer_input()
+            return self.valid_computer_move(new_computer_move)
+        return move
 
     def handle_computer_mark_board(self):
+        computer_move = self.computer_player.computer_input()
         if not self.rules.is_winner(self.game_board):
             self.game_board = self.board.mark_board(
-                self.valid_computer_move(),
+                self.valid_computer_move(computer_move),
                 self.game_board,
                 self.get_current_player(self.total_marks_on_board),
             )
