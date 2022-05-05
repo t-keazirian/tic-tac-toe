@@ -1,5 +1,6 @@
 import random
 from src.board import Board
+from src.human_player import HumanPlayer
 from src.message import Message
 from src.rules import Rules
 from src.spanish_message import SpanishMessage
@@ -16,14 +17,15 @@ class Game:
         self.rules = Rules()
         self.validator = Validator()
         self.symbol = SymbolOptions()
+        self.human_player = HumanPlayer()
         self.computer_player = ComputerPlayer()
         self.ui = ui
         self.set_language(message)
         self.game_board = self.board.starter_board
         # self.player_one = config["player_one"]
         # self.player_two = config["player_two"]
-        self.player_one_mark = config["player_one_mark"]
-        self.player_two_mark = config["player_two_mark"]
+        self.player_one_mark = self.human_player.player_one_mark
+        self.player_two_mark = self.human_player.player_two_mark
         self.total_marks_on_board = 0
         self.playing = True
         self.play_against_computer = False
