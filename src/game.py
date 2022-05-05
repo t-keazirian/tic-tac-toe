@@ -27,10 +27,8 @@ class Game:
         self.play_against_computer = False
 
     def valid_computer_move(self, move):
-        valid_computer_move = self.validator.spot_is_available(self.game_board, move)
-        if not valid_computer_move:
-            new_computer_move = self.computer_player.computer_input()
-            return self.valid_computer_move(new_computer_move)
+        if not self.validator.spot_is_available(self.game_board, move):
+            return self.valid_computer_move(self.computer_player.computer_input())
         return move
 
     def handle_computer_mark_board(self):
