@@ -1,6 +1,5 @@
 import random
 from src.board import Board
-from src.human_player import HumanPlayer
 from src.message import Message
 from src.rules import Rules
 from src.spanish_message import SpanishMessage
@@ -18,7 +17,6 @@ class Game:
         self.validator = Validator()
         self.symbol = SymbolOptions()
         self.computer_player = ComputerPlayer()
-        self.human_player = HumanPlayer()
         self.ui = ui
         self.set_language(message)
         self.game_board = self.board.starter_board
