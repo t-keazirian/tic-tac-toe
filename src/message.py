@@ -47,7 +47,7 @@ At the end of every game, you will have the option to play again or to exit.
         return "Game over - it's a draw!"
 
     def prompt_for_move(self, current_player):
-        return f"Player {current_player} - enter a number to place your mark"
+        return f"Player {current_player.mark} - enter a number to place your mark"
 
     def declare_winner(self, winner):
         return f"Congrats Player {winner} - you are the winner!"

@@ -31,7 +31,7 @@ class MockMessage:
         return "game_over_message"
 
     def prompt_for_move(self, current_player):
-        return f"prompt_for_move {current_player}"
+        return f"prompt_for_move {current_player.mark}"
 
     def declare_winner(self, winner):
         return f"declare_winner {winner}"

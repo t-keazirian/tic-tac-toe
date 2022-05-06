@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 
 from src.game import Game
+from src.human_player import HumanPlayer
 from src.symbol import SymbolOptions
 from test.mocks.mock_message import MockMessage
 
@@ -10,26 +11,29 @@ class TestGame(unittest.TestCase):
     @patch("builtins.print")
     def test_prompt_x_for_first_turn(self, mock_print):
         message = MockMessage()
+        test_player = HumanPlayer("X")
         game = Game(message=message)
         total_marks_on_board = 0
         game.prompt_for_move(total_marks_on_board)
-        mock_print.assert_called_with(message.prompt_for_move("X"))
+        mock_print.assert_called_with(message.prompt_for_move(test_player))
 
     @patch("builtins.print")
     def test_prompt_o_for_second_turn(self, mock_print):
         message = MockMessage()
+        test_player = HumanPlayer("O")
         game = Game(message=message)
         total_marks_on_board = 1
         game.prompt_for_move(total_marks_on_board)
-        mock_print.assert_called_with(message.prompt_for_move("O"))
+        mock_print.assert_called_with(message.prompt_for_move(test_player))
 
     @patch("builtins.print")
     def test_prompt_x_for_third_turn(self, mock_print):
         message = MockMessage()
+        test_player = HumanPlayer("X")
         game = Game(message=message)
         total_marks_on_board = 2
         game.prompt_for_move(total_marks_on_board)
-        mock_print.assert_called_with(message.prompt_for_move("X"))
+        mock_print.assert_called_with(message.prompt_for_move(test_player))
 
     @patch("builtins.print")
     def test_handle_draw_displays_game_over_message(self, mock_print):
@@ -42,19 +46,19 @@ class TestGame(unittest.TestCase):
         game = Game()
         total_marks_on_board = 0
         current_player = game.get_current_player(total_marks_on_board)
-        self.assertEqual("X", current_player)
+        self.assertEqual("X", current_player.mark)
 
     def test_one_turn_player_o_goes_next(self):
         game = Game()
         total_marks_on_board = 1
         current_player = game.get_current_player(total_marks_on_board)
-        self.assertEqual("O", current_player)
+        self.assertEqual("O", current_player.mark)
 
     def test_two_turn_player_x_goes_next(self):
         game = Game()
         total_marks_on_board = 2
         current_player = game.get_current_player(total_marks_on_board)
-        self.assertEqual("X", current_player)
+        self.assertEqual("X", current_player.mark)
 
     def test_if_current_player_is_O_then_X_wins(self):
         game = Game()

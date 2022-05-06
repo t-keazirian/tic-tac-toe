@@ -3,27 +3,11 @@ from src.validator import Validator as validator
 
 
 class ComputerPlayer:
-    def __init__(self):
-        self.player_one_mark = "X"
-        self.player_two_mark = "O"
+    def __init__(self, mark):
+        self.mark = mark
 
-    def computer_input(self):
-        return random.randint(1, 9)
-
-    # def valid_computer_move(self, move, board):
-    #     if not validator.spot_is_available(self, board, move):
-    #         return self.valid_computer_move(self.computer_input(), board)
-    #     return move
-
-    def valid_computer_move(self, move, board):
-        if validator.spot_is_available(self, board, move):
-            return True
-        else:
-            return False
-
-    # change to get_move
-    def get_computer_move(self, move, board):
-        if not self.valid_computer_move(move, board):
-            move = self.computer_input()
-            return self.get_computer_move(move, board)
+    def get_move(self, board):
+        move = random.randint(1, 9)
+        if not validator.spot_is_available(self, board, move):
+            return self.get_move(board)
         return move
