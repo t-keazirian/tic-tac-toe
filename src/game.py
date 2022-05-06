@@ -116,7 +116,7 @@ class Game:
         computer_move = self.computer_player.computer_input()
         if not self.rules.is_winner(self.game_board):
             self.game_board = self.board.mark_board(
-                self.valid_computer_move(computer_move),
+                self.computer_player.get_computer_move(computer_move, self.game_board),
                 self.game_board,
                 self.get_current_player(self.total_marks_on_board),
             )
@@ -124,16 +124,11 @@ class Game:
                 self.game_board, self.player_one_mark, self.player_two_mark
             )
 
-    def valid_computer_move(self, move):
-        if not self.validator.spot_is_available(self.game_board, move):
-            return self.valid_computer_move(self.computer_player.computer_input())
-        return move
-
     def new_game(self):
         self.total_marks_on_board = 0
         self.game_board = Board().starter_board
-        self.player_one_mark = config["player_one_mark"]
-        self.player_two_mark = config["player_two_mark"]
+        self.player_one_mark = self.human_player.player_one_mark
+        self.player_two_mark = self.human_player.player_two_mark
 
     def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
