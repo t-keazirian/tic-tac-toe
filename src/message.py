@@ -77,6 +77,3 @@ Please make a selection from the options:
 1. Human vs Human (2 players)
 2. Human vs Computer (1 player)
 """
-
-    def computer_took_turn(self):
-        return "The computer player marked the board"

@@ -149,23 +149,23 @@ class TestAcceptance(unittest.TestCase):
         self.assertIn(MockMessage.invalid_repeat_game_input(self), game_output)
         self.assertIn(MockMessage.invalid_symbol_option(self), game_output)
 
-    # @patch(
-    #     "builtins.input",
-    #     side_effect=["1", "2", "1", "1", "2", "3", "4", "5", "6", "7", "n"],
-    # )
-    # def test_play_through_with_computer_player(self, mock_input):
-    #     expected_message = MockMessage.computer_took_turn(self)
-
-    #     game_output = self.game_playthrough()
-
-    #     self.assertIn(expected_message, game_output)
-
     @patch(
         "builtins.input",
         side_effect=["2", "1", "1", "1", "2", "3", "4", "5", "6", "7", "n"],
     )
     def test_player_X_wins_the_game_in_spanish(self, mock_input):
         expected_message = SpanishMessage.declare_winner(self, "X")
+
+        game_output = self.game_playthrough()
+
+        self.assertIn(expected_message, game_output)
+
+    @patch(
+        "builtins.input",
+        side_effect=["1", "2", "1", "1", "2", "3", "4", "5", "6", "7", "n"],
+    )
+    def test_play_through_with_computer_player(self, mock_input):
+        expected_message = MockMessage.goodbye_message(self)
 
         game_output = self.game_playthrough()
 

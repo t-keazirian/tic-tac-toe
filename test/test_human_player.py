@@ -8,7 +8,8 @@ class TestHumanPlayer(unittest.TestCase):
     def test_get_move_returns_valid_user_move(self, mock_input):
         human_player = HumanPlayer("X")
         game_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        message = "invalid_board_input"
 
-        result = human_player.get_move(game_board)
+        result = human_player.get_move(game_board, message)
 
         self.assertEqual(1, result)

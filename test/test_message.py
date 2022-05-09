@@ -134,9 +134,3 @@ Please make a selection from the options:
 """
         actual_message = message.choose_players()
         self.assertEqual(expected_message, actual_message)
-
-    def test_computer_took_turn_prints_to_console(self):
-        message = Message()
-        expected_message = "The computer player marked the board"
-        actual_message = message.computer_took_turn()
-        self.assertEqual(expected_message, actual_message)

@@ -53,6 +53,3 @@ class MockMessage:
 
     def choose_players(self):
         return "choose_players"
-
-    def computer_took_turn(self):
-        return "computer_took_turn"

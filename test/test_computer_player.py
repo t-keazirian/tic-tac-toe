@@ -7,9 +7,8 @@ class TestComputerPlayer(unittest.TestCase):
         comp_player = ComputerPlayer("X")
 
         game_board = ["X", "X", "X", "X", "5", "X", "X", "X", "X"]
+        message = "message"
 
-        result = comp_player.get_move(game_board)
+        result = comp_player.get_move(game_board, message)
 
         self.assertEqual(5, result)
-
-
