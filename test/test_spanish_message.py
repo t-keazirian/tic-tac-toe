@@ -2,6 +2,7 @@ import unittest
 
 from src.spanish_message import SpanishMessage
 from src.symbol import SymbolOptions
+from src.human_player import HumanPlayer
 
 
 class TestSpanishMessage(unittest.TestCase):
@@ -63,11 +64,11 @@ Elija una de las siguientes opciones:
 
     def test_X_player_is_prompted_for_move_when_is_current_player(self):
         spanish_message = SpanishMessage()
-        current_player = "X"
+        player = HumanPlayer("X")
         expected_message = (
-            f"Jugador {current_player} - escriba un número para marcar el tablero"
+            f"Jugador {player.mark} - escriba un número para marcar el tablero"
         )
-        actual_message = spanish_message.prompt_for_move(current_player)
+        actual_message = spanish_message.prompt_for_move(player)
         self.assertEqual(expected_message, actual_message)
 
     def test_declare_winner_with_correct_mark_as_winner(self):

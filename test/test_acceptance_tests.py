@@ -3,6 +3,7 @@ import sys
 import unittest
 from unittest.mock import patch
 from src.game import Game
+from src.spanish_message import SpanishMessage
 from test.mocks.mock_message import MockMessage
 
 
@@ -158,3 +159,14 @@ class TestAcceptance(unittest.TestCase):
     #     game_output = self.game_playthrough()
 
     #     self.assertIn(expected_message, game_output)
+
+    @patch(
+        "builtins.input",
+        side_effect=["2", "1", "1", "1", "2", "3", "4", "5", "6", "7", "n"],
+    )
+    def test_player_X_wins_the_game_in_spanish(self, mock_input):
+        expected_message = SpanishMessage.declare_winner(self, "X")
+
+        game_output = self.game_playthrough()
+
+        self.assertIn(expected_message, game_output)
