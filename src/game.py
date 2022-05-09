@@ -112,7 +112,6 @@ class Game:
 
     def handle_mark_board(self, player, board):
         move = player.get_move(board, self.message.invalid_board_input())
-        # validate the move
         current_player = self.get_current_player(self.total_marks_on_board)
         if not self.rules.is_winner(self.game_board):
             self.game_board = self.board.mark_board(move, board, current_player.mark)

@@ -159,14 +159,3 @@ class TestAcceptance(unittest.TestCase):
         game_output = self.game_playthrough()
 
         self.assertIn(expected_message, game_output)
-
-    @patch(
-        "builtins.input",
-        side_effect=["1", "2", "1", "1", "2", "3", "4", "5", "6", "7", "n"],
-    )
-    def test_play_through_with_computer_player(self, mock_input):
-        expected_message = MockMessage.goodbye_message(self)
-
-        game_output = self.game_playthrough()
-
-        self.assertIn(expected_message, game_output)
