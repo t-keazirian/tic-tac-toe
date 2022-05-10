@@ -1,4 +1,5 @@
 import unittest
+from src.human_player import HumanPlayer
 
 from src.message import Message
 from src.symbol import SymbolOptions
@@ -64,11 +65,9 @@ Choose one of the options below:
 
     def test_X_player_is_prompted_for_move_when_is_current_player(self):
         message = Message()
-        current_player = "X"
-        expected_message = (
-            f"Player {current_player} - enter a number to place your mark"
-        )
-        actual_message = message.prompt_for_move(current_player)
+        player = HumanPlayer("X")
+        expected_message = f"Player {player.mark} - enter a number to place your mark"
+        actual_message = message.prompt_for_move(player)
         self.assertEqual(expected_message, actual_message)
 
     def test_declare_winner_with_correct_mark_as_winner(self):
@@ -124,4 +123,14 @@ Choose your language:
 2. Spanish
 """
         actual_message = message.choose_language()
+        self.assertEqual(expected_message, actual_message)
+
+    def test_choose_players_prints_to_console(self):
+        message = Message()
+        expected_message = """
+Please make a selection from the options:
+1. Human vs Human (2 players)
+2. Human vs Computer (1 player)
+"""
+        actual_message = message.choose_players()
         self.assertEqual(expected_message, actual_message)

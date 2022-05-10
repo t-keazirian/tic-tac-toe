@@ -2,6 +2,7 @@ import unittest
 
 from src.spanish_message import SpanishMessage
 from src.symbol import SymbolOptions
+from src.human_player import HumanPlayer
 
 
 class TestSpanishMessage(unittest.TestCase):
@@ -63,11 +64,11 @@ Elija una de las siguientes opciones:
 
     def test_X_player_is_prompted_for_move_when_is_current_player(self):
         spanish_message = SpanishMessage()
-        current_player = "X"
+        player = HumanPlayer("X")
         expected_message = (
-            f"Jugador {current_player} - escriba un número para marcar el tablero"
+            f"Jugador {player.mark} - escriba un número para marcar el tablero"
         )
-        actual_message = spanish_message.prompt_for_move(current_player)
+        actual_message = spanish_message.prompt_for_move(player)
         self.assertEqual(expected_message, actual_message)
 
     def test_declare_winner_with_correct_mark_as_winner(self):
@@ -115,3 +116,13 @@ Al final de cada juego, tendrás la opción de jugar de nuevo o salir.
 """
         actual_message = spanish_message.rules()
         self.assertEqual(rules, actual_message)
+
+    def test_choose_players_prints_to_console(self):
+        spanish_message = SpanishMessage()
+        expected_message = """
+Por favor, haga una selección de las opciones:
+1. Humano contra humano (2 jugadores)
+2. Humano contra computadora (1 jugador)
+"""
+        actual_message = spanish_message.choose_players()
+        self.assertEqual(expected_message, actual_message)

@@ -1,4 +1,6 @@
+import random
 from src.board import Board
+from src.human_player import HumanPlayer
 from src.message import Message
 from src.rules import Rules
 from src.spanish_message import SpanishMessage
@@ -6,6 +8,7 @@ from src.user_interface import UserInterface
 from src.validator import Validator
 from src.symbol import SymbolOptions
 from src.config import config
+from src.computer_player import ComputerPlayer
 
 
 class Game:
@@ -17,10 +20,11 @@ class Game:
         self.ui = ui
         self.set_language(message)
         self.game_board = self.board.starter_board
-        self.player_one = config["player_one"]
-        self.player_two = config["player_two"]
+        self.player_one = HumanPlayer("X")
+        self.player_two = HumanPlayer("O")
         self.total_marks_on_board = 0
         self.playing = True
+        self.play_against_computer = False
 
     def set_language(self, message):
         self.message = message
@@ -32,6 +36,16 @@ class Game:
             new_user_input = self.ui.get_user_input()
             return self.get_menu_choice(new_user_input, message)
         return user_input
+
+    def choose_players(self):
+        self.ui.display_message(self.message.choose_players())
+        user_input = self.get_menu_choice(
+            self.ui.get_user_input(), self.message.invalid_menu_input()
+        )
+        if user_input == config["human_vs_comp"]:
+            self.player_one = HumanPlayer("X")
+            self.player_two = ComputerPlayer("O")
+            self.play_against_computer = True
 
     def change_language(self):
         self.ui.display_message(self.message.choose_language())
@@ -48,10 +62,10 @@ class Game:
         )
         if user_input == config["play_with_symbols"]:
             self.ui.display_message(self.message.display_symbols())
-            self.player_one = self.set_player_symbol(
+            self.player_one.mark = self.set_player_symbol(
                 self.message.choose_symbol_player_one()
             )
-            self.player_two = self.set_player_symbol(
+            self.player_two.mark = self.set_player_symbol(
                 self.message.choose_symbol_player_two()
             )
 
@@ -78,34 +92,16 @@ class Game:
         current_player = self.get_current_player(total_marks_on_board)
         self.ui.display_message(self.message.prompt_for_move(current_player))
 
-    def handle_mark_board(self):
-        move = self.ui.get_user_input()
-        valid_move = self.validator.is_valid_move(self.game_board, move)
-        while not valid_move:
-            self.ui.display_message(self.message.invalid_board_input())
-            move = self.ui.get_user_input()
-            valid_move = self.validator.is_valid_move(self.game_board, move)
-        self.game_board = self.board.mark_board(
-            move,
-            self.game_board,
-            self.get_current_player(self.total_marks_on_board),
-        )
-        self.total_marks_on_board = self.board.count_marks(
-            self.game_board, self.player_one, self.player_two
-        )
-
     def new_game(self):
         self.total_marks_on_board = 0
         self.game_board = Board().starter_board
-        self.player_one = config["player_one"]
-        self.player_two = config["player_two"]
 
     def get_winning_mark(self, total_marks_on_board):
         player = self.get_current_player(total_marks_on_board)
-        if player == self.player_one:
-            return self.player_two
+        if player.mark == self.player_one.mark:
+            return self.player_two.mark
         else:
-            return self.player_one
+            return self.player_one.mark
 
     def handle_winning_game(self):
         winner = self.get_winning_mark(self.total_marks_on_board)
@@ -114,16 +110,27 @@ class Game:
     def handle_draw(self):
         self.ui.display_message(self.message.game_over_message())
 
+    def handle_mark_board(self, player, board):
+        move = player.get_move(board, self.message)
+        current_player = self.get_current_player(self.total_marks_on_board)
+        if not self.rules.is_winner(self.game_board):
+            self.game_board = self.board.mark_board(move, board, current_player.mark)
+            self.total_marks_on_board = self.board.count_marks(
+                board, self.player_one.mark, self.player_two.mark
+            )
+
     def take_turns(self):
+        current_player = self.get_current_player(self.total_marks_on_board)
         self.prompt_for_move(self.total_marks_on_board)
-        self.handle_mark_board()
+        self.handle_mark_board(current_player, self.game_board)
         self.total_marks_on_board = self.board.count_marks(
-            self.game_board, self.player_one, self.player_two
+            self.game_board, self.player_one.mark, self.player_two.mark
         )
         self.get_formatted_board()
 
     def repeat_game(self):
         self.new_game()
+        self.choose_players()
         self.change_symbols()
         self.ui.display_board(self.board.to_string(self.game_board))
 
@@ -145,7 +152,7 @@ class Game:
                 self.ask_to_play_again()
             elif self.board.is_full(
                 self.board.count_marks(
-                    self.game_board, self.player_one, self.player_two
+                    self.game_board, self.player_one.mark, self.player_two.mark
                 ),
                 self.game_board,
             ):
@@ -157,6 +164,7 @@ class Game:
     def run(self):
         self.ui.display_message(self.message.welcome_message())
         self.change_language()
+        self.choose_players()
         self.ui.display_message(self.message.rules())
         self.change_symbols()
         self.ui.display_board(self.board.to_string(self.game_board))
