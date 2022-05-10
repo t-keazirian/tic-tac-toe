@@ -1,10 +1,12 @@
 import unittest
 from unittest.mock import patch
+from src.computer_player import ComputerPlayer
 
 from src.game import Game
 from src.human_player import HumanPlayer
 from src.symbol import SymbolOptions
 from test.mocks.mock_message import MockMessage
+from src.board import Board
 
 
 class TestGame(unittest.TestCase):
@@ -110,3 +112,12 @@ class TestGame(unittest.TestCase):
         result = game.set_player_symbol(message)
 
         self.assertEqual(expected_symbol, result)
+
+    def test_board_is_marked_by_computer_player(self):
+        test_player = ComputerPlayer("X")
+        game = Game()
+        board = Board()
+        game_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
+        game.handle_mark_board(test_player, game_board)
+        marks_on_board = board.count_marks(game_board, "X", "O")
+        self.assertEqual(marks_on_board, 2)
