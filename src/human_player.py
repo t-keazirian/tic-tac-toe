@@ -10,6 +10,6 @@ class HumanPlayer:
     def get_move(self, board, message):
         move = UserInterface().get_user_input()
         if not Validator().is_valid_move(board, move):
-            UserInterface().display_message(message)
+            UserInterface().display_message(message.invalid_board_input())
             return self.get_move(board, message)
         return int(move)
