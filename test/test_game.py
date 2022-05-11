@@ -7,6 +7,7 @@ from src.human_player import HumanPlayer
 from src.symbol import SymbolOptions
 from test.mocks.mock_message import MockMessage
 from src.board import Board
+from src.rules import Rules
 
 
 class TestGame(unittest.TestCase):

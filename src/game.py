@@ -42,8 +42,10 @@ class Game:
             self.ui.get_user_input(), self.message.invalid_menu_input()
         )
         if user_input == config["human_vs_comp"]:
-            self.player_one = HumanPlayer("X")
-            self.player_two = ComputerPlayer("O")
+            # self.player_one = HumanPlayer("X")
+            # self.player_two = ComputerPlayer("O")
+            self.player_one = ComputerPlayer("X")
+            self.player_two = HumanPlayer("O")
             self.play_against_computer = True
 
     def change_language(self):
