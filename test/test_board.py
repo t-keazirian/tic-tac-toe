@@ -4,163 +4,105 @@ from src.board import Board
 
 
 class TestBoard(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+        self.starter_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        self.full_board = ["X", "O", "X", "O", "X", "O", "X", "O", "X"]
+        self.player_one_mark = "X"
+        self.player_two_mark = "O"
+
     def test_board_to_string(self):
-        board = Board()
-        game_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        expected_message = f" {game_board[0]} | {game_board[1]} | {game_board[2]} \n---+---+---\n {game_board[3]} | {game_board[4]} | {game_board[5]} \n---+---+---\n {game_board[6]} | {game_board[7]} | {game_board[8]}"
-        actual_message = board.to_string(game_board)
+        expected_message = f" {self.starter_board[0]} | {self.starter_board[1]} | {self.starter_board[2]} \n---+---+---\n {self.starter_board[3]} | {self.starter_board[4]} | {self.starter_board[5]} \n---+---+---\n {self.starter_board[6]} | {self.starter_board[7]} | {self.starter_board[8]}"
+        actual_message = self.board.to_string(self.starter_board)
         self.assertEqual(expected_message, actual_message)
 
     def test_is_full_returns_true_if_board_is_full(self):
-        board = Board()
-        full_board = ["X", "O", "X", "O", "X", "O", "X", "O", "X"]
-        player_one = "X"
-        player_two = "O"
-        total_marks_on_board = board.count_marks(full_board, player_one, player_two)
-        self.assertEqual(True, board.is_full(total_marks_on_board, full_board))
+        total_marks_on_board = self.board.count_marks(
+            self.full_board, self.player_one_mark, self.player_two_mark
+        )
+        self.assertEqual(
+            True, self.board.is_full(total_marks_on_board, self.full_board)
+        )
 
     def test_is_full_returns_false_if_board_isnt_full(self):
-        board = Board()
-        full_board = ["X", "2", "3", "4", "X", "O", "X", "O", "X"]
-        player_one = "X"
-        player_two = "O"
-        total_marks_on_board = board.count_marks(full_board, player_one, player_two)
-        self.assertEqual(False, board.is_full(total_marks_on_board, full_board))
+        not_full_board = ["X", "2", "3", "4", "X", "O", "X", "O", "X"]
+        total_marks_on_board = self.board.count_marks(
+            not_full_board, self.player_one_mark, self.player_two_mark
+        )
+        self.assertEqual(
+            False, self.board.is_full(total_marks_on_board, not_full_board)
+        )
 
     def test_is_full_returns_true_if_board_is_full_with_emojis(self):
-        board = Board()
         full_board = ["🤡", "👻", "🤡", "👻", "🤡", "👻", "🤡", "👻", "🤡"]
-        player_one = "🤡"
-        player_two = "👻"
-        total_marks_on_board = board.count_marks(full_board, player_one, player_two)
-        self.assertEqual(True, board.is_full(total_marks_on_board, full_board))
+        player_one_mark = "🤡"
+        player_two_mark = "👻"
+        total_marks_on_board = self.board.count_marks(
+            full_board, player_one_mark, player_two_mark
+        )
+        self.assertEqual(True, self.board.is_full(total_marks_on_board, full_board))
 
     def test_no_turns_taken_yet(self):
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        player_one = "X"
-        player_two = "O"
-        total_marks_on_board = board.count_marks(current_board, player_one, player_two)
+        total_marks_on_board = self.board.count_marks(
+            self.starter_board, self.player_two_mark, self.player_two_mark
+        )
         self.assertEqual(0, total_marks_on_board)
 
     def test_one_turn_taken_returns_one_mark_on_board(self):
-        board = Board()
         current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
-        player_one = "X"
-        player_two = "O"
-        total_marks_on_board = board.count_marks(current_board, player_one, player_two)
+        total_marks_on_board = self.board.count_marks(
+            current_board, self.player_one_mark, self.player_two_mark
+        )
         self.assertEqual(1, total_marks_on_board)
 
     def test_two_turns_taken_returns_two_marks_on_board(self):
-        board = Board()
         current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
-        player_one = "X"
-        player_two = "O"
-        total_marks_on_board = board.count_marks(current_board, player_one, player_two)
+        total_marks_on_board = self.board.count_marks(
+            current_board, self.player_one_mark, self.player_two_mark
+        )
         self.assertEqual(2, total_marks_on_board)
 
     def test_one_turn_taken_returns_one_mark_on_board_with_emoji(self):
-        board = Board()
         current_board = ["1", "🤡", "3", "4", "5", "6", "7", "8", "9"]
-        player_one = "🤡"
-        player_two = "👻"
-        total_marks_on_board = board.count_marks(current_board, player_one, player_two)
+        player_one_mark = "🤡"
+        player_two_mark = "👻"
+        total_marks_on_board = self.board.count_marks(
+            current_board, player_one_mark, player_two_mark
+        )
         self.assertEqual(1, total_marks_on_board)
 
-    def test_board_is_marked_with_user_selection_when_no_marks_and_X_is_going_first(
-        self,
-    ):
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        new_board_with_marks = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 1
+    def test_mark_board_marks_board_with_user_selection(self):
+        board_with_one_x = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
+        board_with_one_x_and_o = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
+        board_with_multiple_marks = ["X", "O", "X", "4", "5", "6", "7", "8", "9"]
+        board_with_emoji = ["🤡", "2", "3", "4", "5", "6", "7", "8", "9"]
         self.assertEqual(
-            new_board_with_marks,
-            board.mark_board(user_input, current_board, "X"),
+            board_with_one_x,
+            self.board.mark_board(1, self.starter_board, "X"),
+        )
+        self.assertEqual(
+            board_with_one_x_and_o,
+            self.board.mark_board(2, board_with_one_x, "O"),
+        )
+        self.assertEqual(
+            board_with_multiple_marks,
+            self.board.mark_board(3, board_with_multiple_marks, "X"),
+        )
+        self.assertEqual(
+            board_with_emoji,
+            self.board.mark_board(1, self.starter_board, "🤡"),
         )
 
-    def test_board_is_marked_with_user_selection_when_one_mark_and_O_is_next_player(
-        self,
-    ):
-        board = Board()
-        current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
-        new_board_with_marks = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 2
-        self.assertEqual(
-            new_board_with_marks,
-            board.mark_board(user_input, current_board, "O"),
-        )
+    def test_is_spot_taken_returns_true_when_spot_is_taken(self):
+        test_board_one = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
+        test_board_two = ["1", "X", "3", "4", "5", "6", "7", "8", "9"]
+        test_board_emoji = ["🤡", "2", "3", "4", "5", "6", "7", "8", "9"]
+        self.assertEqual(True, self.board.is_spot_taken(test_board_one, 1))
+        self.assertEqual(True, self.board.is_spot_taken(test_board_two, 2))
+        self.assertEqual(True, self.board.is_spot_taken(test_board_emoji, 1))
 
-    def test_board_is_marked_with_user_selection_when_two_marks_and_X_is_next_player(
-        self,
-    ):
-        board = Board()
-        current_board = ["X", "O", "3", "4", "5", "6", "7", "8", "9"]
-        new_board_with_marks = ["X", "O", "X", "4", "5", "6", "7", "8", "9"]
-        user_input = 3
-        self.assertEqual(
-            new_board_with_marks,
-            board.mark_board(user_input, current_board, "X"),
-        )
-
-    def test_board_is_marked_with_emoji(
-        self,
-    ):
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        new_board_with_marks = ["🤡", "2", "3", "4", "5", "6", "7", "8", "9"]
-        user_input = 1
-        test_mark = "🤡"
-        self.assertEqual(
-            new_board_with_marks,
-            board.mark_board(user_input, current_board, test_mark),
-        )
-
-    def test_is_spot_taken_returns_true_when_spot_is_marked(self):
-        board = Board()
-        current_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
-        test_spot = 1
-        spot_is_taken = board.is_spot_taken(current_board, test_spot)
-        self.assertEqual(True, spot_is_taken)
-
-    def test_is_spot_taken_returns_true_when_spot_is_marked_2(self):
-        board = Board()
-        current_board = ["1", "X", "3", "4", "5", "6", "7", "8", "9"]
-        test_spot = 2
-        spot_is_taken = board.is_spot_taken(current_board, test_spot)
-        self.assertEqual(True, spot_is_taken)
-
-    def test_is_spot_taken_returns_false_with_multiple_spots_taken(self):
-        board = Board()
-        current_board = ["1", "X", "3", "O", "X", "6", "O", "8", "9"]
-        test_spot = 1
-        spot_is_taken = board.is_spot_taken(current_board, test_spot)
-        self.assertEqual(False, spot_is_taken)
-
-    def test_is_spot_taken_returns_false_if_spot_is_avail(self):
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        test_spot = 2
-        spot_is_taken = board.is_spot_taken(current_board, test_spot)
-        self.assertEqual(False, spot_is_taken)
-
-    def test_if_different_spot_is_taken_return_false(self):
-        board = Board()
-        current_board = ["1", "2", "3", "4", "5", "X", "7", "8", "9"]
-        test_spot = 4
-        spot_is_taken = board.is_spot_taken(current_board, test_spot)
-        self.assertEqual(False, spot_is_taken)
-
-    def test_is_spot_taken_returns_false_with_multiple_spots_taken_2(self):
-        board = Board()
-        current_board = ["O", "X", "X", "O", "5", "6", "7", "8", "9"]
-        test_spot = 6
-        spot_is_taken = board.is_spot_taken(current_board, test_spot)
-        self.assertEqual(False, spot_is_taken)
-
-    def test_is_spot_taken_returns_true_with_emoji_on_board(self):
-        board = Board()
-        current_board = ["🤡", "2", "3", "4", "5", "6", "7", "8", "9"]
-        test_spot = 1
-        spot_is_taken = board.is_spot_taken(current_board, test_spot)
-        self.assertEqual(True, spot_is_taken)
+    def test_is_spot_taken_returns_false_if_spot_is_not_taken(self):
+        test_board = ["1", "X", "3", "O", "X", "6", "O", "8", "9"]
+        self.assertEqual(False, self.board.is_spot_taken(self.starter_board, 1))
+        self.assertEqual(False, self.board.is_spot_taken(test_board, 3))
+        self.assertEqual(False, self.board.is_spot_taken(test_board, 9))
