@@ -24,9 +24,9 @@ class Rules:
         return [board[2], board[4], board[6]]
 
     def is_winner_horizontal(self, board):
-        top_row_win = self.is_row_array_same(self.top_row(board))
-        middle_row_win = self.is_row_array_same(self.middle_row(board))
-        bottom_row_win = self.is_row_array_same(self.bottom_row(board))
+        top_row_win = self.contains_winning_mark(self.top_row(board))
+        middle_row_win = self.contains_winning_mark(self.middle_row(board))
+        bottom_row_win = self.contains_winning_mark(self.bottom_row(board))
 
         if top_row_win or middle_row_win or bottom_row_win:
             return True
@@ -34,9 +34,9 @@ class Rules:
             return False
 
     def is_winner_vertical(self, board):
-        left_column_win = self.is_row_array_same(self.left_column(board))
-        middle_column_win = self.is_row_array_same(self.middle_column(board))
-        bottom_column_win = self.is_row_array_same(self.right_column(board))
+        left_column_win = self.contains_winning_mark(self.left_column(board))
+        middle_column_win = self.contains_winning_mark(self.middle_column(board))
+        bottom_column_win = self.contains_winning_mark(self.right_column(board))
 
         if left_column_win or middle_column_win or bottom_column_win:
             return True
@@ -44,10 +44,10 @@ class Rules:
             return False
 
     def is_winner_diagonal(self, board):
-        left_to_btm_right_win = self.is_row_array_same(
+        left_to_btm_right_win = self.contains_winning_mark(
             self.top_left_btm_right_diag(board)
         )
-        right_to_btm_left_win = self.is_row_array_same(
+        right_to_btm_left_win = self.contains_winning_mark(
             self.top_right_btm_left_diag(board)
         )
         if left_to_btm_right_win or right_to_btm_left_win:
@@ -65,8 +65,8 @@ class Rules:
         else:
             return False
 
-    def is_row_array_same(self, row_array):
-        if len(set(row_array)) <= 1:
+    def contains_winning_mark(self, row):
+        if len(set(row)) <= 1:
             return True
         else:
             return False
@@ -83,5 +83,5 @@ class Rules:
             self.top_right_btm_left_diag(board),
         ]
         for row in board_rows:
-            if self.is_row_array_same(row):
+            if self.contains_winning_mark(row):
                 return row[0]

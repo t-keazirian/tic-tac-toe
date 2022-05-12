@@ -44,7 +44,6 @@ class TestRules(unittest.TestCase):
         self.assertEqual(True, self.rules.is_winner_diagonal(top_right_btm_left))
 
     def test_if_not_three_in_diagonal_row_return_false(self):
-
         current_board = ["1", "X", "X", "4", "X", "6", "7", "8", "9"]
         winner = self.rules.is_winner_diagonal(current_board)
         self.assertEqual(False, winner)
@@ -62,53 +61,44 @@ class TestRules(unittest.TestCase):
         is_winner_true = self.rules.is_winner(current_board)
         self.assertEqual(False, is_winner_true)
 
-    def test_top_row_returns_top_row_of_board(self):
+    def test_can_identify_rows_of_the_board(self):
         top_row_board = self.rules.top_row(self.starter_board)
-        self.assertEqual(["1", "2", "3"], top_row_board)
-
-    def test_middle_row_returns_middle_row_of_board(self):
         middle_row_board = self.rules.middle_row(self.starter_board)
-        self.assertEqual(["4", "5", "6"], middle_row_board)
-
-    def test_bottom_row_returns_bottom_row_of_board(self):
         bottom_row_board = self.rules.bottom_row(self.starter_board)
+
+        self.assertEqual(["1", "2", "3"], top_row_board)
+        self.assertEqual(["4", "5", "6"], middle_row_board)
         self.assertEqual(["7", "8", "9"], bottom_row_board)
 
-    def test_first_column_returns_left_column_of_board(self):
+    def test_can_identify_columns_of_the_board(self):
         left_column_board = self.rules.left_column(self.starter_board)
-        self.assertEqual(["1", "4", "7"], left_column_board)
-
-    def test_middle_column_returns_middle_column_of_board(self):
         middle_column_board = self.rules.middle_column(self.starter_board)
-        self.assertEqual(["2", "5", "8"], middle_column_board)
-
-    def test_right_column_returns_right_column_of_board(self):
         right_column_board = self.rules.right_column(self.starter_board)
+        self.assertEqual(["1", "4", "7"], left_column_board)
+        self.assertEqual(["2", "5", "8"], middle_column_board)
         self.assertEqual(["3", "6", "9"], right_column_board)
 
-    def test_left_to_right_diag_returns_diagonal_board(self):
+    def test_can_identify_diagonals_of_the_board(self):
         left_to_right_diag_board = self.rules.top_left_btm_right_diag(
             self.starter_board
         )
-        self.assertEqual(["1", "5", "9"], left_to_right_diag_board)
-
-    def test_top_right_to_bottom_left_returns_opposite_diagonal(self):
         right_to_left_diag_board = self.rules.top_right_btm_left_diag(
             self.starter_board
         )
+        self.assertEqual(["1", "5", "9"], left_to_right_diag_board)
         self.assertEqual(["3", "5", "7"], right_to_left_diag_board)
 
-    def test_is_row_array_same_returns_true_if_array_elements_are_equal(self):
+    def test_contains_winning_mark_returns_true_if_row_elements_are_equal(self):
         x_array = ["X", "X", "X"]
         o_array = ["O", "O", "O"]
-        self.assertEqual(True, self.rules.is_row_array_same(x_array))
-        self.assertEqual(True, self.rules.is_row_array_same(o_array))
+        self.assertEqual(True, self.rules.contains_winning_mark(x_array))
+        self.assertEqual(True, self.rules.contains_winning_mark(o_array))
 
-    def test_is_row_array_same_returns_false_if_array_elements_are_not_equal(self):
+    def test_contains_winning_mark_returns_false_if_row_elements_are_not_equal(self):
         not_winner_one = ["X", "X", "O"]
         not_winner_two = ["1", "X", "3"]
-        self.assertEqual(False, self.rules.is_row_array_same(not_winner_one))
-        self.assertEqual(False, self.rules.is_row_array_same(not_winner_two))
+        self.assertEqual(False, self.rules.contains_winning_mark(not_winner_one))
+        self.assertEqual(False, self.rules.contains_winning_mark(not_winner_two))
 
     def test_get_winning_mark_returns_winning_mark(self):
         x_winning_board = ["X", "X", "X", "4", "5", "6", "7", "8", "9"]
