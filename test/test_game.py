@@ -62,18 +62,6 @@ class TestGame(unittest.TestCase):
         current_player = game.get_current_player(total_marks_on_board)
         self.assertEqual("X", current_player.mark)
 
-    def test_if_current_player_is_O_then_X_wins(self):
-        game = Game()
-        total_marks_on_board = 5
-        winner = game.get_winning_mark(total_marks_on_board)
-        self.assertEqual("X", winner)
-
-    def test_if_current_player_is_X_then_O_wins(self):
-        game = Game()
-        total_marks_on_board = 6
-        winner = game.get_winning_mark(total_marks_on_board)
-        self.assertEqual("O", winner)
-
     @patch("builtins.input", side_effect=["3"])
     def test_set_player_one_symbol_returns_symbol_with_input_3(self, mock_input):
         game = Game()
