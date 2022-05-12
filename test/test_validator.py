@@ -9,44 +9,59 @@ class TestValidator(unittest.TestCase):
 
     def test_is_integer_returns_true_if_input_is_integer(self):
         test_move = "4"
+
         result = self.validator.is_integer(test_move)
+
         self.assertTrue(result)
 
     def test_is_integer_returns_false_if_input_is_not_integer(self):
         test_move = "s"
+
         result = self.validator.is_integer(test_move)
+
         self.assertFalse(result)
 
     def test_if_correct_input_return_true(self):
         test_spot = 8
+
         output = self.validator.is_in_range(test_spot)
+
         self.assertTrue(output)
 
     def test_if_incorrect_input_return_false(self):
         test_spot = 10
+
         output = self.validator.is_in_range(test_spot)
+
         self.assertFalse(output)
 
     def test_if_NaN_inputted_return_false(self):
         test_spot = "one"
+
         output = self.validator.is_in_range(test_spot)
+
         self.assertFalse(output)
 
     def test_spot_is_available_returns_true_if_spot_is_not_taken(self):
         test_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         test_spot = 3
+
         result = self.validator.spot_is_available(test_board, test_spot)
+
         self.assertTrue(result)
 
     def test_spot_is_available_returns_false_if_spot_is_taken(self):
         test_board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
         test_spot = 3
+
         result = self.validator.spot_is_available(test_board, test_spot)
+
         self.assertFalse(result)
 
     def test_is_valid_move_returns_false_if_move_is_invalid(self):
         test_clean_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         test_board_with_marks = ["1", "O", "X", "4", "5", "6", "7", "8", "9"]
+
         self.assertFalse(self.validator.is_valid_move(test_clean_board, "one"))
         self.assertFalse(self.validator.is_valid_move(test_clean_board, ""))
         self.assertFalse(self.validator.is_valid_move(test_clean_board, "10"))
@@ -54,6 +69,7 @@ class TestValidator(unittest.TestCase):
 
     def test_is_valid_move_returns_true_if_move_is_valid(self):
         test_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
         self.assertTrue(self.validator.is_valid_move(test_board, "5"))
         self.assertTrue(self.validator.is_valid_move(test_board, "1"))
 
