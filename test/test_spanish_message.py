@@ -94,7 +94,7 @@ Elija una de las siguientes opciones:
         self.assertEqual(expected_message, actual_message)
 
     def test_rules_prints_to_console(self):
-        rules = """
+        expected_message = """
 Juega este juego tomando turnos marcando el tablero.
 Cuando se le solicite, escriba un número entre 1 y 9 y presione enter.
 Si ese lugar está ocupado, la computadora le pedirá que elija otra opción.
@@ -103,7 +103,7 @@ Si el tablero está lleno y ninguno de los jugadores tiene tres marcas seguidas,
 Al final de cada juego, tendrás la opción de jugar de nuevo o salir.
 """
         actual_message = self.spanish_message.rules()
-        self.assertEqual(rules, actual_message)
+        self.assertEqual(expected_message, actual_message)
 
     def test_choose_players_prints_to_console(self):
         expected_message = """

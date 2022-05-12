@@ -104,7 +104,7 @@ Choose one of the options below:
 
     def test_print_rules_prints_rules_to_console(self):
 
-        rules = """
+        expected_message = """
 Play this game by taking turns marking the board.
 You will start by choosing between using the default X and O symbols, or your own symbol instead.
 When prompted, type a number between 1 and 9 and press enter.
@@ -114,7 +114,7 @@ If the board is full and neither player has three in a row, it is a draw and the
 At the end of every game, you will have the option to play again or to exit.
 """
         actual_message = self.message.rules()
-        self.assertEqual(rules, actual_message)
+        self.assertEqual(expected_message, actual_message)
 
     def test_choose_language_prints_to_console(self):
 

@@ -90,4 +90,4 @@ class TestGame(unittest.TestCase):
         game_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
         self.game.handle_mark_board(self.test_comp_player, game_board)
         marks_on_board = self.board.count_marks(game_board, "X", "O")
-        self.assertEqual(marks_on_board, 2)
+        self.assertEqual(2, marks_on_board)

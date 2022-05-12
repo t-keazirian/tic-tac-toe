@@ -20,18 +20,14 @@ class TestBoard(unittest.TestCase):
         total_marks_on_board = self.board.count_marks(
             self.full_board, self.player_one_mark, self.player_two_mark
         )
-        self.assertEqual(
-            True, self.board.is_full(total_marks_on_board, self.full_board)
-        )
+        self.assertTrue(self.board.is_full(total_marks_on_board, self.full_board))
 
     def test_is_full_returns_false_if_board_isnt_full(self):
         not_full_board = ["X", "2", "3", "4", "X", "O", "X", "O", "X"]
         total_marks_on_board = self.board.count_marks(
             not_full_board, self.player_one_mark, self.player_two_mark
         )
-        self.assertEqual(
-            False, self.board.is_full(total_marks_on_board, not_full_board)
-        )
+        self.assertFalse(self.board.is_full(total_marks_on_board, not_full_board))
 
     def test_is_full_returns_true_if_board_is_full_with_emojis(self):
         full_board = ["🤡", "👻", "🤡", "👻", "🤡", "👻", "🤡", "👻", "🤡"]
@@ -40,7 +36,7 @@ class TestBoard(unittest.TestCase):
         total_marks_on_board = self.board.count_marks(
             full_board, player_one_mark, player_two_mark
         )
-        self.assertEqual(True, self.board.is_full(total_marks_on_board, full_board))
+        self.assertTrue(self.board.is_full(total_marks_on_board, full_board))
 
     def test_no_turns_taken_yet(self):
         total_marks_on_board = self.board.count_marks(
@@ -97,12 +93,12 @@ class TestBoard(unittest.TestCase):
         test_board_one = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]
         test_board_two = ["1", "X", "3", "4", "5", "6", "7", "8", "9"]
         test_board_emoji = ["🤡", "2", "3", "4", "5", "6", "7", "8", "9"]
-        self.assertEqual(True, self.board.is_spot_taken(test_board_one, 1))
-        self.assertEqual(True, self.board.is_spot_taken(test_board_two, 2))
-        self.assertEqual(True, self.board.is_spot_taken(test_board_emoji, 1))
+        self.assertTrue(self.board.is_spot_taken(test_board_one, 1))
+        self.assertTrue(self.board.is_spot_taken(test_board_two, 2))
+        self.assertTrue(self.board.is_spot_taken(test_board_emoji, 1))
 
     def test_is_spot_taken_returns_false_if_spot_is_not_taken(self):
         test_board = ["1", "X", "3", "O", "X", "6", "O", "8", "9"]
-        self.assertEqual(False, self.board.is_spot_taken(self.starter_board, 1))
-        self.assertEqual(False, self.board.is_spot_taken(test_board, 3))
-        self.assertEqual(False, self.board.is_spot_taken(test_board, 9))
+        self.assertFalse(self.board.is_spot_taken(self.starter_board, 1))
+        self.assertFalse(self.board.is_spot_taken(test_board, 3))
+        self.assertFalse(self.board.is_spot_taken(test_board, 9))
