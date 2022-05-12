@@ -1,4 +1,3 @@
-import random
 from src.board import Board
 from src.human_player import HumanPlayer
 from src.message import Message
@@ -96,16 +95,9 @@ class Game:
         self.total_marks_on_board = 0
         self.game_board = Board().starter_board
 
-    def get_winning_mark(self, total_marks_on_board):
-        player = self.get_current_player(total_marks_on_board)
-        if player.mark == self.player_one.mark:
-            return self.player_two.mark
-        else:
-            return self.player_one.mark
-
     def handle_winning_game(self):
-        winner = self.get_winning_mark(self.total_marks_on_board)
-        self.ui.display_message(self.message.declare_winner(winner))
+        winning_mark = self.rules.get_winning_mark(self.game_board)
+        self.ui.display_message(self.message.declare_winner(winning_mark))
 
     def handle_draw(self):
         self.ui.display_message(self.message.game_over_message())

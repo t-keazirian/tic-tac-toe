@@ -93,3 +93,93 @@ class TestRules(unittest.TestCase):
         current_board = ["1", "X", "3", "4", "X", "X", "7", "8", "9"]
         is_winner_true = rules.is_winner(current_board)
         self.assertEqual(False, is_winner_true)
+
+    def test_top_row_returns_top_row_of_board(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        top_row_board = rules.top_row(current_board)
+        self.assertEqual(["1", "2", "3"], top_row_board)
+
+    def test_middle_row_returns_middle_row_of_board(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        middle_row_board = rules.middle_row(current_board)
+        self.assertEqual(["4", "5", "6"], middle_row_board)
+
+    def test_bottom_row_returns_bottom_row_of_board(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        bottom_row_board = rules.bottom_row(current_board)
+        self.assertEqual(["7", "8", "9"], bottom_row_board)
+
+    def test_first_column_returns_left_column_of_board(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        left_column_board = rules.left_column(current_board)
+        self.assertEqual(["1", "4", "7"], left_column_board)
+
+    def test_middle_column_returns_middle_column_of_board(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        middle_column_board = rules.middle_column(current_board)
+        self.assertEqual(["2", "5", "8"], middle_column_board)
+
+    def test_right_column_returns_right_column_of_board(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        right_column_board = rules.right_column(current_board)
+        self.assertEqual(["3", "6", "9"], right_column_board)
+
+    def test_left_to_right_diag_returns_diagonal_board(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        left_to_right_diag_board = rules.top_left_btm_right_diag(current_board)
+        self.assertEqual(["1", "5", "9"], left_to_right_diag_board)
+
+    def test_top_right_to_bottom_left_returns_opposite_diagonal(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        right_to_left_diag_board = rules.top_right_btm_left_diag(current_board)
+        self.assertEqual(["3", "5", "7"], right_to_left_diag_board)
+
+    def test_is_row_array_same_returns_true_if_array_elements_are_equal_with_X(self):
+        rules = Rules()
+        row_array = ["X", "X", "X"]
+        result = rules.is_row_array_same(row_array)
+        self.assertEqual(True, result)
+
+    def test_is_row_array_same_returns_true_if_array_elements_are_equal_with_O(self):
+        rules = Rules()
+        row_array = ["O", "O", "O"]
+        result = rules.is_row_array_same(row_array)
+        self.assertEqual(True, result)
+
+    def test_is_row_array_same_returns_false_if_array_elements_are_not_equal(self):
+        rules = Rules()
+        row_array = ["X", "X", "O"]
+        result = rules.is_row_array_same(row_array)
+        self.assertEqual(False, result)
+
+    def test_is_row_array_same_returns_false_with_numbers(self):
+        rules = Rules()
+        row_array = ["1", "X", "3"]
+        result = rules.is_row_array_same(row_array)
+        self.assertEqual(False, result)
+
+    def test_get_winning_mark_returns_X_winning_mark(self):
+        rules = Rules()
+        current_board = ["X", "X", "X", "4", "5", "6", "7", "8", "9"]
+        result = rules.get_winning_mark(current_board)
+        self.assertEqual("X", result)
+
+    def test_get_winning_mark_returns_O_winning_mark(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "O", "O", "O", "7", "8", "9"]
+        result = rules.get_winning_mark(current_board)
+        self.assertEqual("O", result)
+
+    def test_get_winning_returns_None_if_no_winner(self):
+        rules = Rules()
+        current_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        result = rules.get_winning_mark(current_board)
+        self.assertEqual(None, result)
