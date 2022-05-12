@@ -4,149 +4,85 @@ from src.validator import Validator
 
 
 class TestValidator(unittest.TestCase):
-    def test_is_integer_returns_true_when_input_is_integer(self):
-        validator = Validator()
-        test_move = "4"
-        result = validator.is_integer(test_move)
-        self.assertEqual(True, result)
+    def setUp(self):
+        self.validator = Validator()
 
-    def test_is_integer_returns_true_when_input_is_not_integer(self):
-        validator = Validator()
+    def test_is_integer_returns_true_if_input_is_integer(self):
+        test_move = "4"
+        result = self.validator.is_integer(test_move)
+        self.assertTrue(result)
+
+    def test_is_integer_returns_false_if_input_is_not_integer(self):
         test_move = "s"
-        result = validator.is_integer(test_move)
-        self.assertEqual(False, result)
+        result = self.validator.is_integer(test_move)
+        self.assertFalse(result)
 
     def test_if_correct_input_return_true(self):
-        validator = Validator()
         test_spot = 8
-        output = validator.is_in_range(test_spot)
-        self.assertEqual(True, output)
+        output = self.validator.is_in_range(test_spot)
+        self.assertTrue(output)
 
     def test_if_incorrect_input_return_false(self):
-        validator = Validator()
         test_spot = 10
-        output = validator.is_in_range(test_spot)
-        self.assertEqual(False, output)
+        output = self.validator.is_in_range(test_spot)
+        self.assertFalse(output)
 
     def test_if_NaN_inputted_return_false(self):
-        validator = Validator()
         test_spot = "one"
-        output = validator.is_in_range(test_spot)
-        self.assertEqual(False, output)
+        output = self.validator.is_in_range(test_spot)
+        self.assertFalse(output)
 
-    def test_spot_is_available_when_spot_is_not_taken(self):
-        validator = Validator()
+    def test_spot_is_available_returns_true_if_spot_is_not_taken(self):
         test_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         test_spot = 3
-        result = validator.spot_is_available(test_board, test_spot)
-        self.assertEqual(True, result)
+        result = self.validator.spot_is_available(test_board, test_spot)
+        self.assertTrue(result)
 
-    def test_spot_is_not_available_when_spot_is_taken(self):
-        validator = Validator()
+    def test_spot_is_available_returns_false_if_spot_is_taken(self):
         test_board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
         test_spot = 3
-        result = validator.spot_is_available(test_board, test_spot)
-        self.assertEqual(False, result)
+        result = self.validator.spot_is_available(test_board, test_spot)
+        self.assertFalse(result)
 
-    def test_move_is_not_valid_if_NaN(self):
-        validator = Validator()
+    def test_is_valid_move_returns_false_if_move_is_invalid(self):
+        test_clean_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        test_board_with_marks = ["1", "O", "X", "4", "5", "6", "7", "8", "9"]
+        self.assertFalse(self.validator.is_valid_move(test_clean_board, "one"))
+        self.assertFalse(self.validator.is_valid_move(test_clean_board, ""))
+        self.assertFalse(self.validator.is_valid_move(test_clean_board, "10"))
+        self.assertFalse(self.validator.is_valid_move(test_board_with_marks, "3"))
+
+    def test_is_valid_move_returns_true_if_move_is_valid(self):
         test_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        test_move = "one"
-        result = validator.is_valid_move(test_board, test_move)
-        self.assertEqual(False, result)
+        self.assertTrue(self.validator.is_valid_move(test_board, "5"))
+        self.assertTrue(self.validator.is_valid_move(test_board, "1"))
 
-    def test_move_is_not_valid_if_an_integer_thats_out_of_range(self):
-        validator = Validator()
-        test_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        test_move = "10"
-        result = validator.is_valid_move(test_board, test_move)
-        self.assertEqual(False, result)
+    def test_is_valid_play_again_input_returns_true_if_valid_input(self):
+        self.assertTrue(self.validator.is_valid_play_again_input("y"))
+        self.assertTrue(self.validator.is_valid_play_again_input("N"))
+        self.assertTrue(self.validator.is_valid_play_again_input("y"))
+        self.assertTrue(self.validator.is_valid_play_again_input("n"))
 
-    def test_move_is_not_valid_if_spot_is_not_available(self):
-        validator = Validator()
-        test_board = ["1", "2", "X", "4", "5", "6", "7", "8", "9"]
-        test_move = "3"
-        result = validator.is_valid_move(test_board, test_move)
-        self.assertEqual(False, result)
-
-    def test_move_is_valid_if_spot_is_available(self):
-        validator = Validator()
-        test_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        test_move = "5"
-        self.assertTrue(validator.is_valid_move(test_board, test_move))
-
-    def test_move_is_not_valid_if_empty_string(self):
-        validator = Validator()
-        test_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        test_move = ""
-        self.assertFalse(validator.is_valid_move(test_board, test_move))
-
-    def test_valid_play_again_input_returns_Y_if_valid_input_and_Y_inputted(
-        self,
-    ):
-        validator = Validator()
-        user_input = "y"
-        self.assertEqual(True, validator.is_valid_play_again_input(user_input))
-
-    def test_handle_play_again_input_returns_N_when_valid_input_and_N_inputted(
-        self,
-    ):
-        validator = Validator()
-        user_input = "n"
-        self.assertEqual(True, validator.is_valid_play_again_input(user_input))
-
-    def test_is_valid_play_again_input_returns_false_if_input_is_invalid(
-        self,
-    ):
-        validator = Validator()
-        user_input = "7"
-        self.assertEqual(False, validator.is_valid_play_again_input(user_input))
-
-    def test_is_valid_play_again_input_returns_false_if_number_is_inputted(
-        self,
-    ):
-        validator = Validator()
-        user_input = "s"
-        self.assertEqual(False, validator.is_valid_play_again_input(user_input))
-
-    def test_is_valid_play_again_input_returns_true_if_correct_input(
-        self,
-    ):
-        validator = Validator()
-        user_input = "y"
-        self.assertEqual(True, validator.is_valid_play_again_input(user_input))
+    def test_is_valid_play_again_input_returns_false_if_input_is_invalid(self):
+        self.assertFalse(self.validator.is_valid_play_again_input("7"))
+        self.assertFalse(self.validator.is_valid_play_again_input("s"))
+        self.assertFalse(self.validator.is_valid_play_again_input("y y"))
 
     def test_is_empty_string_returns_true_if_string_is_empty(self):
-        validator = Validator()
-        user_input = ""
-        self.assertEqual(True, validator.is_empty_string(user_input))
+        self.assertTrue(self.validator.is_empty_string(""))
 
     def test_is_empty_string_returns_false_if_string_is_not_empty(self):
-        validator = Validator()
-        user_input = "blah"
-        self.assertEqual(False, validator.is_empty_string(user_input))
+        self.assertFalse(self.validator.is_empty_string("blah"))
 
-    def test_is_valid_menu_choice_returns_false_if_choice_is_3(self):
-        validator = Validator()
-        user_input = "3"
-        self.assertEqual(False, validator.is_valid_menu_choice(user_input))
+    def test_is_valid_menu_choice_returns_false_if_choice_is_invalid(self):
+        self.assertFalse(self.validator.is_valid_menu_choice("blah"))
+        self.assertFalse(self.validator.is_valid_menu_choice("3"))
+        self.assertFalse(self.validator.is_valid_menu_choice(""))
 
-    def test_is_valid_menu_choice_returns_true_if_choice_is_2(self):
-        validator = Validator()
-        user_input = "2"
-        self.assertEqual(True, validator.is_valid_menu_choice(user_input))
-
-    def test_is_valid_menu_choice_returns_false_if_empty_string(self):
-        validator = Validator()
-        user_input = ""
-        self.assertEqual(False, validator.is_valid_menu_choice(user_input))
-
-    def test_is_valid_symbol_choice_input_returns_true_if_choice_is_1(self):
-        validator = Validator()
-        user_input = "1"
-        self.assertEqual(True, validator.is_valid_symbol_choice_input(user_input))
+    def test_is_valid_menu_choice_returns_true_if_choice_is_valid(self):
+        self.assertTrue(self.validator.is_valid_menu_choice("2"))
+        self.assertTrue(self.validator.is_valid_menu_choice("1"))
 
     def test_is_valid_symbol_choice_returns_false_if_choice_is_11(self):
-        validator = Validator()
-        user_input = "11"
-        self.assertEqual(False, validator.is_valid_symbol_choice_input(user_input))
+        self.assertFalse(self.validator.is_valid_symbol_choice_input("11"))
+        self.assertFalse(self.validator.is_valid_symbol_choice_input("blah"))
