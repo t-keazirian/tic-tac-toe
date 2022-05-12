@@ -28,4 +28,4 @@ class TestUserInterface(unittest.TestCase):
     @patch("builtins.input", side_effect=["5"])
     def test_gets_user_input_function_not_returning_false_positive(self, mock_input):
         output = self.ui.get_user_input()
-        self.assertNotEqual(output, "3")
+        self.assertNotEqual("3", output)

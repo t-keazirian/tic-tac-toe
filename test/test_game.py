@@ -60,9 +60,9 @@ class TestGame(unittest.TestCase):
     def test_set_player_one_symbol_returns_symbol_with_input_3(self, mock_input):
         expected_symbol = SymbolOptions().get_symbol("3")
 
-        message = self.message.choose_symbol_player_one()
+        test_message = self.message.choose_symbol_player_one()
 
-        result = self.game.set_player_symbol(message)
+        result = self.game.set_player_symbol(test_message)
 
         self.assertEqual(expected_symbol, result)
 
@@ -70,9 +70,9 @@ class TestGame(unittest.TestCase):
     def test_set_player_two_symbol_returns_symbol_with_input_2(self, mock_input):
         expected_symbol = SymbolOptions().get_symbol("2")
 
-        message = self.message.choose_symbol_player_two()
+        test_message = self.message.choose_symbol_player_two()
 
-        result = self.game.set_player_symbol(message)
+        result = self.game.set_player_symbol(test_message)
 
         self.assertEqual(expected_symbol, result)
 
@@ -80,9 +80,9 @@ class TestGame(unittest.TestCase):
     def test_set_player_two_symbol_returns_symbol_with_input_4(self, mock_input):
         expected_symbol = SymbolOptions().get_symbol("4")
 
-        message = self.message.choose_symbol_player_two()
+        test_message = self.message.choose_symbol_player_two()
 
-        result = self.game.set_player_symbol(message)
+        result = self.game.set_player_symbol(test_message)
 
         self.assertEqual(expected_symbol, result)
 
