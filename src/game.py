@@ -1,3 +1,4 @@
+from src.ai_unbeatable import AIUnbeatable
 from src.board import Board
 from src.human_player import HumanPlayer
 from src.message import Message
@@ -19,8 +20,8 @@ class Game:
         self.ui = ui
         self.set_language(message)
         self.game_board = self.board.starter_board
-        self.player_one = HumanPlayer("X")
-        self.player_two = HumanPlayer("O")
+        self.player_one = HumanPlayer("X", message)
+        self.player_two = HumanPlayer("O", message)
         self.total_marks_on_board = 0
         self.playing = True
         self.play_against_computer = False
@@ -44,8 +45,8 @@ class Game:
         if user_input == config["human_vs_comp"]:
             # self.player_one = HumanPlayer("X")
             # self.player_two = ComputerPlayer("O")
-            self.player_one = ComputerPlayer("X")
-            self.player_two = HumanPlayer("O")
+            self.player_one = ComputerPlayer("X", AIUnbeatable())
+            self.player_two = HumanPlayer("O", self.message)
             self.play_against_computer = True
 
     def change_language(self):
@@ -105,8 +106,9 @@ class Game:
         self.ui.display_message(self.message.game_over_message())
 
     def handle_mark_board(self, player, board):
-        move = player.get_move(board, self.message)
         current_player = self.get_current_player(self.total_marks_on_board)
+        opponent_player = self.get_current_player(self.total_marks_on_board + 1)
+        move = player.get_move(board, current_player.mark, opponent_player.mark)
         if not self.rules.is_winner(self.game_board):
             self.game_board = self.board.mark_board(move, board, current_player.mark)
             self.total_marks_on_board = self.board.count_marks(
