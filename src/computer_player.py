@@ -5,13 +5,10 @@ from src.rules import Rules
 from src.human_player import HumanPlayer
 from src.board import Board
 
-# from src.minimax import Minimax
-
 
 class ComputerPlayer:
     def __init__(self, mark):
         self.mark = mark
-        # self.minimax = Minimax()
 
     def get_move(self, board, message):
         # move = random.randint(1, 9)
@@ -37,15 +34,15 @@ class ComputerPlayer:
         return int(best_move)
 
     def minimax(self, board, depth, is_maximizing):
-        # scores = {"X": 10, "O": -10, "tie": 0}
         winning_mark = Rules().get_winning_mark(board)
 
-        if winning_mark == "O":
-            return -10
-        elif winning_mark == "X":
-            return 10
-        elif winning_mark == None:
-            return 0
+        if Rules().is_winner(board):
+            if winning_mark == "O":
+                return -10
+            elif winning_mark == "X":
+                return 10
+            elif winning_mark == None:
+                return 0
 
         if is_maximizing:
             best_score = -math.inf
