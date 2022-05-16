@@ -73,7 +73,7 @@ Elija una de las siguientes opciones:
         self.assertEqual(expected_message, actual_message)
 
     def test_X_player_is_prompted_for_move_when_is_current_player(self):
-        player = HumanPlayer("X")
+        player = HumanPlayer("X", "message")
         expected_message = (
             f"Jugador {player.mark} - escriba un número para marcar el tablero"
         )
