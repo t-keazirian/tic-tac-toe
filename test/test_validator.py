@@ -99,6 +99,16 @@ class TestValidator(unittest.TestCase):
         self.assertTrue(self.validator.is_valid_menu_choice("2"))
         self.assertTrue(self.validator.is_valid_menu_choice("1"))
 
-    def test_is_valid_symbol_choice_returns_false_if_choice_is_11(self):
+    def test_is_valid_symbol_choice_returns_false_if_choice_is_invalid(self):
         self.assertFalse(self.validator.is_valid_symbol_choice_input("11"))
         self.assertFalse(self.validator.is_valid_symbol_choice_input("blah"))
+
+    def test_is_valid_computer_menu_choice_returns_true_if_valid(self):
+        self.assertTrue(self.validator.is_valid_symbol_choice_input("1"))
+        self.assertTrue(self.validator.is_valid_symbol_choice_input("2"))
+        self.assertTrue(self.validator.is_valid_symbol_choice_input("3"))
+
+    def test_is_valid_computer_menu_choice_returns_false_if_invalid(self):
+        self.assertFalse(self.validator.is_valid_symbol_choice_input("11"))
+        self.assertFalse(self.validator.is_valid_symbol_choice_input("f"))
+        self.assertFalse(self.validator.is_valid_symbol_choice_input("Y"))

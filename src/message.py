@@ -20,7 +20,7 @@ Choose one of the options below:
         )
 
     def invalid_menu_input(self):
-        return "That input is invalid. Please enter 1 or 2."
+        return "That input is invalid. Please choose from the list above."
 
     def invalid_symbol_option(self):
         return "That input is invalid. Please enter a number 1-10."
@@ -75,5 +75,18 @@ Choose your language:
         return """
 Please make a selection from the options:
 1. Human vs Human (2 players)
-2. Human vs Computer (1 player)
+2. Human vs Simple Computer (1 player)
+3. Human vs Unbeatable Computer (1 player)
+"""
+
+    def computer_go_first(self):
+        return """🚨 Computer will go first! 🚨
+
+Here are the rules:
+"""
+
+    def human_go_first(self):
+        return """🚨 You will go first! 🚨
+
+Here are the rules:
 """

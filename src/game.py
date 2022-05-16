@@ -1,4 +1,5 @@
 from src.ai_unbeatable import AIUnbeatable
+from src.ai_random import AIRandom
 from src.board import Board
 from src.human_player import HumanPlayer
 from src.message import Message
@@ -37,14 +38,26 @@ class Game:
             return self.get_menu_choice(new_user_input, message)
         return user_input
 
+    def get_computer_player_choice(self, user_input, message):
+        valid_user_input = self.validator.is_valid_computer_menu_choice(user_input)
+        if not valid_user_input:
+            self.ui.display_message(message)
+            new_user_input = self.ui.get_user_input()
+            return self.get_computer_player_choice(new_user_input, message)
+        return user_input
+
     def choose_players(self):
         self.ui.display_message(self.message.choose_players())
-        user_input = self.get_menu_choice(
+        user_input = self.get_computer_player_choice(
             self.ui.get_user_input(), self.message.invalid_menu_input()
         )
-        if user_input == config["human_vs_comp"]:
-            # self.player_one = HumanPlayer("X")
-            # self.player_two = ComputerPlayer("O")
+        if user_input == config["human_vs_ai_simple"]:
+            self.ui.display_message(self.message.human_go_first())
+            self.player_one = HumanPlayer("X", self.message)
+            self.player_two = ComputerPlayer("O", AIRandom())
+            self.play_against_computer = True
+        if user_input == config["human_vs_ai_unbeatable"]:
+            self.ui.display_message(self.message.computer_go_first())
             self.player_one = ComputerPlayer("X", AIUnbeatable())
             self.player_two = HumanPlayer("O", self.message)
             self.play_against_computer = True

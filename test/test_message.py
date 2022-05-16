@@ -37,7 +37,7 @@ Choose one of the options below:
         self.assertEqual(expected_message, actual_message)
 
     def test_invalid_menu_input_prints_message(self):
-        expected_message = "That input is invalid. Please enter 1 or 2."
+        expected_message = "That input is invalid. Please choose from the list above."
 
         actual_message = self.message.invalid_menu_input()
 
@@ -145,9 +145,30 @@ Choose your language:
         expected_message = """
 Please make a selection from the options:
 1. Human vs Human (2 players)
-2. Human vs Computer (1 player)
+2. Human vs Simple Computer (1 player)
+3. Human vs Unbeatable Computer (1 player)
 """
 
         actual_message = self.message.choose_players()
+
+        self.assertEqual(expected_message, actual_message)
+
+    def test_computer_go_first_prints_to_console(self):
+        expected_message = """🚨 Computer will go first! 🚨
+
+Here are the rules:
+"""
+
+        actual_message = self.message.computer_go_first()
+
+        self.assertEqual(expected_message, actual_message)
+
+    def test_human_go_first_prints_to_console(self):
+        expected_message = """🚨 You will go first! 🚨
+
+Here are the rules:
+"""
+
+        actual_message = self.message.human_go_first()
 
         self.assertEqual(expected_message, actual_message)

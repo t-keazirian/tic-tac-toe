@@ -139,8 +139,29 @@ Al final de cada juego, tendrás la opción de jugar de nuevo o salir.
 Por favor, haga una selección de las opciones:
 1. Humano contra humano (2 jugadores)
 2. Humano contra computadora (1 jugador)
+3. Humano vs computadora imbatible (1 jugador)
 """
 
         actual_message = self.spanish_message.choose_players()
+
+        self.assertEqual(expected_message, actual_message)
+
+    def test_human_go_first_prints_to_console(self):
+        expected_message = """🚨 ¡Irás primero! 🚨
+
+Estas son las reglas:
+"""
+
+        actual_message = self.spanish_message.human_go_first()
+
+        self.assertEqual(expected_message, actual_message)
+
+    def test_computer_go_first_prints_to_console(self):
+        expected_message = """🚨 ¡La computadora irá primero! 🚨
+
+Estas son las reglas:
+"""
+
+        actual_message = self.spanish_message.computer_go_first()
 
         self.assertEqual(expected_message, actual_message)

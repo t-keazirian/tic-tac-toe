@@ -159,3 +159,14 @@ class TestAcceptance(unittest.TestCase):
         game_output = self.game_playthrough()
 
         self.assertIn(expected_message, game_output)
+
+    @patch(
+        "builtins.input",
+        side_effect=["1", "3", "1", "2", "6", "8", "9", "n"],
+    )
+    def test_play_through_with_ai_unbeatable(self, mock_input):
+        expected_message = MockMessage.declare_winner(self, "X")
+
+        game_output = self.game_playthrough()
+
+        self.assertIn(expected_message, game_output)
