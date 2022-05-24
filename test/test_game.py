@@ -7,6 +7,7 @@ from src.human_player import HumanPlayer
 from src.symbol import SymbolOptions
 from test.mocks.mock_message import MockMessage
 from src.board import Board
+from src.ai_random import AIRandom
 
 
 class TestGame(unittest.TestCase):
@@ -14,9 +15,10 @@ class TestGame(unittest.TestCase):
         self.game = Game(message=MockMessage())
         self.message = MockMessage()
         self.board = Board()
-        self.test_player_x = HumanPlayer("X")
-        self.test_player_o = HumanPlayer("O")
-        self.test_comp_player = ComputerPlayer("O")
+        self.ai_random = AIRandom()
+        self.test_player_x = HumanPlayer("X", "message")
+        self.test_player_o = HumanPlayer("O", "message")
+        self.test_comp_player = ComputerPlayer("O", self.ai_random)
 
     @patch("builtins.print")
     def test_prompt_x_for_first_turn(self, mock_print):

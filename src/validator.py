@@ -45,6 +45,12 @@ class Validator:
         else:
             return False
 
+    def is_valid_computer_menu_choice(self, user_input):
+        if user_input == "1" or user_input == "2" or user_input == "3":
+            return True
+        else:
+            return False
+
     def is_valid_symbol_choice_input(self, user_input):
         options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
         if user_input not in options:

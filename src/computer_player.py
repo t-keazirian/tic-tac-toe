@@ -1,13 +1,7 @@
-import random
-from src.validator import Validator as validator
-
-
 class ComputerPlayer:
-    def __init__(self, mark):
+    def __init__(self, mark, ai):
         self.mark = mark
+        self.ai = ai
 
-    def get_move(self, board, message):
-        move = random.randint(1, 9)
-        if not validator.spot_is_available(self, board, move):
-            return self.get_move(board, message)
-        return move
+    def get_move(self, board, mark, opponent_mark):
+        return self.ai.get_computer_move(board, mark, opponent_mark)

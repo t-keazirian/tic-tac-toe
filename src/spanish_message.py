@@ -70,4 +70,17 @@ Al final de cada juego, tendrás la opción de jugar de nuevo o salir.
 Por favor, haga una selección de las opciones:
 1. Humano contra humano (2 jugadores)
 2. Humano contra computadora (1 jugador)
+3. Humano vs computadora imbatible (1 jugador)
+"""
+
+    def computer_go_first(self):
+        return """🚨 ¡La computadora irá primero! 🚨
+
+Estas son las reglas:
+"""
+
+    def human_go_first(self):
+        return """🚨 ¡Irás primero! 🚨
+
+Estas son las reglas:
 """

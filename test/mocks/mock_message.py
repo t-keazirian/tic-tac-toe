@@ -53,3 +53,9 @@ class MockMessage:
 
     def choose_players(self):
         return "choose_players"
+
+    def computer_go_first(self):
+        return "computer_go_first"
+
+    def human_go_first(self):
+        return "human_go_first"
